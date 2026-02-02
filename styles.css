@@ -83,3 +83,123 @@ header {
   display: flex;
   align-items: center;
 }
+/* Search Results Container */
+.search-bar-container {
+  position: relative;
+  max-width: 700px;
+  width: 90%;
+  margin: 0 auto 3rem;
+}
+
+.search-bar {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 60px;
+  padding: 1rem;
+  border: 1px solid rgba(0,207,255,0.3);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: text; /* better cursor when clickable */
+}
+
+.search-bar input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  outline: none;
+}
+
+.search-bar button {
+  background: #00cfff;
+  color: #0f172a;
+  border: none;
+  padding: 0.9rem 1.8rem;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Search Results Dropdown */
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(30, 41, 59, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  margin-top: 0.8rem;
+  max-height: 320px;
+  overflow-y: auto;
+  border: 1px solid rgba(0,207,255,0.3);
+  z-index: 100;
+  display: none; /* hidden by default */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.search-result-item {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-result-item:hover {
+  background: rgba(0,207,255,0.15);
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.search-result-item .info {
+  flex: 1;
+}
+
+.search-result-item h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #e2e8f0;
+}
+
+.search-result-item p {
+  margin: 0.3rem 0 0;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+/* Mobile adjustments for search */
+@media (max-width: 768px) {
+  .search-bar {
+    padding: 0.8rem;
+    border-radius: 50px;
+    gap: 0.6rem;
+  }
+
+  .search-bar input {
+    font-size: 1rem;
+  }
+
+  .search-bar button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  .search-results {
+    max-height: 280px;
+  }
+}
