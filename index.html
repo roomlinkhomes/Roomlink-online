@@ -23,39 +23,60 @@
     }
     main { flex: 1; }
 
-    header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      background: rgba(15, 23, 42, 0.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      padding: 1rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-.logo img {
-  height: 48px;                /* keep original size for layout */
-  width: auto;
-  display: block;
-  transform: scale(1.5);       /* ← 1.5 = 50% bigger, try 1.6–2.0 */
-  transform-origin: left center; /* grows from left side, looks natural */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 1rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* ← important for mobile */
 }
 
-@media (min-width: 768px) {
+/* Logo takes only needed space, hamburger always visible */
+.logo {
+  flex-shrink: 0;
+}
+
+.logo img {
+  height: 48px;
+  width: auto;
+  max-width: 200px;
+  display: block;
+}
+
+/* Force hamburger to always be visible and on the right */
+.hamburger {
+  font-size: 1.8rem;
+  color: #cbd5e1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+  position: relative;
+}
+
+/* On mobile: make sure logo doesn't push hamburger off screen */
+@media (max-width: 768px) {
   header {
-    height: 90px;
-    padding: 0 5%;
+    padding: 0.8rem 4%;
+    justify-content: space-between; /* logo left, hamburger right */
   }
 
   .logo img {
-    height: 80px;              /* ← only big on larger screens */
-    max-width: 340px;
+    height: 42px;
+    max-width: 160px;
+  }
+
+  .hamburger {
+    display: block !important;
+    order: 2; /* ensures it's on the right */
   }
 }
-
     .nav-links {
       display: flex;
       gap: 2.2rem;
@@ -228,40 +249,42 @@
       background: #00cfff;
       color: #0f172a;
     }
+.search-bar {
+  max-width: 700px;                /* keeps it max 700px on big screens */
+  width: 90%;                      /* ← takes 90% of available space on smaller screens */
+  margin: 0 auto 3rem;             /* reduced bottom margin for mobile */
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;             /* softer corners on mobile */
+  padding: 0.8rem 1rem;            /* slightly less padding on mobile */
+  border: 1px solid rgba(0,207,255,0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;                     /* smaller gap on mobile */
+  cursor: pointer;
+  box-sizing: border-box;          /* ensures padding doesn't add extra width */
+}
 
-    .search-bar {
-      max-width: 700px;
-      margin: 0 auto 4rem;
-      background: rgba(255,255,255,0.08);
-      backdrop-filter: blur(10px);
-      border-radius: 60px;
-      padding: 1rem;
-      border: 1px solid rgba(0,207,255,0.3);
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      cursor: pointer;
-    }
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .search-bar {
+    width: 95%;                    /* almost full-width on phones */
+    max-width: none;               /* remove max-width limit on mobile */
+    margin: 0 auto 2.5rem;         /* tighter spacing */
+    padding: 0.7rem 0.9rem;
+    border-radius: 40px;           /* even softer for mobile feel */
+    gap: 0.6rem;
+  }
 
-    .search-bar input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: white;
-      font-size: 1.1rem;
-      outline: none;
-    }
+  .search-bar input {
+    font-size: 1rem;               /* slightly smaller text on mobile */
+  }
 
-    .search-bar button {
-      background: #00cfff;
-      color: #0f172a;
-      border: none;
-      padding: 0.9rem 1.8rem;
-      border-radius: 50px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
+  .search-bar button {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
     .benefits {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -516,6 +539,9 @@
   </div>
 
   <main>
+
+
+
     <!-- HOME -->
 <section id="home">
   <div class="hero">
@@ -581,6 +607,10 @@
     </a>
   </div>
 </section>
+
+
+
+
 
     <!-- HOW TO USE -->
     <section id="how-to-use">
@@ -861,7 +891,7 @@
 </div>
     <div class="footer-bottom">
       © <span id="year"></span> RoomLink. All rights reserved.
-      <p>Designed with ❤️ for better living spaces aroundworld</p>
+      <p>Designed with ❤️ for better living spaces around the world</p>
     </div>
   </footer>
 
