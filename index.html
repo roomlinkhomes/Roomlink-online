@@ -37,18 +37,32 @@ header {
   flex-wrap: wrap; /* ← important for mobile */
 }
 
-/* Logo takes only needed space, hamburger always visible */
 .logo {
-  flex-shrink: 0;
+  flex-shrink: 0;           /* Prevents logo from shrinking too much */
 }
 
 .logo img {
-  height: 48px;
+  height: 64px;             /* ← Bigger base size (was 48px) – feels more prominent */
   width: auto;
-  max-width: 200px;
+  max-width: 280px;         /* Increased room so it doesn't get cut off */
   display: block;
 }
 
+/* Extra boost on larger screens (desktop/tablet) */
+@media (min-width: 768px) {
+  .logo img {
+    height: 80px;           /* Even bigger on desktop – premium feel */
+    max-width: 360px;
+  }
+}
+
+/* Keep it controlled on very small phones */
+@media (max-width: 480px) {
+  .logo img {
+    height: 52px;           /* Slightly smaller only on tiny screens */
+    max-width: 220px;
+  }
+}
 /* Force hamburger to always be visible and on the right */
 .hamburger {
   font-size: 1.8rem;
