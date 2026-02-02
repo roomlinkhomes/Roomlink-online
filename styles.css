@@ -62,3 +62,24 @@
 .hero-btn:hover {
   background-color: #ff3b3b;
 }
+header {
+  height: 80px;                /* ← fixed height — adjust to your taste (70–90px) */
+  padding: 0 5%;               /* remove vertical padding so image can be bigger */
+  display: flex;
+  align-items: center;         /* vertically center everything */
+  justify-content: space-between;
+}
+
+.logo img {
+  height: 70px;                /* ← make logo as big as you want — try 70, 80, 90px */
+  width: auto;
+  max-width: 320px;            /* prevent it from overflowing on wide screens */
+  display: block;
+}
+
+/* Make sure nav and hamburger don't push the height */
+.nav-links, .hamburger {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
