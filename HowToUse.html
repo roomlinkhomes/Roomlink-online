@@ -12,6 +12,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
+    :root {
+      --purple: #6b48ff;
+      --dark: #0f0f2d;
+      --light: #f8f9ff;
+      --accent: #00d4ff;
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --card-text: #1a1a2e;
+    }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -23,216 +31,123 @@
     }
     main { flex: 1; }
 
-header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  background: rgba(15, 23, 42, 0.92);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  padding: 1rem 5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap; /* ← important for mobile */
-}
-
-.logo {
-  flex-shrink: 0;           /* Prevents logo from shrinking too much */
-}
-
-.logo img {
-  height: 1000px;             /* ← Bigger base size (was 48px) – feels more prominent */
-  width: auto;
-  max-width: 500px;         /* Increased room so it doesn't get cut off */
-  display: block;
-}
-
-/* Extra boost on larger screens (desktop/tablet) */
-@media (min-width: 768px) {
-  .logo img {
-    height: 80px;           /* Even bigger on desktop – premium feel */
-    max-width: 360px;
-  }
-}
-
-/* Keep it controlled on very small phones */
-@media (max-width: 480px) {
-  .logo img {
-    height: 52px;           /* Slightly smaller only on tiny screens */
-    max-width: 220px;
-  }
-}
-/* Force hamburger to always be visible and on the right */
-.hamburger {
-  font-size: 1.8rem;
-  color: #cbd5e1;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 1001;
-  position: relative;
-}
-
-/* On mobile: make sure logo doesn't push hamburger off screen */
-@media (max-width: 768px) {
-  header {
-    padding: 0.8rem 4%;
-    justify-content: space-between; /* logo left, hamburger right */
-  }
-
-  .logo img {
-    height: 42px;
-    max-width: 160px;
-  }
-
-  .hamburger {
-    display: block !important;
-    order: 2; /* ensures it's on the right */
-  }
-}
-    .nav-links {
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 1rem 5%;
       display: flex;
-      gap: 2.2rem;
-      list-style: none;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
     }
-
-    .nav-links a {
-      color: #cbd5e1;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
+    .logo { flex-shrink: 0; }
+    .logo img {
+      height: 100px;
+      width: auto;
+      max-width: 500px;
+      display: block;
     }
-
-    .nav-links a:hover, .nav-links a.active { color: #00cfff; }
-
+    @media (min-width: 768px) { .logo img { height: 80px; max-width: 360px; } }
+    @media (max-width: 480px) { .logo img { height: 52px; max-width: 220px; } }
     .hamburger {
       font-size: 1.8rem;
       color: #cbd5e1;
       background: none;
       border: none;
       cursor: pointer;
+      z-index: 1001;
     }
-
+    @media (max-width: 768px) {
+      header { padding: 0.8rem 4%; justify-content: space-between; }
+      .logo img { height: 42px; max-width: 160px; }
+      .hamburger { display: block !important; order: 2; }
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a { color: #cbd5e1; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: #00cfff; }
     .mobile-menu {
-      position: fixed;
-      top: 0; right: -100%;
-      width: 80%; max-width: 320px;
-      height: 100%;
-      background: #0f172a;
+      position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100%;
+      background: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(10px);
-      transition: right 0.4s ease;
-      z-index: 999;
+      transition: right 0.4s ease; z-index: 999;
       padding: 5rem 2rem 2rem;
     }
-
     .mobile-menu.active { right: 0; }
-
-    .mobile-menu-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 3rem;
-    }
-
-    .mobile-menu-header .logo img {
-      height: 60px;
-      max-width: 240px;
-    }
-
-    .close-btn {
-      font-size: 2.5rem;
-      color: #cbd5e1;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-
-    .mobile-nav {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 2.2rem;
-    }
-
-    .mobile-nav a {
-      color: #cbd5e1;
-      text-decoration: none;
-      font-size: 1.3rem;
-      font-weight: 500;
-    }
-
+    .mobile-menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
+    .mobile-menu-header .logo img { height: 60px; max-width: 240px; }
+    .close-btn { font-size: 2.5rem; color: #cbd5e1; background: none; border: none; cursor: pointer; }
+    .mobile-nav { list-style: none; display: flex; flex-direction: column; gap: 2.2rem; }
+    .mobile-nav a { color: #cbd5e1; text-decoration: none; font-size: 1.3rem; font-weight: 500; }
     .mobile-nav a:hover, .mobile-nav a.active { color: #00cfff; }
-
     .signup-btn {
-      margin-top: 3rem;
-      display: block;
-      background: #00cfff;
-      color: #0f172a;
-      padding: 1rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      text-align: center;
-      font-size: 1.2rem;
+      margin-top: 3rem; display: block; background: #00cfff; color: #0f172a;
+      padding: 1rem; border-radius: 50px; text-decoration: none; font-weight: bold;
+      text-align: center; font-size: 1.2rem;
     }
-
     .signup-btn:hover { transform: scale(1.05); }
-
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hamburger { display: block; }
-    }
-
-    @media (min-width: 769px) {
-      .hamburger, .mobile-menu { display: none; }
-    }
-
-    section {
-      padding: 100px 5% 120px;
-      min-height: 100vh;
-    }
-
-    section#home {
-      background: linear-gradient(135deg, #0a0f1c 0%, #001f3f 100%);
-    }
-
-    h2 {
-      font-size: 3rem;
-      margin-bottom: 1.2rem;
-      color: #00cfff;
-      text-align: center;
-    }
+    @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
+    @media (min-width: 769px) { .hamburger, .mobile-menu { display: none; } }
 
     .hero {
+      position: relative;
+      height: 85vh;
+      min-height: 620px;
+      background: url('https://res.cloudinary.com/drserbss8/image/upload/v1771713149/file_0000000006a87246928f037facd41c82_xv3kqb.png') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      padding: 100px 5% 80px;
+      padding: 120px 5% 80px 5%;
+      overflow: hidden;
     }
-
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10,0,40,0.65), rgba(20,0,60,0.75), rgba(0,0,0,0.72));
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
     .hero h1 {
-      font-size: 4.5rem;
+      font-size: 2.9rem;
+      font-weight: 900;
       margin-bottom: 1rem;
-      background: linear-gradient(to right, #00cfff, #00eaff);
+      background: linear-gradient(to right, #00ff9d, #00eaff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeUp 1.2s ease-out forwards;
     }
-
     .hero p {
       font-size: 1.4rem;
       max-width: 800px;
       margin: 0 auto 2.5rem;
-      color: #cbd5e1;
+      color: #e0f7ff;
       line-height: 1.6;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeUp 1.4s ease-out 0.3s forwards;
     }
-
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
     .hero-cta {
       display: flex;
       flex-wrap: wrap;
       gap: 1.5rem;
       justify-content: center;
-      margin-bottom: 4rem;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeUp 1.6s ease-out 0.6s forwards;
     }
-
     .btn {
       padding: 1rem 2.2rem;
       border-radius: 50px;
@@ -241,231 +156,61 @@ header {
       font-size: 1.1rem;
       transition: all 0.3s;
     }
+    .btn-primary { background: #00cfff; color: #0f172a; }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 207, 255, 0.4); }
+    .btn-outline { border: 2px solid #00cfff; color: #00cfff; }
+    .btn-outline:hover { background: #00cfff; color: #0f172a; }
 
-    .btn-primary {
-      background: #00cfff;
-      color: #0f172a;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0, 207, 255, 0.4);
-    }
-
-    .btn-outline {
-      border: 2px solid #00cfff;
+    section { padding: 90px 5% 110px; }
+    h2 {
+      font-size: 2.8rem;
+      margin-bottom: 3.5rem;
       color: #00cfff;
-    }
-
-    .btn-outline:hover {
-      background: #00cfff;
-      color: #0f172a;
-    }
-.search-bar {
-  max-width: 700px;                /* keeps it max 700px on big screens */
-  width: 90%;                      /* ← takes 90% of available space on smaller screens */
-  margin: 0 auto 3rem;             /* reduced bottom margin for mobile */
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
-  border-radius: 50px;             /* softer corners on mobile */
-  padding: 0.8rem 1rem;            /* slightly less padding on mobile */
-  border: 1px solid rgba(0,207,255,0.3);
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;                     /* smaller gap on mobile */
-  cursor: pointer;
-  box-sizing: border-box;          /* ensures padding doesn't add extra width */
-}
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .search-bar {
-    width: 95%;                    /* almost full-width on phones */
-    max-width: none;               /* remove max-width limit on mobile */
-    margin: 0 auto 2.5rem;         /* tighter spacing */
-    padding: 0.7rem 0.9rem;
-    border-radius: 40px;           /* even softer for mobile feel */
-    gap: 0.6rem;
-  }
-
-  .search-bar input {
-    font-size: 1rem;               /* slightly smaller text on mobile */
-  }
-
-  .search-bar button {
-    padding: 0.7rem 1.2rem;
-    font-size: 0.95rem;
-  }
-}
-    .benefits {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .benefit-card {
-      background: rgba(30, 41, 59, 0.6);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 2.5rem;
-      border: 1px solid rgba(0,207,255,0.15);
       text-align: center;
-      transition: transform 0.3s;
     }
 
-    .benefit-card:hover {
-      transform: translateY(-10px);
+    .how-it-works { background: rgba(0,0,0,0.25); }
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 40px;
     }
-
-    .benefit-icon {
-      font-size: 3.5rem;
-      color: #00cfff;
-      margin-bottom: 1.5rem;
+    .step {
+      flex: 1 1 22%;
+      min-width: 240px;
+      max-width: 280px;
+      text-align: center;
     }
-
-    .benefit-card h3 {
-      font-size: 1.6rem;
+    .step-number {
+      display: inline-block;
+      background: var(--purple);
+      color: white;
+      width: 40px; height: 40px;
+      line-height: 40px;
+      border-radius: 50%;
+      margin-bottom: 12px;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+    .step h3 {
+      font-size: 1.5rem;
       margin-bottom: 1rem;
       color: #e2e8f0;
     }
-
-    .contact-container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-
-
-/* Robot welcome image - after Get in Touch heading */
-.robot-welcome {
-  text-align: center;
-  margin: 1.5rem auto 2.5rem;
-}
-
-.support-robot {
-  max-width: 280px;          /* adjust this to your preference — 240–320px usually looks nice */
-  width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  border-radius: 16px;       /* soft rounded corners */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); /* gentle floating shadow */
-  transition: transform 0.3s ease;
-}
-
-.support-robot:hover {
-  transform: translateY(-8px); /* subtle lift on hover */
-}
-
-/* Optional: make it a bit smaller on mobile */
-@media (max-width: 768px) {
-  .support-robot {
-    max-width: 220px;
-    margin: 1rem auto 2rem;
-  }
-}
-
-
-
-    .contact-form {
-      background: rgba(30, 41, 59, 0.6);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 2.5rem;
-      border: 1px solid rgba(0,207,255,0.15);
-      margin-bottom: 3rem;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(0,207,255,0.3);
-      border-radius: 8px;
-      color: white;
-      font-size: 1rem;
-      outline: none;
-      transition: border 0.3s;
-    }
-
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      border-color: #00cfff;
-    }
-
-    .contact-form button {
-      background: #00cfff;
-      color: #0f172a;
-      border: none;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      font-weight: bold;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: all 0.3s;
-      width: 100%;
-    }
-
-    .contact-form button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0,207,255,0.4);
-    }
-
-    .contact-form button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .form-message {
-      margin-top: 1rem;
-      text-align: center;
-      font-weight: 500;
-    }
-
-    .success { color: #00ff9d; }
-    .error   { color: #ff4d4d; }
-
-    .contact-info {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-
-    .info-card {
-      background: rgba(30, 41, 59, 0.6);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 2rem;
-      border: 1px solid rgba(0,207,255,0.15);
-      text-align: center;
-    }
-
-    .info-icon {
-      font-size: 2.5rem;
-      color: #00cfff;
-      margin-bottom: 1rem;
-    }
-
-    .map-container {
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-      margin-top: 2rem;
+    .step p {
+      color: #cbd5e1;
+      font-size: 0.97rem;
     }
 
     footer {
       background: linear-gradient(to top, #0f172a, #1e293b);
-      padding: 4rem 5% 2rem;
+      padding: 6rem 5% 4rem;
       color: #cbd5e1;
       font-size: 0.95rem;
       border-top: 1px solid rgba(255,255,255,0.08);
     }
-
     .footer-container {
       max-width: 1200px;
       margin: 0 auto;
@@ -473,48 +218,19 @@ header {
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 3rem;
     }
-
-    .footer-logo img {
-      height: 60px;
-      width: auto;
-      max-width: 240px;
-    }
-
-    .footer-links h4 {
-      color: #00cfff;
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-    }
-
-    .footer-links ul {
-      list-style: none;
-    }
-
-    .footer-links a {
-      color: #cbd5e1;
-      text-decoration: none;
-      line-height: 2;
-      transition: color 0.3s;
-    }
-
+    .footer-logo img { height: 60px; width: auto; max-width: 240px; }
+    .footer-links h4 { color: #00cfff; margin-bottom: 1rem; font-size: 1.1rem; }
+    .footer-links ul { list-style: none; }
+    .footer-links a { color: #cbd5e1; text-decoration: none; line-height: 2; transition: color 0.3s; }
     .footer-links a:hover { color: #00cfff; }
-
-    .footer-social a {
-      color: #cbd5e1;
-      font-size: 1.6rem;
-      margin-right: 1.2rem;
-      transition: color 0.3s;
-    }
-
+    .footer-social a { color: #cbd5e1; font-size: 1.6rem; margin-right: 1.2rem; transition: color 0.3s; }
     .footer-social a:hover { color: #00cfff; }
-
     .footer-bottom {
       text-align: center;
       margin-top: 4rem;
       padding-top: 2rem;
       border-top: 1px solid rgba(255,255,255,0.08);
     }
-
     .download-btn {
       display: inline-flex;
       align-items: center;
@@ -527,22 +243,23 @@ header {
       font-weight: bold;
       margin-top: 1.5rem;
     }
-
     .download-btn:hover {
       transform: scale(1.05);
       box-shadow: 0 10px 30px rgba(0,207,255,0.3);
     }
 
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hamburger { display: block; }
-      .hero h1 { font-size: 3.2rem; }
+      section { padding: 70px 5% 90px; }
+      h2 { font-size: 2.3rem; margin-bottom: 2.5rem; }
+      .hero { height: 80vh; min-height: 540px; padding: 100px 5% 60px; }
+      .hero h1 { font-size: 2.2rem; font-weight: 600; }
+      .hero p { font-size: 1rem; line-height: 1.4; }
+      .step { flex: 1 1 100%; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <div class="logo">
       <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
@@ -561,7 +278,6 @@ header {
     </button>
   </header>
 
-  <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-header">
       <div class="logo">
@@ -584,41 +300,73 @@ header {
   </div>
 
   <main>
-
-    <!-- HOW TO USE -->
     <section id="how-to-use">
-      <div style="max-width: 900px; margin: 0 auto;">
-        <h2>How to Use RoomLink</h2>
-        <p style="text-align:center; max-width:700px; margin:0 auto 3rem; font-size:1.2rem; color:#cbd5e1;">
-          RoomLink is your go-to app for finding verified apartments and short-term stays. The app is not yet released but will be available soon on Google Play Store. Here's how it will work once launched:
-        </p>
-
-        <div style="background: rgba(30,41,59,0.6); backdrop-filter: blur(10px); border-radius:16px; padding:2.5rem; border:1px solid rgba(0,207,255,0.15);">
-          <h3 style="font-size:1.8rem; color:#00cfff; margin-bottom:1.5rem;">Step-by-Step Guide</h3>
-          <ol style="list-style-type:decimal; padding-left:2rem; font-size:1.1rem; line-height:1.8; color:#e2e8f0;">
-            <li><strong>Download & Sign Up</strong> — Get the app from Google Play, create an account with email/phone, set up your profile (currency, language, dark/light mode, notifications preferences).</li>
-            <li><strong>Search for Stays</strong> — Use powerful filters: location, price range, dates, amenities. View results on list or interactive map.</li>
-            <li><strong>Browse & Favorite</strong> — See verified listings with photos, full details & host info. Save favorites for later.</li>
-            <li><strong>Chat with Hosts</strong> — Message hosts directly in-app to ask questions or negotiate.</li>
-            <li><strong>Book Securely</strong> — Select dates, review total (no hidden fees), pay safely via in-app wallet or payment gateway.</li>
-            <li><strong>Manage Your Booking</strong> — Get instant confirmation, receive notifications, track check-in/out, view booking history.</li>
-            <li><strong>Leave a Review</strong> — After your stay, rate the host/property and help the community.</li>
-            <li><strong>For Hosts</strong> — List your property (goes through verification), manage bookings, chat with guests, withdraw earnings.</li>
-            <li><strong>Support & Safety</strong> — Report issues, contact support, use our verification system for peace of mind.</li>
-          </ol>
+      <div class="hero">
+        <div class="hero-content">
+          <h1>How to Use RoomLink</h1>
+          <p>RoomLink is your go-to app for finding verified apartments and short-term stays. The app is not yet released but will be available soon on Google Play Store. Here's how it will work once launched:</p>
+          <div class="hero-cta">
+            <a href="index.html" class="btn btn-outline">Back to Home</a>
+            <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary">
+              <i class="fab fa-google-play"></i> Download Coming Soon
+            </a>
+          </div>
         </div>
+      </div>
 
-        <div style="text-align:center; margin-top:3rem;">
-          <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary">
-            <i class="fab fa-google-play"></i> Download Coming Soon
-          </a>
+      <div class="how-it-works">
+        <h2>Step-by-Step Guide</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Download & Sign Up</h3>
+            <p>Get the app from Google Play, create an account with email/phone, set up your profile (currency, language, dark/light mode, notifications preferences).</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Search for Stays</h3>
+            <p>Use powerful filters: location, price range, dates, amenities. View results on list or interactive map.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Browse & Favorite</h3>
+            <p>See verified listings with photos, full details & host info. Save favorites for later.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Chat with Hosts</h3>
+            <p>Message hosts directly in-app to ask questions or negotiate.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">5</div>
+            <h3>Book Securely</h3>
+            <p>Select dates, review total (no hidden fees), pay safely via in-app wallet or payment gateway.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">6</div>
+            <h3>Manage Your Booking</h3>
+            <p>Get instant confirmation, receive notifications, track check-in/out, view booking history.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">7</div>
+            <h3>Leave a Review</h3>
+            <p>After your stay, rate the host/property and help the community.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">8</div>
+            <h3>For Hosts</h3>
+            <p>List your property (goes through verification), manage bookings, chat with guests, withdraw earnings.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">9</div>
+            <h3>Support & Safety</h3>
+            <p>Report issues, contact support, use our verification system for peace of mind.</p>
+          </div>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-container">
       <div>
@@ -648,23 +396,23 @@ header {
         </a>
       </div>
 
-<div class="footer-links">
-  <h4>Follow Us</h4>
-  <div class="footer-social">
-    <a href="https://x.com/apexwebsolutios" target="_blank"><i class="fab fa-x-twitter"></i></a>
-    <a href="https://www.instagram.com/roomlinkofficial?igsh=NjVsNGJpZ2ViOG1n" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="https://www.facebook.com/share/1KEQdswU1A/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-    <a href="https://www.linkedin.com/company/room-link/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-    <a href="https://www.tiktok.com/@roomlinkofficial" target="_blank"><i class="fab fa-tiktok"></i></a>
-  </div>
-</div>
+      <div class="footer-links">
+        <h4>Follow Us</h4>
+        <div class="footer-social">
+          <a href="https://x.com/apexwebsolutios" target="_blank"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://www.instagram.com/roomlinkofficial?igsh=NjVsNGJpZ2ViOG1n" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/share/1KEQdswU1A/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.linkedin.com/company/room-link/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.tiktok.com/@roomlinkofficial" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
     <div class="footer-bottom">
       © <span id="year"></span> RoomLink. All rights reserved.
       <p>Designed with ❤️ for better living spaces around the world</p>
     </div>
   </footer>
 
-  <!-- JAVASCRIPT -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -675,7 +423,6 @@ header {
     hamburgerBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
     closeMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
     mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) mobileMenu.classList.remove('active'); });
-
   </script>
 </body>
 </html>
