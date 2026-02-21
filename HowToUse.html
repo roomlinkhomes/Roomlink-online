@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="rTe8HUdL74DOgE2TKQGn-cHTZBFAYKglMI0sO2CwxQ8" />
-  <title>RoomLink | Verified Apartments & Short-Term Stays</title>
+  <title>RoomLink | How to Use</title>
   <meta name="description" content="RoomLink offers secure, verified apartments and stylish short-term stays worldwide. Transparent bookings, no hidden fees — let's find your perfect place." />
   <meta name="keywords" content="apartments for rent, short-term stays, verified rentals, RoomLink, global accommodation, Nigeria rentals" />
   <link rel="icon" href="/logo.png" type="image/png" />
@@ -42,7 +42,7 @@ header {
 }
 
 .logo img {
-  height: 100px;             /* Fixed typo: was 1000px, now 100px for reasonable size */
+  height: 1000px;             /* ← Bigger base size (was 48px) – feels more prominent */
   width: auto;
   max-width: 500px;         /* Increased room so it doesn't get cut off */
   display: block;
@@ -277,25 +277,6 @@ header {
   box-sizing: border-box;          /* ensures padding doesn't add extra width */
 }
 
-/* Base styles for the search button */
-.search-bar button {
-  background: #00cfff;             /* Brand color background */
-  color: #0f172a;                  /* Dark text for contrast */
-  border: none;
-  padding: 0.8rem 1.5rem;          /* Moderate padding */
-  border-radius: 50px;             /* Fully rounded to match theme */
-  font-weight: bold;
-  font-size: 1rem;                 /* Reasonable font size */
-  cursor: pointer;
-  transition: all 0.3s;            /* Smooth hover */
-  white-space: nowrap;             /* Prevent text wrapping */
-}
-
-.search-bar button:hover {
-  transform: scale(1.05);          /* Slight grow on hover */
-  box-shadow: 0 4px 12px rgba(0,207,255,0.4); /* Subtle shadow */
-}
-
 /* Mobile adjustments */
 @media (max-width: 768px) {
   .search-bar {
@@ -309,12 +290,11 @@ header {
 
   .search-bar input {
     font-size: 1rem;               /* slightly smaller text on mobile */
-    flex: 1;                       /* Input takes remaining space */
   }
 
   .search-bar button {
-    padding: 0.6rem 1rem;          /* Slightly smaller padding on mobile */
-    font-size: 0.95rem;            /* Smaller font on mobile */
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
   }
 }
     .benefits {
@@ -558,23 +538,6 @@ header {
       .hamburger { display: block; }
       .hero h1 { font-size: 3.2rem; }
     }
-
-    /* Hero image styles - added for new hero image */
-    .hero-image {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 0 auto 2rem auto;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    }
-
-    @media (max-width: 768px) {
-      .hero-image {
-        border-radius: 12px;
-        margin-bottom: 1.5rem;
-      }
-    }
   </style>
 </head>
 <body>
@@ -586,8 +549,8 @@ header {
     </div>
 
     <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="HowToUse.html">How to Use</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="HowToUse.html" class="active">How to Use</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="Privacy.html">Privacy Policy</a></li>
       <li><a href="contact.html">Contact</a></li>
@@ -608,8 +571,8 @@ header {
     </div>
 
     <ul class="mobile-nav">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="HowToUse.html">How to Use</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="HowToUse.html" class="active">How to Use</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="Privacy.html">Privacy Policy</a></li>
       <li><a href="contact.html">Contact</a></li>
@@ -622,80 +585,36 @@ header {
 
   <main>
 
+    <!-- HOW TO USE -->
+    <section id="how-to-use">
+      <div style="max-width: 900px; margin: 0 auto;">
+        <h2>How to Use RoomLink</h2>
+        <p style="text-align:center; max-width:700px; margin:0 auto 3rem; font-size:1.2rem; color:#cbd5e1;">
+          RoomLink is your go-to app for finding verified apartments and short-term stays. The app is not yet released but will be available soon on Google Play Store. Here's how it will work once launched:
+        </p>
 
+        <div style="background: rgba(30,41,59,0.6); backdrop-filter: blur(10px); border-radius:16px; padding:2.5rem; border:1px solid rgba(0,207,255,0.15);">
+          <h3 style="font-size:1.8rem; color:#00cfff; margin-bottom:1.5rem;">Step-by-Step Guide</h3>
+          <ol style="list-style-type:decimal; padding-left:2rem; font-size:1.1rem; line-height:1.8; color:#e2e8f0;">
+            <li><strong>Download & Sign Up</strong> — Get the app from Google Play, create an account with email/phone, set up your profile (currency, language, dark/light mode, notifications preferences).</li>
+            <li><strong>Search for Stays</strong> — Use powerful filters: location, price range, dates, amenities. View results on list or interactive map.</li>
+            <li><strong>Browse & Favorite</strong> — See verified listings with photos, full details & host info. Save favorites for later.</li>
+            <li><strong>Chat with Hosts</strong> — Message hosts directly in-app to ask questions or negotiate.</li>
+            <li><strong>Book Securely</strong> — Select dates, review total (no hidden fees), pay safely via in-app wallet or payment gateway.</li>
+            <li><strong>Manage Your Booking</strong> — Get instant confirmation, receive notifications, track check-in/out, view booking history.</li>
+            <li><strong>Leave a Review</strong> — After your stay, rate the host/property and help the community.</li>
+            <li><strong>For Hosts</strong> — List your property (goes through verification), manage bookings, chat with guests, withdraw earnings.</li>
+            <li><strong>Support & Safety</strong> — Report issues, contact support, use our verification system for peace of mind.</li>
+          </ol>
+        </div>
 
-    <!-- HOME -->
-<section id="home">
-  <div class="hero">
-    <!-- New hero image added here -->
-    <img src="https://res.cloudinary.com/drserbss8/image/upload/v1771681620/file_0000000055447243832374ba69392462_wmcz8n.png" alt="RoomLink Hero Image" class="hero-image">
-
-    <h1>Find Your Perfect Place</h1>
-    <p>Verified apartments & stylish short-term stays national, secure, transparent, effortless.</p>
-
-    <div class="search-bar" onclick="window.open('https://play.google.com/store/apps/details?id=your.roomlink.app.id', '_blank')">
-      <i class="fas fa-search" style="font-size:1.6rem; color:#00cfff;"></i>
-      <input type="text" placeholder="Search properties, download app to start" readonly />
-      <button>Search</button>
-    </div>
-
-    <div class="hero-cta">
-      <a href="HowToUse.html" class="btn btn-outline">How It Works</a>
-      <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary">
-        <i class="fab fa-google-play"></i> Download App
-      </a>
-    </div>
-  </div>
-
-  <!-- Benefits with Images -->
-  <div class="benefits">
-    <div class="benefit-card">
-      <img 
-        src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" 
-        alt="Verified Security" 
-        style="width:100%; height:180px; object-fit:cover; border-radius:12px 12px 0 0;"
-      />
-      <h3>Fully Verified</h3>
-      <p>Owners, properties & users, all checked for trust and safety.</p>
-    </div>
-
-    <div class="benefit-card">
-      <img 
-        src="https://images.pexels.com/photos/50987/money-card-business-credit-card-50987.jpeg?auto=compress&cs=tinysrgb&w=800" 
-        alt="Transparent Pricing" 
-        style="width:100%; height:180px; object-fit:cover; border-radius:12px 12px 0 0;"
-      />
-      <h3>Transparent Pricing</h3>
-      <p>No hidden fees, clear costs from start to finish.</p>
-    </div>
-
-    <div class="benefit-card">
-      <img 
-        src="https://images.pexels.com/photos/5380792/pexels-photo-5380792.jpeg?auto=compress&cs=tinysrgb&w=800" 
-        alt="Seamless Experience" 
-        style="width:100%; height:180px; object-fit:cover; border-radius:12px 12px 0 0;"
-      />
-      <h3>Seamless Experience</h3>
-      <p>Search, chat, book & manage everything in one app.</p>
-    </div>
-  </div>
-
-  <div style="text-align:center; margin:5rem 0; font-size:1.3rem; color:#94a3b8;">
-    Join <strong style="color:#00cfff;">thousands</strong> of users renting smarter with RoomLink
-  </div>
-
-  <div style="text-align:center;">
-    <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank">
-      <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" 
-           alt="Get it on Google Play" 
-           style="height:80px; margin:1rem 0;" />
-    </a>
-  </div>
-</section>
-
-
-
-
+        <div style="text-align:center; margin-top:3rem;">
+          <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary">
+            <i class="fab fa-google-play"></i> Download Coming Soon
+          </a>
+        </div>
+      </div>
+    </section>
 
   </main>
 
