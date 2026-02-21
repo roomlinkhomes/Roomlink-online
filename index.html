@@ -8,10 +8,16 @@
   <meta name="description" content="RoomLink offers secure, verified apartments and stylish short-term stays worldwide. Transparent bookings, no hidden fees — let's find your perfect place." />
   <meta name="keywords" content="apartments for rent, short-term stays, verified rentals, RoomLink, global accommodation, Nigeria rentals" />
   <link rel="icon" href="/logo.png" type="image/png" />
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
   <style>
+    :root {
+      --purple: #6b48ff;
+      --dark: #0f0f2d;
+      --light: #f8f9ff;
+      --accent: #00d4ff;
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --card-text: #1a1a2e;
+    }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -23,216 +29,123 @@
     }
     main { flex: 1; }
 
-header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  background: rgba(15, 23, 42, 0.92);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  padding: 1rem 5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap; /* ← important for mobile */
-}
-
-.logo {
-  flex-shrink: 0;           /* Prevents logo from shrinking too much */
-}
-
-.logo img {
-  height: 100px;             /* Fixed typo: was 1000px, now 100px for reasonable size */
-  width: auto;
-  max-width: 500px;         /* Increased room so it doesn't get cut off */
-  display: block;
-}
-
-/* Extra boost on larger screens (desktop/tablet) */
-@media (min-width: 768px) {
-  .logo img {
-    height: 80px;           /* Even bigger on desktop – premium feel */
-    max-width: 360px;
-  }
-}
-
-/* Keep it controlled on very small phones */
-@media (max-width: 480px) {
-  .logo img {
-    height: 52px;           /* Slightly smaller only on tiny screens */
-    max-width: 220px;
-  }
-}
-/* Force hamburger to always be visible and on the right */
-.hamburger {
-  font-size: 1.8rem;
-  color: #cbd5e1;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 1001;
-  position: relative;
-}
-
-/* On mobile: make sure logo doesn't push hamburger off screen */
-@media (max-width: 768px) {
-  header {
-    padding: 0.8rem 4%;
-    justify-content: space-between; /* logo left, hamburger right */
-  }
-
-  .logo img {
-    height: 42px;
-    max-width: 160px;
-  }
-
-  .hamburger {
-    display: block !important;
-    order: 2; /* ensures it's on the right */
-  }
-}
-    .nav-links {
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 1rem 5%;
       display: flex;
-      gap: 2.2rem;
-      list-style: none;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
     }
-
-    .nav-links a {
-      color: #cbd5e1;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
+    .logo { flex-shrink: 0; }
+    .logo img {
+      height: 100px;
+      width: auto;
+      max-width: 500px;
+      display: block;
     }
-
-    .nav-links a:hover, .nav-links a.active { color: #00cfff; }
-
+    @media (min-width: 768px) { .logo img { height: 80px; max-width: 360px; } }
+    @media (max-width: 480px) { .logo img { height: 52px; max-width: 220px; } }
     .hamburger {
       font-size: 1.8rem;
       color: #cbd5e1;
       background: none;
       border: none;
       cursor: pointer;
+      z-index: 1001;
     }
-
+    @media (max-width: 768px) {
+      header { padding: 0.8rem 4%; justify-content: space-between; }
+      .logo img { height: 42px; max-width: 160px; }
+      .hamburger { display: block !important; order: 2; }
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a { color: #cbd5e1; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: #00cfff; }
     .mobile-menu {
-      position: fixed;
-      top: 0; right: -100%;
-      width: 80%; max-width: 320px;
-      height: 100%;
-      background: #0f172a;
+      position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100%;
+      background: rgba(15, 23, 42, 0.85); /* Made semi-transparent */
       backdrop-filter: blur(10px);
-      transition: right 0.4s ease;
-      z-index: 999;
+      transition: right 0.4s ease; z-index: 999;
       padding: 5rem 2rem 2rem;
     }
-
     .mobile-menu.active { right: 0; }
-
-    .mobile-menu-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 3rem;
-    }
-
-    .mobile-menu-header .logo img {
-      height: 60px;
-      max-width: 240px;
-    }
-
-    .close-btn {
-      font-size: 2.5rem;
-      color: #cbd5e1;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-
-    .mobile-nav {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 2.2rem;
-    }
-
-    .mobile-nav a {
-      color: #cbd5e1;
-      text-decoration: none;
-      font-size: 1.3rem;
-      font-weight: 500;
-    }
-
+    .mobile-menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
+    .mobile-menu-header .logo img { height: 60px; max-width: 240px; }
+    .close-btn { font-size: 2.5rem; color: #cbd5e1; background: none; border: none; cursor: pointer; }
+    .mobile-nav { list-style: none; display: flex; flex-direction: column; gap: 2.2rem; }
+    .mobile-nav a { color: #cbd5e1; text-decoration: none; font-size: 1.3rem; font-weight: 500; }
     .mobile-nav a:hover, .mobile-nav a.active { color: #00cfff; }
-
     .signup-btn {
-      margin-top: 3rem;
-      display: block;
-      background: #00cfff;
-      color: #0f172a;
-      padding: 1rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      text-align: center;
-      font-size: 1.2rem;
+      margin-top: 3rem; display: block; background: #00cfff; color: #0f172a;
+      padding: 1rem; border-radius: 50px; text-decoration: none; font-weight: bold;
+      text-align: center; font-size: 1.2rem;
     }
-
     .signup-btn:hover { transform: scale(1.05); }
-
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hamburger { display: block; }
-    }
-
-    @media (min-width: 769px) {
-      .hamburger, .mobile-menu { display: none; }
-    }
-
-    section {
-      padding: 100px 5% 120px;
-      min-height: 100vh;
-    }
-
-    section#home {
-      background: linear-gradient(135deg, #0a0f1c 0%, #001f3f 100%);
-    }
-
-    h2 {
-      font-size: 3rem;
-      margin-bottom: 1.2rem;
-      color: #00cfff;
-      text-align: center;
-    }
+    @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
+    @media (min-width: 769px) { .hamburger, .mobile-menu { display: none; } }
 
     .hero {
+      position: relative;
+      height: 85vh;
+      min-height: 620px;
+      background: url('https://res.cloudinary.com/drserbss8/image/upload/v1771681620/file_0000000055447243832374ba69392462_wmcz8n.png') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      padding: 100px 5% 80px;
+      padding: 100px 5% 80px 5%;
+      overflow: hidden;
     }
-
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10,0,40,0.65), rgba(20,0,60,0.75), rgba(0,0,0,0.72));
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
     .hero h1 {
-      font-size: 4.5rem;
+      font-size: 2.9rem;
+      font-weight: 900;
       margin-bottom: 1rem;
-      background: linear-gradient(to right, #00cfff, #00eaff);
+      background: linear-gradient(to right, #00ff9d, #00eaff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeUp 1.2s ease-out forwards;
     }
-
     .hero p {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       max-width: 800px;
       margin: 0 auto 2.5rem;
-      color: #cbd5e1;
+      color: #e0f7ff;
       line-height: 1.6;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeUp 1.4s ease-out 0.3s forwards;
     }
-
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
     .hero-cta {
       display: flex;
       flex-wrap: wrap;
       gap: 1.5rem;
       justify-content: center;
-      margin-bottom: 4rem;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeUp 1.6s ease-out 0.6s forwards;
     }
-
     .btn {
       padding: 1rem 2.2rem;
       border-radius: 50px;
@@ -241,251 +154,121 @@ header {
       font-size: 1.1rem;
       transition: all 0.3s;
     }
+    .btn-primary { background: #00cfff; color: #0f172a; }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 207, 255, 0.4); }
+    .btn-outline { border: 2px solid #00cfff; color: #00cfff; }
+    .btn-outline:hover { background: #00cfff; color: #0f172a; }
 
-    .btn-primary {
-      background: #00cfff;
-      color: #0f172a;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0, 207, 255, 0.4);
-    }
-
-    .btn-outline {
-      border: 2px solid #00cfff;
+    section { padding: 90px 5% 110px; }
+    h2 {
+      font-size: 2.8rem;
+      margin-bottom: 3.5rem;
       color: #00cfff;
+      text-align: center;
     }
 
-    .btn-outline:hover {
-      background: #00cfff;
-      color: #0f172a;
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px 40px;
     }
-.search-bar {
-  max-width: 700px;                /* keeps it max 700px on big screens */
-  width: 90%;                      /* ← takes 90% of available space on smaller screens */
-  margin: 0 auto 3rem;             /* reduced bottom margin for mobile */
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
-  border-radius: 50px;             /* softer corners on mobile */
-  padding: 0.8rem 1rem;            /* slightly less padding on mobile */
-  border: 1px solid rgba(0,207,255,0.3);
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;                     /* smaller gap on mobile */
-  cursor: pointer;
-  box-sizing: border-box;          /* ensures padding doesn't add extra width */
-}
+    .feature-card {
+      background: var(--card-bg);
+      color: var(--card-text);
+      border-radius: 16px;
+      padding: 24px 20px;           /* smaller padding → tinier cards */
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transition: transform 0.35s;
+    }
+    .feature-card:hover { transform: translateY(-10px); }
+    .feature-icon { font-size: 2.6rem; margin-bottom: 16px; color: var(--purple); }
+    .feature-title { font-size: 1.25rem; margin-bottom: 10px; font-weight: 600; }
+    .feature-card p { color: #444; font-size: 0.92rem; line-height: 1.45; }
 
-/* Base styles for the search button */
-.search-bar button {
-  background: #00cfff;             /* Brand color background */
-  color: #0f172a;                  /* Dark text for contrast */
-  border: none;
-  padding: 0.8rem 1.5rem;          /* Moderate padding */
-  border-radius: 50px;             /* Fully rounded to match theme */
-  font-weight: bold;
-  font-size: 1rem;                 /* Reasonable font size */
-  cursor: pointer;
-  transition: all 0.3s;            /* Smooth hover */
-  white-space: nowrap;             /* Prevent text wrapping */
-}
+    .how-it-works { background: rgba(0,0,0,0.25); }
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 40px;
+    }
+    .step {
+      flex: 1 1 22%;
+      min-width: 240px;
+      max-width: 280px;
+      text-align: center;
+    }
+    .step img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+      margin-bottom: 16px;
+    }
+    .step-number {
+      display: inline-block;
+      background: var(--purple);
+      color: white;
+      width: 40px; height: 40px;
+      line-height: 40px;
+      border-radius: 50%;
+      margin-bottom: 12px;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
 
-.search-bar button:hover {
-  transform: scale(1.05);          /* Slight grow on hover */
-  box-shadow: 0 4px 12px rgba(0,207,255,0.4); /* Subtle shadow */
-}
+    .landlord-section {
+      background: linear-gradient(135deg, #4b0082, #006994);
+      padding: 90px 5%;
+      text-align: center;
+      border-radius: 28px;
+      margin: 80px 5%;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    }
+    .check-list {
+      list-style: none;
+      font-size: 1.2rem;
+      margin: 40px auto;
+      max-width: 700px;
+      text-align: left;
+    }
+    .check-list li { margin: 20px 0; display: flex; align-items: center; gap: 16px; }
+    .check-list i { color: #00ff9d; font-size: 1.8rem; }
 
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .search-bar {
-    width: 95%;                    /* almost full-width on phones */
-    max-width: none;               /* remove max-width limit on mobile */
-    margin: 0 auto 2.5rem;         /* tighter spacing */
-    padding: 0.7rem 0.9rem;
-    border-radius: 40px;           /* even softer for mobile feel */
-    gap: 0.6rem;
-  }
-
-  .search-bar input {
-    font-size: 1rem;               /* slightly smaller text on mobile */
-    flex: 1;                       /* Input takes remaining space */
-  }
-
-  .search-bar button {
-    padding: 0.6rem 1rem;          /* Slightly smaller padding on mobile */
-    font-size: 0.95rem;            /* Smaller font on mobile */
-  }
-}
     .benefits {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
+      gap: 40px;
     }
-
     .benefit-card {
       background: rgba(30, 41, 59, 0.6);
       backdrop-filter: blur(10px);
       border-radius: 16px;
-      padding: 2.5rem;
+      padding: 0 0 2rem 0;
       border: 1px solid rgba(0,207,255,0.15);
       text-align: center;
       transition: transform 0.3s;
     }
-
-    .benefit-card:hover {
-      transform: translateY(-10px);
-    }
-
-    .benefit-icon {
-      font-size: 3.5rem;
-      color: #00cfff;
-      margin-bottom: 1.5rem;
-    }
-
-    .benefit-card h3 {
-      font-size: 1.6rem;
-      margin-bottom: 1rem;
-      color: #e2e8f0;
-    }
-
-    .contact-container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-
-
-/* Robot welcome image - after Get in Touch heading */
-.robot-welcome {
-  text-align: center;
-  margin: 1.5rem auto 2.5rem;
-}
-
-.support-robot {
-  max-width: 280px;          /* adjust this to your preference — 240–320px usually looks nice */
-  width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  border-radius: 16px;       /* soft rounded corners */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); /* gentle floating shadow */
-  transition: transform 0.3s ease;
-}
-
-.support-robot:hover {
-  transform: translateY(-8px); /* subtle lift on hover */
-}
-
-/* Optional: make it a bit smaller on mobile */
-@media (max-width: 768px) {
-  .support-robot {
-    max-width: 220px;
-    margin: 1rem auto 2rem;
-  }
-}
-
-
-
-    .contact-form {
-      background: rgba(30, 41, 59, 0.6);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 2.5rem;
-      border: 1px solid rgba(0,207,255,0.15);
-      margin-bottom: 3rem;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
+    .benefit-card:hover { transform: translateY(-10px); }
+    .benefit-card img {
       width: 100%;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(0,207,255,0.3);
-      border-radius: 8px;
-      color: white;
-      font-size: 1rem;
-      outline: none;
-      transition: border 0.3s;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px 12px 0 0;
     }
-
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      border-color: #00cfff;
-    }
-
-    .contact-form button {
-      background: #00cfff;
-      color: #0f172a;
-      border: none;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      font-weight: bold;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: all 0.3s;
-      width: 100%;
-    }
-
-    .contact-form button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0,207,255,0.4);
-    }
-
-    .contact-form button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .form-message {
-      margin-top: 1rem;
-      text-align: center;
-      font-weight: 500;
-    }
-
-    .success { color: #00ff9d; }
-    .error   { color: #ff4d4d; }
-
-    .contact-info {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-
-    .info-card {
-      background: rgba(30, 41, 59, 0.6);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 2rem;
-      border: 1px solid rgba(0,207,255,0.15);
-      text-align: center;
-    }
-
-    .info-icon {
-      font-size: 2.5rem;
-      color: #00cfff;
-      margin-bottom: 1rem;
-    }
-
-    .map-container {
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-      margin-top: 2rem;
-    }
+    .benefit-card h3 { font-size: 1.5rem; margin: 1.4rem 1rem 0.8rem; color: #e2e8f0; }
+    .benefit-card p { padding: 0 1.5rem 1rem; color: #cbd5e1; font-size: 0.97rem; }
 
     footer {
       background: linear-gradient(to top, #0f172a, #1e293b);
-      padding: 4rem 5% 2rem;
+      padding: 6rem 5% 4rem;
       color: #cbd5e1;
       font-size: 0.95rem;
       border-top: 1px solid rgba(255,255,255,0.08);
     }
-
     .footer-container {
       max-width: 1200px;
       margin: 0 auto;
@@ -493,48 +276,19 @@ header {
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 3rem;
     }
-
-    .footer-logo img {
-      height: 60px;
-      width: auto;
-      max-width: 240px;
-    }
-
-    .footer-links h4 {
-      color: #00cfff;
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-    }
-
-    .footer-links ul {
-      list-style: none;
-    }
-
-    .footer-links a {
-      color: #cbd5e1;
-      text-decoration: none;
-      line-height: 2;
-      transition: color 0.3s;
-    }
-
+    .footer-logo img { height: 60px; width: auto; max-width: 240px; }
+    .footer-links h4 { color: #00cfff; margin-bottom: 1rem; font-size: 1.1rem; }
+    .footer-links ul { list-style: none; }
+    .footer-links a { color: #cbd5e1; text-decoration: none; line-height: 2; transition: color 0.3s; }
     .footer-links a:hover { color: #00cfff; }
-
-    .footer-social a {
-      color: #cbd5e1;
-      font-size: 1.6rem;
-      margin-right: 1.2rem;
-      transition: color 0.3s;
-    }
-
+    .footer-social a { color: #cbd5e1; font-size: 1.6rem; margin-right: 1.2rem; transition: color 0.3s; }
     .footer-social a:hover { color: #00cfff; }
-
     .footer-bottom {
       text-align: center;
       margin-top: 4rem;
       padding-top: 2rem;
       border-top: 1px solid rgba(255,255,255,0.08);
     }
-
     .download-btn {
       display: inline-flex;
       align-items: center;
@@ -547,44 +301,32 @@ header {
       font-weight: bold;
       margin-top: 1.5rem;
     }
-
     .download-btn:hover {
       transform: scale(1.05);
       box-shadow: 0 10px 30px rgba(0,207,255,0.3);
     }
 
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hamburger { display: block; }
-      .hero h1 { font-size: 3.2rem; }
+    @media (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
     }
-
-    /* Hero image styles - added for new hero image */
-    .hero-image {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 0 auto 2rem auto;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    }
-
     @media (max-width: 768px) {
-      .hero-image {
-        border-radius: 12px;
-        margin-bottom: 1.5rem;
-      }
+      .features-grid { grid-template-columns: 1fr; }
+      section { padding: 70px 5% 90px; }
+      h2 { font-size: 2.3rem; margin-bottom: 2.5rem; }
+      .hero { height: 80vh; min-height: 540px; padding: 100px 5% 60px; }
+      .hero h1 { font-size: 2.2rem; font-weight: 600; } /* Smaller and less bold */
+      .hero p { font-size: 1rem; line-height: 1.4; } /* Tighter line-height */
+      .step { flex: 1 1 100%; }
+      .landlord-section { margin: 60px 5%; padding: 70px 5%; }
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <div class="logo">
       <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
     </div>
-
     <ul class="nav-links">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="HowToUse.html">How to Use</a></li>
@@ -592,21 +334,14 @@ header {
       <li><a href="Privacy.html">Privacy Policy</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-
-    <button class="hamburger" id="hamburgerBtn">
-      <i class="fas fa-bars"></i>
-    </button>
+    <button class="hamburger" id="hamburgerBtn"><i class="fas fa-bars"></i></button>
   </header>
 
-  <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-header">
-      <div class="logo">
-        <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
-      </div>
+      <div class="logo"><img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo"></div>
       <button class="close-btn" id="closeMenu">×</button>
     </div>
-
     <ul class="mobile-nav">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="HowToUse.html">How to Use</a></li>
@@ -614,92 +349,130 @@ header {
       <li><a href="Privacy.html">Privacy Policy</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-
     <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="signup-btn">
       <i class="fab fa-google-play"></i> Sign Up / Download App
     </a>
   </div>
 
   <main>
+    <section id="home">
+      <div class="hero">
+        <div class="hero-content">
+          <h1>Find Your Perfect Place</h1>
+          <p>Verified apartments & stylish short-term stays — secure, transparent, effortless.</p>
+          <div class="hero-cta">
+            <a href="HowToUse.html" class="btn btn-outline">How It Works</a>
+            <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary">
+              <i class="fab fa-google-play"></i> Download App
+            </a>
+          </div>
+        </div>
+      </div>
 
+      <section class="container">
+        <h2>Why Choose RoomLink?</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+            <h3 class="feature-title">Verified Listings</h3>
+            <p>Only real, checked rooms and roommates — no fake posts</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-id-card"></i></div>
+            <h3 class="feature-title">KYC Landlords</h3>
+            <p>Landlords are verified so you rent with confidence</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-handshake"></i></div>
+            <h3 class="feature-title">Rent Split</h3>
+            <p>Easy roommate rent splitting & transparent payments</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-calendar-check"></i></div>
+            <h3 class="feature-title">Inspection Booking</h3>
+            <p>Schedule viewings safely and conveniently</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-lock"></i></div>
+            <h3 class="feature-title">Secure Chat</h3>
+            <p>Private messaging with built-in protection</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3 class="feature-title">Scam Protection</h3>
+            <p>We actively block scammers & fake listings</p>
+          </div>
+        </div>
+      </section>
 
+      <div class="how-it-works">
+        <h2>How RoomLink Works</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Home</h3>
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800" alt="Home">
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Search</h3>
+            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=800" alt="Search">
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Chat</h3>
+            <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=800" alt="Chat">
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Post Listing</h3>
+            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80&w=800" alt="Post">
+          </div>
+        </div>
+      </div>
 
-    <!-- HOME -->
-<section id="home">
-  <div class="hero">
-    <!-- New hero image added here -->
-    <img src="https://res.cloudinary.com/drserbss8/image/upload/v1771681620/file_0000000055447243832374ba69392462_wmcz8n.png" alt="RoomLink Hero Image" class="hero-image">
+      <div class="landlord-section">
+        <h2>Are You a Landlord or Agent?</h2>
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Post for free during early access</li>
+          <li><i class="fas fa-check"></i> Get a verified badge and attract more tenants</li>
+          <li><i class="fas fa-check"></i> Receive secure payments directly to your bank account</li>
+        </ul>
+        <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary" style="font-size:1.25rem; padding:16px 48px; margin-top:40px;">Start on App →</a>
+      </div>
 
-    <h1>Find Your Perfect Place</h1>
-    <p>Verified apartments & stylish short-term stays national, secure, transparent, effortless.</p>
+      <div class="benefits container">
+        <div class="benefit-card">
+          <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Verified Security">
+          <h3>Fully Verified</h3>
+          <p>Owners, properties & users, all checked for trust and safety.</p>
+        </div>
+        <div class="benefit-card">
+          <img src="https://images.pexels.com/photos/50987/money-card-business-credit-card-50987.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Transparent Pricing">
+          <h3>Transparent Pricing</h3>
+          <p>No hidden fees, clear costs from start to finish.</p>
+        </div>
+        <div class="benefit-card">
+          <img src="https://images.pexels.com/photos/5380792/pexels-photo-5380792.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Seamless Experience">
+          <h3>Seamless Experience</h3>
+          <p>Search, chat, book & manage everything in one app.</p>
+        </div>
+      </div>
 
-    <div class="search-bar" onclick="window.open('https://play.google.com/store/apps/details?id=your.roomlink.app.id', '_blank')">
-      <i class="fas fa-search" style="font-size:1.6rem; color:#00cfff;"></i>
-      <input type="text" placeholder="Search properties, download app to start" readonly />
-      <button>Search</button>
-    </div>
+      <div style="text-align:center; margin:6rem 0 4rem; font-size:1.35rem; color:#94a3b8;">
+        Join <strong style="color:#00cfff;">thousands</strong> of users renting smarter with RoomLink
+      </div>
 
-    <div class="hero-cta">
-      <a href="HowToUse.html" class="btn btn-outline">How It Works</a>
-      <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary">
-        <i class="fab fa-google-play"></i> Download App
-      </a>
-    </div>
-  </div>
-
-  <!-- Benefits with Images -->
-  <div class="benefits">
-    <div class="benefit-card">
-      <img 
-        src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" 
-        alt="Verified Security" 
-        style="width:100%; height:180px; object-fit:cover; border-radius:12px 12px 0 0;"
-      />
-      <h3>Fully Verified</h3>
-      <p>Owners, properties & users, all checked for trust and safety.</p>
-    </div>
-
-    <div class="benefit-card">
-      <img 
-        src="https://images.pexels.com/photos/50987/money-card-business-credit-card-50987.jpeg?auto=compress&cs=tinysrgb&w=800" 
-        alt="Transparent Pricing" 
-        style="width:100%; height:180px; object-fit:cover; border-radius:12px 12px 0 0;"
-      />
-      <h3>Transparent Pricing</h3>
-      <p>No hidden fees, clear costs from start to finish.</p>
-    </div>
-
-    <div class="benefit-card">
-      <img 
-        src="https://images.pexels.com/photos/5380792/pexels-photo-5380792.jpeg?auto=compress&cs=tinysrgb&w=800" 
-        alt="Seamless Experience" 
-        style="width:100%; height:180px; object-fit:cover; border-radius:12px 12px 0 0;"
-      />
-      <h3>Seamless Experience</h3>
-      <p>Search, chat, book & manage everything in one app.</p>
-    </div>
-  </div>
-
-  <div style="text-align:center; margin:5rem 0; font-size:1.3rem; color:#94a3b8;">
-    Join <strong style="color:#00cfff;">thousands</strong> of users renting smarter with RoomLink
-  </div>
-
-  <div style="text-align:center;">
-    <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank">
-      <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" 
-           alt="Get it on Google Play" 
-           style="height:80px; margin:1rem 0;" />
-    </a>
-  </div>
-</section>
-
-
-
-
-
+      <div style="text-align:center; margin-bottom: 6rem;">
+        <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank">
+          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+               alt="Get it on Google Play"
+               style="height:85px;" />
+        </a>
+      </div>
+    </section>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-container">
       <div>
@@ -710,7 +483,6 @@ header {
           Verified apartments & stylish short-term stays worldwide secure, transparent, effortless.
         </p>
       </div>
-
       <div class="footer-links">
         <h4>Quick Links</h4>
         <ul>
@@ -721,42 +493,37 @@ header {
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
-
       <div>
         <h4>Get the App</h4>
         <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="download-btn">
           <i class="fab fa-google-play"></i> Download on Google Play
         </a>
       </div>
-
-<div class="footer-links">
-  <h4>Follow Us</h4>
-  <div class="footer-social">
-    <a href="https://x.com/apexwebsolutios" target="_blank"><i class="fab fa-x-twitter"></i></a>
-    <a href="https://www.instagram.com/roomlinkofficial?igsh=NjVsNGJpZ2ViOG1n" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="https://www.facebook.com/share/1KEQdswU1A/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-    <a href="https://www.linkedin.com/company/room-link/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-    <a href="https://www.tiktok.com/@roomlinkofficial" target="_blank"><i class="fab fa-tiktok"></i></a>
-  </div>
-</div>
+      <div class="footer-links">
+        <h4>Follow Us</h4>
+        <div class="footer-social">
+          <a href="https://x.com/apexwebsolutios" target="_blank"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://www.instagram.com/roomlinkofficial?igsh=NjVsNGJpZ2ViOG1n" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/share/1KEQdswU1A/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.linkedin.com/company/room-link/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.tiktok.com/@roomlinkofficial" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
     <div class="footer-bottom">
       © <span id="year"></span> RoomLink. All rights reserved.
       <p>Designed with ❤️ for better living spaces around the world</p>
     </div>
   </footer>
 
-  <!-- JAVASCRIPT -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const closeMenu = document.getElementById('closeMenu');
     const mobileMenu = document.getElementById('mobileMenu');
-
     hamburgerBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
     closeMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
     mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) mobileMenu.classList.remove('active'); });
-
   </script>
 </body>
 </html>

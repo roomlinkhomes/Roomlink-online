@@ -12,7 +12,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
-    /* All your original CSS remains unchanged */
+    :root {
+      --purple: #6b48ff;
+      --dark: #0f0f2d;
+      --light: #f8f9ff;
+      --accent: #00d4ff;
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --card-text: #1a1a2e;
+      --tint-bg: rgba(15, 23, 42, 0.85); /* Tinted overlay for sections */
+    }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -37,17 +45,15 @@
       align-items: center;
       flex-wrap: wrap;
     }
-
     .logo { flex-shrink: 0; }
     .logo img {
-      height: 1000px;
+      height: 100px;
       width: auto;
       max-width: 500px;
       display: block;
     }
     @media (min-width: 768px) { .logo img { height: 80px; max-width: 360px; } }
     @media (max-width: 480px) { .logo img { height: 52px; max-width: 220px; } }
-
     .hamburger {
       font-size: 1.8rem;
       color: #cbd5e1;
@@ -56,107 +62,92 @@
       cursor: pointer;
       z-index: 1001;
     }
-
     @media (max-width: 768px) {
-      header { padding: 0.8rem 4%; }
+      header { padding: 0.8rem 4%; justify-content: space-between; }
       .logo img { height: 42px; max-width: 160px; }
       .hamburger { display: block !important; order: 2; }
     }
-
-    .nav-links {
-      display: flex;
-      gap: 2.2rem;
-      list-style: none;
-    }
-    .nav-links a {
-      color: #cbd5e1;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a { color: #cbd5e1; text-decoration: none; font-weight: 500; transition: color 0.3s; }
     .nav-links a:hover, .nav-links a.active { color: #00cfff; }
-
     .mobile-menu {
-      position: fixed;
-      top: 0; right: -100%;
-      width: 80%; max-width: 320px;
-      height: 100%;
-      background: #0f172a;
+      position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100%;
+      background: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(10px);
-      transition: right 0.4s ease;
-      z-index: 999;
+      transition: right 0.4s ease; z-index: 999;
       padding: 5rem 2rem 2rem;
     }
     .mobile-menu.active { right: 0; }
-
-    .mobile-menu-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 3rem;
-    }
+    .mobile-menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
     .mobile-menu-header .logo img { height: 60px; max-width: 240px; }
-
-    .close-btn {
-      font-size: 2.5rem;
-      color: #cbd5e1;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-
-    .mobile-nav {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 2.2rem;
-    }
-    .mobile-nav a {
-      color: #cbd5e1;
-      text-decoration: none;
-      font-size: 1.3rem;
-      font-weight: 500;
-    }
+    .close-btn { font-size: 2.5rem; color: #cbd5e1; background: none; border: none; cursor: pointer; }
+    .mobile-nav { list-style: none; display: flex; flex-direction: column; gap: 2.2rem; }
+    .mobile-nav a { color: #cbd5e1; text-decoration: none; font-size: 1.3rem; font-weight: 500; }
     .mobile-nav a:hover, .mobile-nav a.active { color: #00cfff; }
-
     .signup-btn {
-      margin-top: 3rem;
-      display: block;
-      background: #00cfff;
-      color: #0f172a;
-      padding: 1rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      text-align: center;
-      font-size: 1.2rem;
+      margin-top: 3rem; display: block; background: #00cfff; color: #0f172a;
+      padding: 1rem; border-radius: 50px; text-decoration: none; font-weight: bold;
+      text-align: center; font-size: 1.2rem;
     }
     .signup-btn:hover { transform: scale(1.05); }
-
     @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
     @media (min-width: 769px) { .hamburger, .mobile-menu { display: none; } }
 
     section {
-      padding: 100px 5% 120px;
-      min-height: 100vh;
+      padding: 120px 5% 90px;
+      position: relative;
+      background: var(--tint-bg); /* More tinted screen */
+      backdrop-filter: blur(5px); /* Subtle blur for modern feel */
+      border-radius: 0 0 28px 28px; /* Modern rounded bottom */
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2); /* Depth */
     }
-
     h2 {
-      font-size: 3rem;
-      margin-bottom: 1.2rem;
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
       color: #00cfff;
       text-align: center;
+      text-shadow: 0 2px 4px rgba(0,207,255,0.2); /* Modern glow */
+    }
+    h3 {
+      font-size: 2.2rem;
+      color: #00cfff;
+      margin: 3rem 0 1.5rem;
+      text-align: center;
+      transition: color 0.3s;
+    }
+    h3:hover { color: #00eaff; } /* Subtle hover for modern interaction */
+    h4 {
+      font-size: 1.5rem;
+      color: #cbd5e1;
+      margin: 2rem 0 1rem;
+    }
+    p {
+      line-height: 1.8;
+      color: #e2e8f0;
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+    }
+    ul {
+      list-style-type: disc;
+      padding-left: 2rem;
+      margin: 1rem 0 2rem;
+      color: #e2e8f0;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1rem;
     }
 
-    /* Footer styles */
     footer {
       background: linear-gradient(to top, #0f172a, #1e293b);
-      padding: 4rem 5% 2rem;
+      padding: 6rem 5% 4rem;
       color: #cbd5e1;
       font-size: 0.95rem;
       border-top: 1px solid rgba(255,255,255,0.08);
     }
-
     .footer-container {
       max-width: 1200px;
       margin: 0 auto;
@@ -164,48 +155,19 @@
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 3rem;
     }
-
-    .footer-logo img {
-      height: 60px;
-      width: auto;
-      max-width: 240px;
-    }
-
-    .footer-links h4 {
-      color: #00cfff;
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-    }
-
-    .footer-links ul {
-      list-style: none;
-    }
-
-    .footer-links a {
-      color: #cbd5e1;
-      text-decoration: none;
-      line-height: 2;
-      transition: color 0.3s;
-    }
-
+    .footer-logo img { height: 60px; width: auto; max-width: 240px; }
+    .footer-links h4 { color: #00cfff; margin-bottom: 1rem; font-size: 1.1rem; }
+    .footer-links ul { list-style: none; }
+    .footer-links a { color: #cbd5e1; text-decoration: none; line-height: 2; transition: color 0.3s; }
     .footer-links a:hover { color: #00cfff; }
-
-    .footer-social a {
-      color: #cbd5e1;
-      font-size: 1.6rem;
-      margin-right: 1.2rem;
-      transition: color 0.3s;
-    }
-
+    .footer-social a { color: #cbd5e1; font-size: 1.6rem; margin-right: 1.2rem; transition: color 0.3s; }
     .footer-social a:hover { color: #00cfff; }
-
     .footer-bottom {
       text-align: center;
       margin-top: 4rem;
       padding-top: 2rem;
       border-top: 1px solid rgba(255,255,255,0.08);
     }
-
     .download-btn {
       display: inline-flex;
       align-items: center;
@@ -218,15 +180,18 @@
       font-weight: bold;
       margin-top: 1.5rem;
     }
-
     .download-btn:hover {
       transform: scale(1.05);
       box-shadow: 0 10px 30px rgba(0,207,255,0.3);
     }
 
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hamburger { display: block; }
+      section { padding: 100px 5% 80px; border-radius: 0; }
+      h2 { font-size: 2.3rem; margin-bottom: 1.2rem; }
+      h3 { font-size: 1.8rem; margin: 2.5rem 0 1rem; }
+      h4 { font-size: 1.3rem; margin: 1.8rem 0 0.8rem; }
+      p, ul { font-size: 1rem; line-height: 1.6; }
+      .container { padding: 0 0.5rem; }
     }
   </style>
 </head>
@@ -276,28 +241,29 @@
   <main>
     <!-- PRIVACY POLICY -->
     <section id="privacy">
-      <h2>Privacy Policy & Terms of Use</h2>
+      <div class="container">
+        <h2>Privacy Policy & Terms of Use</h2>
 
-      <div style="max-width: 900px; margin: 0 auto; line-height: 1.8; color: #e2e8f0; font-size: 1.05rem;">
-        <h3 style="font-size: 2.2rem; color: #00cfff; margin: 2.5rem 0 1.2rem; text-align: center;">Privacy Policy</h3>
         <p style="text-align: center; font-size: 0.95rem; color: #94a3b8; margin-bottom: 2rem;">
           Last updated: January 31, 2026
         </p>
 
+        <h3>Privacy Policy</h3>
+
         <p>RoomLink ("we", "us", "our") operates the RoomLink mobile application and website (collectively, the "Service"). We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our Service.</p>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">1. Information We Collect</h4>
+        <h4>1. Information We Collect</h4>
         <p>We collect information in the following ways:</p>
-        <ul style="list-style-type: disc; padding-left: 2rem; margin: 0.8rem 0 1.5rem;">
+        <ul>
           <li><strong>Information you provide directly</strong>: name, email address, phone number, profile photo, government-issued ID (for verification), payment method details (not stored by us), address, booking preferences.</li>
           <li><strong>Information about properties you list</strong>: photos, description, location, pricing, availability, house rules.</li>
           <li><strong>Automatically collected information</strong>: device information, IP address, browser type, operating system, pages visited, time spent, referral sources, location data (with permission), search queries, booking interactions.</li>
           <li><strong>Communications</strong>: messages sent through in-app chat, support tickets, emails.</li>
         </ul>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">2. How We Use Your Information</h4>
+        <h4>2. How We Use Your Information</h4>
         <p>We use your information to:</p>
-        <ul style="list-style-type: disc; padding-left: 2rem; margin: 0.8rem 0 1.5rem;">
+        <ul>
           <li>Provide, maintain, and improve the Service (including verification, matching, booking, payments, messaging)</li>
           <li>Verify identity and property ownership/legality to prevent fraud</li>
           <li>Process payments and send receipts/confirmations</li>
@@ -309,9 +275,9 @@
           <li>Conduct analytics and research to improve our platform</li>
         </ul>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">3. Sharing Your Information</h4>
+        <h4>3. Sharing Your Information</h4>
         <p>We share your information only in these limited cases:</p>
-        <ul style="list-style-type: disc; padding-left: 2rem; margin: 0.8rem 0 1.5rem;">
+        <ul>
           <li><strong>With other users</strong>: necessary contact and booking details are shared between confirmed guests and hosts.</li>
           <li><strong>Service providers</strong>: payment processors, cloud storage, identity verification services, messaging infrastructure, analytics tools all under strict confidentiality agreements.</li>
           <li><strong>Legal requirements</strong>: when required by law, subpoena, court order, or to protect rights, safety, or property.</li>
@@ -319,12 +285,12 @@
         </ul>
         <p>We do <strong>not</strong> sell your personal information to third parties for marketing purposes.</p>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">4. Data Retention</h4>
+        <h4>4. Data Retention</h4>
         <p>We retain your personal data only for as long as necessary to provide the Service, comply with legal obligations, resolve disputes, and enforce our agreements. After account deletion, data is removed within 90 days except where retention is required by law.</p>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">5. Your Rights & Choices</h4>
+        <h4>5. Your Rights & Choices</h4>
         <p>You have the right to:</p>
-        <ul style="list-style-type: disc; padding-left: 2rem; margin: 0.8rem 0 1.5rem;">
+        <ul>
           <li>Access, correct, or delete your personal data</li>
           <li>Object to or restrict certain processing</li>
           <li>Withdraw consent (where processing is based on consent)</li>
@@ -333,38 +299,34 @@
         </ul>
         <p>To exercise these rights, contact us at <strong>support@roomlink.homes</strong>.</p>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">6. Security</h4>
+        <h4>6. Security</h4>
         <p>We implement reasonable technical, administrative, and physical safeguards to protect your information. However, no method of transmission over the Internet or electronic storage is 100% secure.</p>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">7. Children's Privacy</h4>
+        <h4>7. Children's Privacy</h4>
         <p>Our Service is not intended for individuals under 18 years of age. We do not knowingly collect personal information from children under 18.</p>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">8. Changes to This Privacy Policy</h4>
+        <h4>8. Changes to This Privacy Policy</h4>
         <p>We may update this policy from time to time. We will notify you of material changes by posting the new policy on this page and updating the "Last updated" date.</p>
 
-        <!-- TERMS OF USE -->
-        <h3 style="font-size: 2.2rem; color: #00cfff; margin: 4rem 0 1.2rem; text-align: center;">Terms of Use</h3>
-        <p style="text-align: center; font-size: 0.95rem; color: #94a3b8; margin-bottom: 2rem;">
-          Last updated: January 31, 2026
-        </p>
+        <h3>Terms of Use</h3>
 
         <p>These Terms of Use ("Terms") govern your access to and use of the RoomLink mobile application and website (the "Service") operated by RoomLink. By accessing or using the Service, you agree to be bound by these Terms. If you do not agree, do not use the Service.</p>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">1. Eligibility</h4>
+        <h4>1. Eligibility</h4>
         <p>You must be at least 18 years old and legally capable of entering into contracts to use the Service. By using the Service, you represent and warrant that you meet these requirements.</p>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">2. User Accounts</h4>
+        <h4>2. User Accounts</h4>
         <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to notify us immediately of any unauthorized use.</p>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">3. User Content & Listings</h4>
+        <h4>3. User Content & Listings</h4>
         <p>You are solely responsible for any content (listings, photos, descriptions, messages) you post. You represent that you have all rights necessary to post such content and that it does not infringe any third-party rights. We may remove content that violates these Terms.</p>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">4. Bookings & Payments</h4>
+        <h4>4. Bookings & Payments</h4>
         <p>All bookings and payments are facilitated through the Service. You agree to pay all fees displayed at the time of booking. We act as a limited agent for hosts to collect payments. Cancellation policies are set by hosts and displayed during booking.</p>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">5. Prohibited Conduct</h4>
+        <h4>5. Prohibited Conduct</h4>
         <p>You agree not to:</p>
-        <ul style="list-style-type: disc; padding-left: 2rem; margin: 0.8rem 0 1.5rem;">
+        <ul>
           <li>Use the Service for any illegal purpose</li>
           <li>Post false, misleading, or fraudulent listings</li>
           <li>Impersonate any person or entity</li>
@@ -373,19 +335,19 @@
           <li>Attempt to gain unauthorized access</li>
         </ul>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">6. Termination</h4>
+        <h4>6. Termination</h4>
         <p>We may suspend or terminate your account or access to the Service at any time, without notice, for conduct that we believe violates these Terms or is harmful to other users or the Service.</p>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">7. Disclaimers & Limitation of Liability</h4>
+        <h4>7. Disclaimers & Limitation of Liability</h4>
         <p>The Service is provided "as is" without warranties of any kind. We are not responsible for the conduct of users, the condition of properties, or any disputes between users. To the fullest extent permitted by law, RoomLink shall not be liable for any indirect, incidental, special, consequential, or punitive damages.</p>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">8. Indemnification</h4>
+        <h4>8. Indemnification</h4>
         <p>You agree to indemnify and hold RoomLink harmless from any claims, losses, liabilities, damages, costs, and expenses arising from your use of the Service or violation of these Terms.</p>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">9. Governing Law</h4>
+        <h4>9. Governing Law</h4>
         <p>These Terms shall be governed by the laws of the Federal Republic of Nigeria, without regard to conflict of law principles.</p>
 
-        <h4 style="font-size: 1.5rem; color: #cbd5e1; margin: 2rem 0 0.8rem;">10. Changes to Terms</h4>
+        <h4>10. Changes to Terms</h4>
         <p>We may modify these Terms at any time. Continued use of the Service after changes constitutes acceptance of the updated Terms.</p>
 
         <p style="margin-top: 3rem; font-style: italic; color: #94a3b8; text-align: center;">
@@ -395,7 +357,7 @@
     </section>
   </main>
 
-  <!-- FOOTER - now identical in structure to other pages -->
+  <!-- FOOTER -->
   <footer>
     <div class="footer-container">
       <div>
