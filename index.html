@@ -28,6 +28,7 @@
       flex-direction: column;
     }
     main { flex: 1; }
+
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -43,23 +44,13 @@
     }
     .logo { flex-shrink: 0; }
     .logo img {
-      height: 180px; /* Increased base height for bigger logo */
+      height: 100px;
       width: auto;
-      max-width: 900px; /* Increased max-width to allow larger size */
+      max-width: 500px;
       display: block;
     }
-    @media (min-width: 768px) {
-      .logo img {
-        height: 150px; /* Larger on desktop */
-        max-width: 720px;
-      }
-    }
-    @media (max-width: 480px) {
-      .logo img {
-        height: 100px; /* Bigger on small phones */
-        max-width: 440px;
-      }
-    }
+    @media (min-width: 768px) { .logo img { height: 80px; max-width: 360px; } }
+    @media (max-width: 480px) { .logo img { height: 52px; max-width: 220px; } }
     .hamburger {
       font-size: 1.8rem;
       color: #cbd5e1;
@@ -70,7 +61,7 @@
     }
     @media (max-width: 768px) {
       header { padding: 0.8rem 4%; justify-content: space-between; }
-      .logo img { height: 90px; max-width: 360px; } /* Bigger on mobile header */
+      .logo img { height: 42px; max-width: 160px; }
       .hamburger { display: block !important; order: 2; }
     }
     .nav-links { display: flex; gap: 2.2rem; list-style: none; }
@@ -85,7 +76,7 @@
     }
     .mobile-menu.active { right: 0; }
     .mobile-menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
-    .mobile-menu-header .logo img { height: 120px; max-width: 480px; } /* Bigger logo in mobile menu */
+    .mobile-menu-header .logo img { height: 60px; max-width: 240px; }
     .close-btn { font-size: 2.5rem; color: #cbd5e1; background: none; border: none; cursor: pointer; }
     .mobile-nav { list-style: none; display: flex; flex-direction: column; gap: 2.2rem; }
     .mobile-nav a { color: #cbd5e1; text-decoration: none; font-size: 1.3rem; font-weight: 500; }
@@ -98,6 +89,7 @@
     .signup-btn:hover { transform: scale(1.05); }
     @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
     @media (min-width: 769px) { .hamburger, .mobile-menu { display: none; } }
+
     .hero {
       position: relative;
       height: 85vh;
@@ -166,6 +158,7 @@
     .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 207, 255, 0.4); }
     .btn-outline { border: 2px solid #00cfff; color: #00cfff; }
     .btn-outline:hover { background: #00cfff; color: #0f172a; }
+
     section { padding: 90px 5% 110px; }
     h2 {
       font-size: 2.8rem;
@@ -173,7 +166,9 @@
       color: #00cfff;
       text-align: center;
     }
+
     .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -183,15 +178,22 @@
       background: var(--card-bg);
       color: var(--card-text);
       border-radius: 16px;
-      padding: 24px 20px; /* smaller padding → tinier cards */
+      padding: 24px 20px;           /* smaller padding → tinier cards */
       text-align: center;
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      transition: transform 0.35s;
+      transition: transform 0.35s, opacity 0.5s, transform 0.5s;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    .feature-card.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .feature-card:hover { transform: translateY(-10px); }
     .feature-icon { font-size: 2.6rem; margin-bottom: 16px; color: var(--purple); }
     .feature-title { font-size: 1.25rem; margin-bottom: 10px; font-weight: 600; }
     .feature-card p { color: #444; font-size: 0.92rem; line-height: 1.45; }
+
     .how-it-works { background: rgba(0,0,0,0.25); }
     .steps {
       display: flex;
@@ -205,6 +207,13 @@
       min-width: 240px;
       max-width: 280px;
       text-align: center;
+      transition: opacity 0.5s, transform 0.5s;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    .step.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .step img {
       width: 100%;
@@ -223,6 +232,7 @@
       font-weight: bold;
       font-size: 1.3rem;
     }
+
     .landlord-section {
       background: linear-gradient(135deg, #4b0082, #006994);
       padding: 90px 5%;
@@ -230,6 +240,13 @@
       border-radius: 28px;
       margin: 80px 5%;
       box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+      transition: opacity 0.5s, transform 0.5s;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    .landlord-section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .check-list {
       list-style: none;
@@ -240,6 +257,7 @@
     }
     .check-list li { margin: 20px 0; display: flex; align-items: center; gap: 16px; }
     .check-list i { color: #00ff9d; font-size: 1.8rem; }
+
     .benefits {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -252,7 +270,13 @@
       padding: 0 0 2rem 0;
       border: 1px solid rgba(0,207,255,0.15);
       text-align: center;
-      transition: transform 0.3s;
+      transition: transform 0.3s, opacity 0.5s, transform 0.5s;
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    .benefit-card.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .benefit-card:hover { transform: translateY(-10px); }
     .benefit-card img {
@@ -263,6 +287,7 @@
     }
     .benefit-card h3 { font-size: 1.5rem; margin: 1.4rem 1rem 0.8rem; color: #e2e8f0; }
     .benefit-card p { padding: 0 1.5rem 1rem; color: #cbd5e1; font-size: 0.97rem; }
+
     footer {
       background: linear-gradient(to top, #0f172a, #1e293b);
       padding: 6rem 5% 4rem;
@@ -306,6 +331,7 @@
       transform: scale(1.05);
       box-shadow: 0 10px 30px rgba(0,207,255,0.3);
     }
+
     @media (max-width: 1024px) {
       .features-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -319,42 +345,10 @@
       .step { flex: 1 1 100%; }
       .landlord-section { margin: 60px 5%; padding: 70px 5%; }
     }
-
-    /* Scroll reveal animations */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .step, .feature-card, .benefit-card {
-      will-change: opacity, transform;
-    }
-
-    /* Stagger for groups (e.g., add delay for sequential appear) */
-    .features-grid .feature-card:nth-child(2), .steps .step:nth-child(2), .benefits .benefit-card:nth-child(2) {
-      transition-delay: 0.1s;
-    }
-    .features-grid .feature-card:nth-child(3), .steps .step:nth-child(3), .benefits .benefit-card:nth-child(3) {
-      transition-delay: 0.2s;
-    }
-    .features-grid .feature-card:nth-child(4), .steps .step:nth-child(4) {
-      transition-delay: 0.3s;
-    }
-    .features-grid .feature-card:nth-child(5) {
-      transition-delay: 0.4s;
-    }
-    .features-grid .feature-card:nth-child(6) {
-      transition-delay: 0.5s;
-    }
   </style>
 </head>
 <body>
+
   <header>
     <div class="logo">
       <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
@@ -368,6 +362,7 @@
     </ul>
     <button class="hamburger" id="hamburgerBtn"><i class="fas fa-bars"></i></button>
   </header>
+
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-header">
       <div class="logo"><img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo"></div>
@@ -384,6 +379,7 @@
       <i class="fab fa-google-play"></i> Sign Up / Download App
     </a>
   </div>
+
   <main>
     <section id="home">
       <div class="hero">
@@ -398,66 +394,69 @@
           </div>
         </div>
       </div>
+
       <section class="container">
         <h2>Why Choose RoomLink?</h2>
         <div class="features-grid">
-          <div class="feature-card reveal">
+          <div class="feature-card">
             <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
             <h3 class="feature-title">Verified Listings</h3>
             <p>Only real, checked rooms and roommates — no fake posts</p>
           </div>
-          <div class="feature-card reveal">
+          <div class="feature-card">
             <div class="feature-icon"><i class="fas fa-id-card"></i></div>
             <h3 class="feature-title">KYC Landlords</h3>
             <p>Landlords are verified so you rent with confidence</p>
           </div>
-          <div class="feature-card reveal">
+          <div class="feature-card">
             <div class="feature-icon"><i class="fas fa-handshake"></i></div>
             <h3 class="feature-title">Rent Split</h3>
             <p>Easy roommate rent splitting & transparent payments</p>
           </div>
-          <div class="feature-card reveal">
+          <div class="feature-card">
             <div class="feature-icon"><i class="fas fa-calendar-check"></i></div>
             <h3 class="feature-title">Inspection Booking</h3>
             <p>Schedule viewings safely and conveniently</p>
           </div>
-          <div class="feature-card reveal">
+          <div class="feature-card">
             <div class="feature-icon"><i class="fas fa-lock"></i></div>
             <h3 class="feature-title">Secure Chat</h3>
             <p>Private messaging with built-in protection</p>
           </div>
-          <div class="feature-card reveal">
+          <div class="feature-card">
             <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
             <h3 class="feature-title">Scam Protection</h3>
             <p>We actively block scammers & fake listings</p>
           </div>
         </div>
       </section>
+
       <div class="how-it-works">
         <h2>How RoomLink Works</h2>
         <div class="steps">
-          <div class="step reveal">
+          <div class="step">
             <div class="step-number">1</div>
             <h3>Home</h3>
             <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800" alt="Home">
           </div>
-          <div class="step reveal">
+          <div class="step">
             <div class="step-number">2</div>
             <h3>Search</h3>
             <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=800" alt="Search">
           </div>
-          <div class="step reveal">
+          <div class="step">
             <div class="step-number">3</div>
             <h3>Chat</h3>
             <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=800" alt="Chat">
           </div>
-          <div class="step reveal">
+          <div class="step">
             <div class="step-number">4</div>
             <h3>Post Listing</h3>
             <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80&w=800" alt="Post">
           </div>
         </div>
       </div>
+
       <div class="landlord-section">
         <h2>Are You a Landlord or Agent?</h2>
         <ul class="check-list">
@@ -467,26 +466,32 @@
         </ul>
         <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary" style="font-size:1.25rem; padding:16px 48px; margin-top:40px;">Start on App →</a>
       </div>
+
       <div class="benefits container">
-        <div class="benefit-card reveal">
-          <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Verified Security">
-          <h3>Fully Verified</h3>
-          <p>Owners, properties & users, all checked for trust and safety.</p>
-        </div>
-        <div class="benefit-card reveal">
-          <img src="https://images.pexels.com/photos/50987/money-card-business-credit-card-50987.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Transparent Pricing">
-          <h3>Transparent Pricing</h3>
-          <p>No hidden fees, clear costs from start to finish.</p>
-        </div>
-        <div class="benefit-card reveal">
-          <img src="https://images.pexels.com/photos/5380792/pexels-photo-5380792.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Seamless Experience">
-          <h3>Seamless Experience</h3>
-          <p>Search, chat, book & manage everything in one app.</p>
+        <h2>Benefits</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Verified Security">
+            <h3>Fully Verified</h3>
+            <p>Owners, properties & users, all checked for trust and safety.</p>
+          </div>
+          <div class="benefit-card">
+            <img src="https://images.pexels.com/photos/50987/money-card-business-credit-card-50987.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Transparent Pricing">
+            <h3>Transparent Pricing</h3>
+            <p>No hidden fees, clear costs from start to finish.</p>
+          </div>
+          <div class="benefit-card">
+            <img src="https://images.pexels.com/photos/5380792/pexels-photo-5380792.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Seamless Experience">
+            <h3>Seamless Experience</h3>
+            <p>Search, chat, book & manage everything in one app.</p>
+          </div>
         </div>
       </div>
+
       <div style="text-align:center; margin:6rem 0 4rem; font-size:1.35rem; color:#94a3b8;">
         Join <strong style="color:#00cfff;">thousands</strong> of users renting smarter with RoomLink
       </div>
+
       <div style="text-align:center; margin-bottom: 6rem;">
         <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank">
           <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
@@ -496,6 +501,7 @@
       </div>
     </section>
   </main>
+
   <footer>
     <div class="footer-container">
       <div>
@@ -538,6 +544,7 @@
       <p>Designed with ❤️ for better living spaces around the world</p>
     </div>
   </footer>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
     const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -547,24 +554,21 @@
     closeMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
     mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) mobileMenu.classList.remove('active'); });
 
-    // Scroll reveal script
-    const reveals = document.querySelectorAll('.reveal');
+    // Scroll animation for all cards
+    const animateElements = document.querySelectorAll('.feature-card, .step, .benefit-card, .landlord-section');
 
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+      entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          observer.unobserve(entry.target); // Stop observing once revealed
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 100); // Stagger animation by 100ms per element
+          observer.unobserve(entry.target);
         }
       });
-    }, {
-      threshold: 0.1, // Trigger when 10% visible
-      rootMargin: '0px 0px -50px 0px' // Slight offset for smoother trigger
-    });
+    }, { threshold: 0.1 });
 
-    reveals.forEach((element) => {
-      observer.observe(element);
-    });
+    animateElements.forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
