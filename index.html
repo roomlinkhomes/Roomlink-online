@@ -69,7 +69,7 @@
     .nav-links a:hover, .nav-links a.active { color: #00cfff; }
     .mobile-menu {
       position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100%;
-      background: rgba(15, 23, 42, 0.85); /* Made semi-transparent */
+      background: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(10px);
       transition: right 0.4s ease; z-index: 999;
       padding: 5rem 2rem 2rem;
@@ -178,16 +178,10 @@
       background: var(--card-bg);
       color: var(--card-text);
       border-radius: 16px;
-      padding: 24px 20px;           /* smaller padding → tinier cards */
+      padding: 24px 20px;
       text-align: center;
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      transition: transform 0.35s, opacity 0.5s, transform 0.5s;
-      opacity: 0;
-      transform: translateY(50px);
-    }
-    .feature-card.visible {
-      opacity: 1;
-      transform: translateY(0);
+      transition: transform 0.35s;
     }
     .feature-card:hover { transform: translateY(-10px); }
     .feature-icon { font-size: 2.6rem; margin-bottom: 16px; color: var(--purple); }
@@ -207,13 +201,6 @@
       min-width: 240px;
       max-width: 280px;
       text-align: center;
-      transition: opacity 0.5s, transform 0.5s;
-      opacity: 0;
-      transform: translateY(50px);
-    }
-    .step.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
     .step img {
       width: 100%;
@@ -240,13 +227,6 @@
       border-radius: 28px;
       margin: 80px 5%;
       box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-      transition: opacity 0.5s, transform 0.5s;
-      opacity: 0;
-      transform: translateY(50px);
-    }
-    .landlord-section.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
     .check-list {
       list-style: none;
@@ -270,13 +250,7 @@
       padding: 0 0 2rem 0;
       border: 1px solid rgba(0,207,255,0.15);
       text-align: center;
-      transition: transform 0.3s, opacity 0.5s, transform 0.5s;
-      opacity: 0;
-      transform: translateY(50px);
-    }
-    .benefit-card.visible {
-      opacity: 1;
-      transform: translateY(0);
+      transition: transform 0.3s;
     }
     .benefit-card:hover { transform: translateY(-10px); }
     .benefit-card img {
@@ -332,6 +306,39 @@
       box-shadow: 0 10px 30px rgba(0,207,255,0.3);
     }
 
+    /* ===== SCROLL REVEAL ANIMATIONS ===== */
+    .feature-card,
+    .step,
+    .benefit-card {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .feature-card.visible,
+    .step.visible,
+    .benefit-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Staggered delays */
+    .features-grid .feature-card:nth-child(1) { transition-delay: 0.05s; }
+    .features-grid .feature-card:nth-child(2) { transition-delay: 0.15s; }
+    .features-grid .feature-card:nth-child(3) { transition-delay: 0.25s; }
+    .features-grid .feature-card:nth-child(4) { transition-delay: 0.35s; }
+    .features-grid .feature-card:nth-child(5) { transition-delay: 0.45s; }
+    .features-grid .feature-card:nth-child(6) { transition-delay: 0.55s; }
+
+    .steps .step:nth-child(1) { transition-delay: 0.1s; }
+    .steps .step:nth-child(2) { transition-delay: 0.25s; }
+    .steps .step:nth-child(3) { transition-delay: 0.4s; }
+    .steps .step:nth-child(4) { transition-delay: 0.55s; }
+
+    .benefits .benefit-card:nth-child(1) { transition-delay: 0.1s; }
+    .benefits .benefit-card:nth-child(2) { transition-delay: 0.25s; }
+    .benefits .benefit-card:nth-child(3) { transition-delay: 0.4s; }
+
     @media (max-width: 1024px) {
       .features-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -340,8 +347,8 @@
       section { padding: 70px 5% 90px; }
       h2 { font-size: 2.3rem; margin-bottom: 2.5rem; }
       .hero { height: 80vh; min-height: 540px; padding: 100px 5% 60px; }
-      .hero h1 { font-size: 2.2rem; font-weight: 600; } /* Smaller and less bold */
-      .hero p { font-size: 1rem; line-height: 1.4; } /* Tighter line-height */
+      .hero h1 { font-size: 2.2rem; font-weight: 600; }
+      .hero p { font-size: 1rem; line-height: 1.4; }
       .step { flex: 1 1 100%; }
       .landlord-section { margin: 60px 5%; padding: 70px 5%; }
     }
@@ -468,23 +475,20 @@
       </div>
 
       <div class="benefits container">
-        <h2>Benefits</h2>
-        <div class="benefits-grid">
-          <div class="benefit-card">
-            <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Verified Security">
-            <h3>Fully Verified</h3>
-            <p>Owners, properties & users, all checked for trust and safety.</p>
-          </div>
-          <div class="benefit-card">
-            <img src="https://images.pexels.com/photos/50987/money-card-business-credit-card-50987.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Transparent Pricing">
-            <h3>Transparent Pricing</h3>
-            <p>No hidden fees, clear costs from start to finish.</p>
-          </div>
-          <div class="benefit-card">
-            <img src="https://images.pexels.com/photos/5380792/pexels-photo-5380792.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Seamless Experience">
-            <h3>Seamless Experience</h3>
-            <p>Search, chat, book & manage everything in one app.</p>
-          </div>
+        <div class="benefit-card">
+          <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Verified Security">
+          <h3>Fully Verified</h3>
+          <p>Owners, properties & users, all checked for trust and safety.</p>
+        </div>
+        <div class="benefit-card">
+          <img src="https://images.pexels.com/photos/50987/money-card-business-credit-card-50987.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Transparent Pricing">
+          <h3>Transparent Pricing</h3>
+          <p>No hidden fees, clear costs from start to finish.</p>
+        </div>
+        <div class="benefit-card">
+          <img src="https://images.pexels.com/photos/5380792/pexels-photo-5380792.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Seamless Experience">
+          <h3>Seamless Experience</h3>
+          <p>Search, chat, book & manage everything in one app.</p>
         </div>
       </div>
 
@@ -554,21 +558,22 @@
     closeMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
     mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) mobileMenu.classList.remove('active'); });
 
-    // Scroll animation for all cards
-    const animateElements = document.querySelectorAll('.feature-card, .step, .benefit-card, .landlord-section');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
+    // Smooth scroll reveal animation for all cards
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, index * 100); // Stagger animation by 100ms per element
-          observer.unobserve(entry.target);
+          entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1 });
+    }, {
+      threshold: 0.12,          // trigger when 12% of the card is visible
+      rootMargin: "0px 0px -80px 0px"   // start animation a little before it fully enters
+    });
 
-    animateElements.forEach(el => observer.observe(el));
+    // Select all the cards we want to animate
+    document.querySelectorAll('.feature-card, .step, .benefit-card').forEach(card => {
+      revealObserver.observe(card);
+    });
   </script>
 </body>
 </html>
