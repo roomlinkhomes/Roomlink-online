@@ -12,8 +12,11 @@
   <style>
     :root {
       --purple: #6b48ff;
-      --accent: #00cfff;
-      --dark: #0f172a;
+      --dark: #0f0f2d;
+      --light: #f8f9ff;
+      --accent: #00d4ff;
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --card-text: #1a1a2e;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
@@ -25,13 +28,11 @@
       flex-direction: column;
     }
     main { flex: 1; }
-
-    /* ==================== HEADER ==================== */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: rgba(15, 23, 42, 0.95);
+      background: rgba(15, 23, 42, 0.92);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255,255,255,0.08);
       padding: 1rem 5%;
@@ -40,181 +41,184 @@
       align-items: center;
       flex-wrap: wrap;
     }
+    .logo { flex-shrink: 0; }
     .logo img {
-      height: 52px;
+      height: 100px;
       width: auto;
-      max-width: 220px;
+      max-width: 500px;
+      display: block;
     }
-    @media (min-width: 769px) {
-      .logo img { height: 80px; max-width: 360px; }
-    }
-    .nav-links { 
-      display: flex; 
-      gap: 2.2rem; 
-      list-style: none; 
-    }
-    .nav-links a { 
-      color: #cbd5e1; 
-      text-decoration: none; 
-      font-weight: 500; 
-      transition: color 0.3s; 
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    @media (min-width: 768px) { .logo img { height: 80px; max-width: 360px; } }
+    @media (max-width: 480px) { .logo img { height: 52px; max-width: 220px; } }
     .hamburger {
       font-size: 1.8rem;
       color: #cbd5e1;
       background: none;
       border: none;
       cursor: pointer;
-      display: none;
+      z-index: 1001;
     }
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hamburger { display: block; }
+      header { padding: 0.8rem 4%; justify-content: space-between; }
+      .logo img { height: 42px; max-width: 160px; }
+      .hamburger { display: block !important; order: 2; }
     }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a { color: #cbd5e1; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: #00cfff; }
+    .mobile-menu {
+      position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(10px);
+      transition: right 0.4s ease; z-index: 999;
+      padding: 5rem 2rem 2rem;
+    }
+    .mobile-menu.active { right: 0; }
+    .mobile-menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
+    .mobile-menu-header .logo img { height: 60px; max-width: 240px; }
+    .close-btn { font-size: 2.5rem; color: #cbd5e1; background: none; border: none; cursor: pointer; }
+    .mobile-nav { list-style: none; display: flex; flex-direction: column; gap: 2.2rem; }
+    .mobile-nav a { color: #cbd5e1; text-decoration: none; font-size: 1.3rem; font-weight: 500; }
+    .mobile-nav a:hover, .mobile-nav a.active { color: #00cfff; }
+    .signup-btn {
+      margin-top: 3rem; display: block; background: #00cfff; color: #0f172a;
+      padding: 1rem; border-radius: 50px; text-decoration: none; font-weight: bold;
+      text-align: center; font-size: 1.2rem;
+    }
+    .signup-btn:hover { transform: scale(1.05); }
+    @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
+    @media (min-width: 769px) { .hamburger, .mobile-menu { display: none; } }
 
-    /* ==================== HERO SECTION - MODERN LOOK ==================== */
+    /* ==================== HERO - MOVED TO UPPER EDGE ==================== */
     .hero {
       position: relative;
-      min-height: 100vh;
+      height: 85vh;
+      min-height: 620px;
+      background: url('https://res.cloudinary.com/drserbss8/image/upload/v1771681620/file_0000000055447243832374ba69392462_wmcz8n.png') center/cover no-repeat;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       text-align: center;
-      padding: 120px 5% 100px 5%;
-      background: linear-gradient(135deg, #0a0f1f 0%, #1a2338 100%);
+      padding: 110px 5% 100px 5%;     /* Reduced top padding → moved UP significantly */
       overflow: hidden;
     }
-
-    /* Desktop: Keep background image */
-    @media (min-width: 769px) {
-      .hero {
-        min-height: 85vh;
-        background: url('https://res.cloudinary.com/drserbss8/image/upload/v1771681620/file_0000000055447243832374ba69392462_wmcz8n.png') center/cover no-repeat;
-        padding-top: 140px;
-      }
-      .hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to bottom, rgba(10,0,40,0.75), rgba(20,0,60,0.82), rgba(0,0,0,0.80));
-      }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10,0,40,0.75), rgba(20,0,60,0.82), rgba(0,0,0,0.80));
     }
-
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 820px;
+      max-width: 900px;
     }
     .hero h1 {
       font-size: 2.9rem;
       font-weight: 900;
-      line-height: 1.05;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
       background: linear-gradient(to right, #00ff9d, #00eaff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1.2s ease-out forwards;
     }
     .hero p {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 2.5rem;
       color: #e0f7ff;
-      max-width: 700px;
-      margin: 0 auto 2.8rem;
-      line-height: 1.5;
+      line-height: 1.6;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1.4s ease-out 0.3s forwards;
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
     }
     .hero-cta {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.2rem;
+      gap: 1.5rem;
       justify-content: center;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1.6s ease-out 0.6s forwards;
     }
     .btn {
-      padding: 1.15rem 2.5rem;
+      padding: 1rem 2.2rem;
       border-radius: 50px;
-      font-weight: 700;
+      font-weight: bold;
       text-decoration: none;
-      font-size: 1.12rem;
-      transition: all 0.3s ease;
-      min-width: 180px;
+      font-size: 1.1rem;
+      transition: all 0.3s;
     }
-    .btn-primary {
-      background: var(--accent);
-      color: #0f172a;
-    }
-    .btn-primary:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(0, 207, 255, 0.5);
-    }
-    .btn-outline {
-      border: 2px solid var(--accent);
-      color: var(--accent);
-    }
-    .btn-outline:hover {
-      background: var(--accent);
-      color: #0f172a;
-    }
+    .btn-primary { background: #00cfff; color: #0f172a; }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 207, 255, 0.4); }
+    .btn-outline { border: 2px solid #00cfff; color: #00cfff; }
+    .btn-outline:hover { background: #00cfff; color: #0f172a; }
 
-    /* Mobile Hero Tweaks */
+    /* Mobile adjustments */
     @media (max-width: 768px) {
       .hero {
-        padding: 130px 5% 110px 5%;
+        height: 82vh;
+        min-height: 520px;
+        padding: 85px 5% 80px 5%;     /* Even higher on mobile */
       }
-      .hero h1 {
-        font-size: 2.45rem;
-      }
-      .hero p {
-        font-size: 1.1rem;
-      }
-      .btn {
-        padding: 1.05rem 2rem;
-        font-size: 1.05rem;
-        width: 100%;
-        max-width: 300px;
-      }
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1.05rem; }
     }
 
-    /* ==================== OTHER SECTIONS ==================== */
+    /* Breathing spaces */
+    .why-section {
+      padding-top: 120px !important;
+    }
+    .how-section {
+      padding-top: 100px !important;
+    }
+
     section { padding: 90px 5% 110px; }
     h2 {
-      font-size: 2.6rem;
-      margin-bottom: 3.2rem;
+      font-size: 2.8rem;
+      margin-bottom: 3.5rem;
       color: #00cfff;
       text-align: center;
     }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
-
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 28px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px 40px;
     }
     .feature-card {
-      background: rgba(255,255,255,0.92);
-      color: #1a1a2e;
+      background: var(--card-bg);
+      color: var(--card-text);
       border-radius: 16px;
-      padding: 28px 22px;
+      padding: 24px 20px;
       text-align: center;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
       transition: transform 0.35s;
     }
-    .feature-card:hover { transform: translateY(-8px); }
-    .feature-icon { font-size: 2.8rem; margin-bottom: 16px; color: var(--purple); }
-    .feature-title { font-size: 1.3rem; margin-bottom: 12px; font-weight: 600; }
-    .feature-card p { color: #444; font-size: 0.95rem; line-height: 1.5; }
+    .feature-card:hover { transform: translateY(-10px); }
+    .feature-icon { font-size: 2.6rem; margin-bottom: 16px; color: var(--purple); }
+    .feature-title { font-size: 1.25rem; margin-bottom: 10px; font-weight: 600; }
+    .feature-card p { color: #444; font-size: 0.92rem; line-height: 1.45; }
 
     .how-it-works { 
       background: rgba(0,0,0,0.25); 
-      padding-top: 100px; 
     }
+
     .steps {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 32px;
+      gap: 40px;
       margin-top: 40px;
     }
     .step {
-      flex: 1 1 240px;
+      flex: 1 1 22%;
+      min-width: 240px;
       max-width: 280px;
       text-align: center;
     }
@@ -228,14 +232,13 @@
       display: inline-block;
       background: var(--purple);
       color: white;
-      width: 42px; height: 42px;
-      line-height: 42px;
+      width: 40px; height: 40px;
+      line-height: 40px;
       border-radius: 50%;
       margin-bottom: 12px;
       font-weight: bold;
-      font-size: 1.35rem;
+      font-size: 1.3rem;
     }
-
     .landlord-section {
       background: linear-gradient(135deg, #4b0082, #006994);
       padding: 90px 5%;
@@ -251,14 +254,8 @@
       max-width: 700px;
       text-align: left;
     }
-    .check-list li { 
-      margin: 20px 0; 
-      display: flex; 
-      align-items: center; 
-      gap: 16px; 
-    }
+    .check-list li { margin: 20px 0; display: flex; align-items: center; gap: 16px; }
     .check-list i { color: #00ff9d; font-size: 1.8rem; }
-
     .benefits {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -280,17 +277,8 @@
       object-fit: cover;
       border-radius: 12px 12px 0 0;
     }
-    .benefit-card h3 { 
-      font-size: 1.5rem; 
-      margin: 1.4rem 1rem 0.8rem; 
-      color: #e2e8f0; 
-    }
-    .benefit-card p { 
-      padding: 0 1.5rem 1rem; 
-      color: #cbd5e1; 
-      font-size: 0.97rem; 
-    }
-
+    .benefit-card h3 { font-size: 1.5rem; margin: 1.4rem 1rem 0.8rem; color: #e2e8f0; }
+    .benefit-card p { padding: 0 1.5rem 1rem; color: #cbd5e1; font-size: 0.97rem; }
     footer {
       background: linear-gradient(to top, #0f172a, #1e293b);
       padding: 6rem 5% 4rem;
@@ -308,19 +296,9 @@
     .footer-logo img { height: 60px; width: auto; max-width: 240px; }
     .footer-links h4 { color: #00cfff; margin-bottom: 1rem; font-size: 1.1rem; }
     .footer-links ul { list-style: none; }
-    .footer-links a { 
-      color: #cbd5e1; 
-      text-decoration: none; 
-      line-height: 2; 
-      transition: color 0.3s; 
-    }
+    .footer-links a { color: #cbd5e1; text-decoration: none; line-height: 2; transition: color 0.3s; }
     .footer-links a:hover { color: #00cfff; }
-    .footer-social a { 
-      color: #cbd5e1; 
-      font-size: 1.6rem; 
-      margin-right: 1.2rem; 
-      transition: color 0.3s; 
-    }
+    .footer-social a { color: #cbd5e1; font-size: 1.6rem; margin-right: 1.2rem; transition: color 0.3s; }
     .footer-social a:hover { color: #00cfff; }
     .footer-bottom {
       text-align: center;
@@ -340,16 +318,48 @@
       font-weight: bold;
       margin-top: 1.5rem;
     }
-
+    .download-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0,207,255,0.3);
+    }
     /* Scroll Reveal */
-    .feature-card, .step, .benefit-card {
+    .feature-card,
+    .step,
+    .benefit-card {
       opacity: 0;
       transform: translateY(60px);
       transition: all 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    .feature-card.visible, .step.visible, .benefit-card.visible {
+    .feature-card.visible,
+    .step.visible,
+    .benefit-card.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+    .features-grid .feature-card:nth-child(1) { transition-delay: 0.05s; }
+    .features-grid .feature-card:nth-child(2) { transition-delay: 0.15s; }
+    .features-grid .feature-card:nth-child(3) { transition-delay: 0.25s; }
+    .features-grid .feature-card:nth-child(4) { transition-delay: 0.35s; }
+    .features-grid .feature-card:nth-child(5) { transition-delay: 0.45s; }
+    .features-grid .feature-card:nth-child(6) { transition-delay: 0.55s; }
+    .steps .step:nth-child(1) { transition-delay: 0.1s; }
+    .steps .step:nth-child(2) { transition-delay: 0.25s; }
+    .steps .step:nth-child(3) { transition-delay: 0.4s; }
+    .steps .step:nth-child(4) { transition-delay: 0.55s; }
+    .benefits .benefit-card:nth-child(1) { transition-delay: 0.1s; }
+    .benefits .benefit-card:nth-child(2) { transition-delay: 0.25s; }
+    .benefits .benefit-card:nth-child(3) { transition-delay: 0.4s; }
+    @media (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .features-grid { grid-template-columns: 1fr; }
+      section { padding: 70px 5% 90px; }
+      h2 { font-size: 2.3rem; margin-bottom: 2.5rem; }
+      .step { flex: 1 1 100%; }
+      .landlord-section { margin: 60px 5%; padding: 70px 5%; }
+      .why-section { padding-top: 90px !important; }
+      .how-section { padding-top: 80px !important; }
     }
   </style>
 </head>
@@ -386,117 +396,123 @@
   </div>
 
   <main>
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Find Your Perfect Place</h1>
-        <p>Verified apartments & stylish short-term stays — secure, transparent, effortless.</p>
-        <div class="hero-cta">
-          <a href="HowToUse.html" class="btn btn-outline">How It Works</a>
-          <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary">
-            <i class="fab fa-google-play"></i> Download App
-          </a>
+    <section id="home">
+      <div class="hero">
+        <div class="hero-content">
+          <h1>Find Your Perfect Place</h1>
+          <p>Verified apartments & stylish short-term stays — secure, transparent, effortless.</p>
+          <div class="hero-cta">
+            <a href="HowToUse.html" class="btn btn-outline">How It Works</a>
+            <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary">
+              <i class="fab fa-google-play"></i> Download App
+            </a>
+          </div>
         </div>
+      </div>
+
+      <!-- Why Choose RoomLink -->
+      <div class="container why-section">
+        <h2>Why Choose RoomLink?</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+            <h3 class="feature-title">Verified Listings</h3>
+            <p>Only real, checked rooms and roommates — no fake posts</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-id-card"></i></div>
+            <h3 class="feature-title">KYC Landlords</h3>
+            <p>Landlords are verified so you rent with confidence</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-handshake"></i></div>
+            <h3 class="feature-title">Rent Split</h3>
+            <p>Easy roommate rent splitting & transparent payments</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-calendar-check"></i></div>
+            <h3 class="feature-title">Inspection Booking</h3>
+            <p>Schedule viewings safely and conveniently</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-lock"></i></div>
+            <h3 class="feature-title">Secure Chat</h3>
+            <p>Private messaging with built-in protection</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3 class="feature-title">Scam Protection</h3>
+            <p>We actively block scammers & fake listings</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- How RoomLink Works -->
+      <div class="how-it-works how-section">
+        <h2>How RoomLink Works</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Home</h3>
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800" alt="Home">
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Search</h3>
+            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=800" alt="Search">
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Chat</h3>
+            <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=800" alt="Chat">
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Post Listing</h3>
+            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80&w=800" alt="Post">
+          </div>
+        </div>
+      </div>
+
+      <div class="landlord-section">
+        <h2>Are You a Landlord or Agent?</h2>
+        <ul class="check-list">
+          <li><i class="fas fa-check"></i> Post for free during early access</li>
+          <li><i class="fas fa-check"></i> Get a verified badge and attract more tenants</li>
+          <li><i class="fas fa-check"></i> Receive secure payments directly to your bank account</li>
+        </ul>
+        <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary" style="font-size:1.25rem; padding:16px 48px; margin-top:40px;">Start on App →</a>
+      </div>
+
+      <div class="benefits container">
+        <div class="benefit-card">
+          <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Verified Security">
+          <h3>Fully Verified</h3>
+          <p>Owners, properties & users, all checked for trust and safety.</p>
+        </div>
+        <div class="benefit-card">
+          <img src="https://images.pexels.com/photos/50987/money-card-business-credit-card-50987.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Transparent Pricing">
+          <h3>Transparent Pricing</h3>
+          <p>No hidden fees, clear costs from start to finish.</p>
+        </div>
+        <div class="benefit-card">
+          <img src="https://images.pexels.com/photos/5380792/pexels-photo-5380792.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Seamless Experience">
+          <h3>Seamless Experience</h3>
+          <p>Search, chat, book & manage everything in one app.</p>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin:6rem 0 4rem; font-size:1.35rem; color:#94a3b8;">
+        Join <strong style="color:#00cfff;">thousands</strong> of users renting smarter with RoomLink
+      </div>
+      <div style="text-align:center; margin-bottom: 6rem;">
+        <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank">
+          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+               alt="Get it on Google Play"
+               style="height:85px;" />
+        </a>
       </div>
     </section>
-
-    <div class="container">
-      <h2>Why Choose RoomLink?</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
-          <h3 class="feature-title">Verified Listings</h3>
-          <p>Only real, checked rooms and roommates — no fake posts</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-id-card"></i></div>
-          <h3 class="feature-title">KYC Landlords</h3>
-          <p>Landlords are verified so you rent with confidence</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-handshake"></i></div>
-          <h3 class="feature-title">Rent Split</h3>
-          <p>Easy roommate rent splitting & transparent payments</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-calendar-check"></i></div>
-          <h3 class="feature-title">Inspection Booking</h3>
-          <p>Schedule viewings safely and conveniently</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-lock"></i></div>
-          <h3 class="feature-title">Secure Chat</h3>
-          <p>Private messaging with built-in protection</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-          <h3 class="feature-title">Scam Protection</h3>
-          <p>We actively block scammers & fake listings</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="how-it-works">
-      <h2>How RoomLink Works</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">1</div>
-          <h3>Home</h3>
-          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800" alt="Home">
-        </div>
-        <div class="step">
-          <div class="step-number">2</div>
-          <h3>Search</h3>
-          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&q=80&w=800" alt="Search">
-        </div>
-        <div class="step">
-          <div class="step-number">3</div>
-          <h3>Chat</h3>
-          <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=800" alt="Chat">
-        </div>
-        <div class="step">
-          <div class="step-number">4</div>
-          <h3>Post Listing</h3>
-          <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&q=80&w=800" alt="Post">
-        </div>
-      </div>
-    </div>
-
-    <div class="landlord-section">
-      <h2>Are You a Landlord or Agent?</h2>
-      <ul class="check-list">
-        <li><i class="fas fa-check"></i> Post for free during early access</li>
-        <li><i class="fas fa-check"></i> Get a verified badge and attract more tenants</li>
-        <li><i class="fas fa-check"></i> Receive secure payments directly to your bank account</li>
-      </ul>
-      <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary" style="font-size:1.25rem; padding:16px 48px; margin-top:40px; display:inline-block;">Start on App →</a>
-    </div>
-
-    <div class="benefits container">
-      <div class="benefit-card">
-        <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Verified Security">
-        <h3>Fully Verified</h3>
-        <p>Owners, properties & users, all checked for trust and safety.</p>
-      </div>
-      <div class="benefit-card">
-        <img src="https://images.pexels.com/photos/50987/money-card-business-credit-card-50987.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Transparent Pricing">
-        <h3>Transparent Pricing</h3>
-        <p>No hidden fees, clear costs from start to finish.</p>
-      </div>
-      <div class="benefit-card">
-        <img src="https://images.pexels.com/photos/5380792/pexels-photo-5380792.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Seamless Experience">
-        <h3>Seamless Experience</h3>
-        <p>Search, chat, book & manage everything in one app.</p>
-      </div>
-    </div>
-
-    <div style="text-align:center; margin:6rem 0 4rem; font-size:1.35rem; color:#94a3b8;">
-      Join <strong style="color:#00cfff;">thousands</strong> of users renting smarter with RoomLink
-    </div>
-    <div style="text-align:center; margin-bottom: 6rem;">
-      <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank">
-        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height:85px;" />
-      </a>
-    </div>
   </main>
 
   <footer>
@@ -544,25 +560,23 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Mobile Menu
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const closeMenu = document.getElementById('closeMenu');
     const mobileMenu = document.getElementById('mobileMenu');
     hamburgerBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
     closeMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
-    mobileMenu.addEventListener('click', e => { 
-      if (e.target === mobileMenu) mobileMenu.classList.remove('active'); 
-    });
+    mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) mobileMenu.classList.remove('active'); });
 
-    // Scroll Reveal Animation
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.15 });
+    }, {
+      threshold: 0.12,
+      rootMargin: "0px 0px -80px 0px"
+    });
 
     document.querySelectorAll('.feature-card, .step, .benefit-card').forEach(card => {
       revealObserver.observe(card);
