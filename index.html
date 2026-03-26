@@ -89,7 +89,7 @@
     @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
     @media (min-width: 769px) { .hamburger, .mobile-menu { display: none; } }
 
-    /* ==================== HERO - MOVED MUCH HIGHER ==================== */
+    /* ==================== HERO - MOVED TO UPPER EDGE ==================== */
     .hero {
       position: relative;
       height: 85vh;
@@ -99,14 +99,14 @@
       align-items: flex-start;
       justify-content: center;
       text-align: center;
-      padding: 180px 5% 100px 5%;   /* Increased top padding - moved UP */
+      padding: 110px 5% 100px 5%;     /* Reduced top padding → moved UP significantly */
       overflow: hidden;
     }
     .hero::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(10,0,40,0.72), rgba(20,0,60,0.80), rgba(0,0,0,0.78));
+      background: linear-gradient(to bottom, rgba(10,0,40,0.75), rgba(20,0,60,0.82), rgba(0,0,0,0.80));
     }
     .hero-content {
       position: relative;
@@ -121,7 +121,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       opacity: 0;
-      transform: translateY(40px);
+      transform: translateY(30px);
       animation: fadeUp 1.2s ease-out forwards;
     }
     .hero p {
@@ -131,7 +131,7 @@
       color: #e0f7ff;
       line-height: 1.6;
       opacity: 0;
-      transform: translateY(40px);
+      transform: translateY(30px);
       animation: fadeUp 1.4s ease-out 0.3s forwards;
     }
     @keyframes fadeUp {
@@ -143,7 +143,7 @@
       gap: 1.5rem;
       justify-content: center;
       opacity: 0;
-      transform: translateY(40px);
+      transform: translateY(30px);
       animation: fadeUp 1.6s ease-out 0.6s forwards;
     }
     .btn {
@@ -159,23 +159,23 @@
     .btn-outline { border: 2px solid #00cfff; color: #00cfff; }
     .btn-outline:hover { background: #00cfff; color: #0f172a; }
 
+    /* Mobile adjustments */
     @media (max-width: 768px) {
       .hero {
         height: 82vh;
         min-height: 520px;
-        padding: 130px 5% 80px 5%;   /* Adjusted for mobile */
+        padding: 85px 5% 80px 5%;     /* Even higher on mobile */
       }
-      .hero h1 { font-size: 2.25rem; }
+      .hero h1 { font-size: 2.2rem; }
       .hero p { font-size: 1.05rem; }
     }
 
-    /* ==================== BREATHING SPACE FIXES ==================== */
+    /* Breathing spaces */
     .why-section {
-      padding-top: 120px !important;   /* Added space after hero */
+      padding-top: 120px !important;
     }
-
     .how-section {
-      padding-top: 100px !important;   /* Added space after Why Choose */
+      padding-top: 100px !important;
     }
 
     section { padding: 90px 5% 110px; }
@@ -410,7 +410,7 @@
         </div>
       </div>
 
-      <!-- Why Choose RoomLink - with breathing space -->
+      <!-- Why Choose RoomLink -->
       <div class="container why-section">
         <h2>Why Choose RoomLink?</h2>
         <div class="features-grid">
@@ -447,7 +447,7 @@
         </div>
       </div>
 
-      <!-- How RoomLink Works - with breathing space -->
+      <!-- How RoomLink Works -->
       <div class="how-it-works how-section">
         <h2>How RoomLink Works</h2>
         <div class="steps">
