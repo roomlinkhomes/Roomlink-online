@@ -28,7 +28,6 @@
       flex-direction: column;
     }
     main { flex: 1; }
-
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -90,23 +89,24 @@
     @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
     @media (min-width: 769px) { .hamburger, .mobile-menu { display: none; } }
 
+    /* ==================== HERO - MOVED MUCH HIGHER ==================== */
     .hero {
       position: relative;
       height: 85vh;
       min-height: 620px;
       background: url('https://res.cloudinary.com/drserbss8/image/upload/v1771681620/file_0000000055447243832374ba69392462_wmcz8n.png') center/cover no-repeat;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       text-align: center;
-      padding: 100px 5% 80px 5%;
+      padding: 180px 5% 100px 5%;   /* Increased top padding - moved UP */
       overflow: hidden;
     }
     .hero::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(10,0,40,0.65), rgba(20,0,60,0.75), rgba(0,0,0,0.72));
+      background: linear-gradient(to bottom, rgba(10,0,40,0.72), rgba(20,0,60,0.80), rgba(0,0,0,0.78));
     }
     .hero-content {
       position: relative;
@@ -159,6 +159,25 @@
     .btn-outline { border: 2px solid #00cfff; color: #00cfff; }
     .btn-outline:hover { background: #00cfff; color: #0f172a; }
 
+    @media (max-width: 768px) {
+      .hero {
+        height: 82vh;
+        min-height: 520px;
+        padding: 130px 5% 80px 5%;   /* Adjusted for mobile */
+      }
+      .hero h1 { font-size: 2.25rem; }
+      .hero p { font-size: 1.05rem; }
+    }
+
+    /* ==================== BREATHING SPACE FIXES ==================== */
+    .why-section {
+      padding-top: 120px !important;   /* Added space after hero */
+    }
+
+    .how-section {
+      padding-top: 100px !important;   /* Added space after Why Choose */
+    }
+
     section { padding: 90px 5% 110px; }
     h2 {
       font-size: 2.8rem;
@@ -166,9 +185,7 @@
       color: #00cfff;
       text-align: center;
     }
-
     .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
-
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -188,7 +205,10 @@
     .feature-title { font-size: 1.25rem; margin-bottom: 10px; font-weight: 600; }
     .feature-card p { color: #444; font-size: 0.92rem; line-height: 1.45; }
 
-    .how-it-works { background: rgba(0,0,0,0.25); }
+    .how-it-works { 
+      background: rgba(0,0,0,0.25); 
+    }
+
     .steps {
       display: flex;
       flex-wrap: wrap;
@@ -219,7 +239,6 @@
       font-weight: bold;
       font-size: 1.3rem;
     }
-
     .landlord-section {
       background: linear-gradient(135deg, #4b0082, #006994);
       padding: 90px 5%;
@@ -237,7 +256,6 @@
     }
     .check-list li { margin: 20px 0; display: flex; align-items: center; gap: 16px; }
     .check-list i { color: #00ff9d; font-size: 1.8rem; }
-
     .benefits {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -261,7 +279,6 @@
     }
     .benefit-card h3 { font-size: 1.5rem; margin: 1.4rem 1rem 0.8rem; color: #e2e8f0; }
     .benefit-card p { padding: 0 1.5rem 1rem; color: #cbd5e1; font-size: 0.97rem; }
-
     footer {
       background: linear-gradient(to top, #0f172a, #1e293b);
       padding: 6rem 5% 4rem;
@@ -305,8 +322,7 @@
       transform: scale(1.05);
       box-shadow: 0 10px 30px rgba(0,207,255,0.3);
     }
-
-    /* ===== SCROLL REVEAL ANIMATIONS ===== */
+    /* Scroll Reveal */
     .feature-card,
     .step,
     .benefit-card {
@@ -314,31 +330,25 @@
       transform: translateY(60px);
       transition: all 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-
     .feature-card.visible,
     .step.visible,
     .benefit-card.visible {
       opacity: 1;
       transform: translateY(0);
     }
-
-    /* Staggered delays */
     .features-grid .feature-card:nth-child(1) { transition-delay: 0.05s; }
     .features-grid .feature-card:nth-child(2) { transition-delay: 0.15s; }
     .features-grid .feature-card:nth-child(3) { transition-delay: 0.25s; }
     .features-grid .feature-card:nth-child(4) { transition-delay: 0.35s; }
     .features-grid .feature-card:nth-child(5) { transition-delay: 0.45s; }
     .features-grid .feature-card:nth-child(6) { transition-delay: 0.55s; }
-
     .steps .step:nth-child(1) { transition-delay: 0.1s; }
     .steps .step:nth-child(2) { transition-delay: 0.25s; }
     .steps .step:nth-child(3) { transition-delay: 0.4s; }
     .steps .step:nth-child(4) { transition-delay: 0.55s; }
-
     .benefits .benefit-card:nth-child(1) { transition-delay: 0.1s; }
     .benefits .benefit-card:nth-child(2) { transition-delay: 0.25s; }
     .benefits .benefit-card:nth-child(3) { transition-delay: 0.4s; }
-
     @media (max-width: 1024px) {
       .features-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -346,16 +356,14 @@
       .features-grid { grid-template-columns: 1fr; }
       section { padding: 70px 5% 90px; }
       h2 { font-size: 2.3rem; margin-bottom: 2.5rem; }
-      .hero { height: 80vh; min-height: 540px; padding: 100px 5% 60px; }
-      .hero h1 { font-size: 2.2rem; font-weight: 600; }
-      .hero p { font-size: 1rem; line-height: 1.4; }
       .step { flex: 1 1 100%; }
       .landlord-section { margin: 60px 5%; padding: 70px 5%; }
+      .why-section { padding-top: 90px !important; }
+      .how-section { padding-top: 80px !important; }
     }
   </style>
 </head>
 <body>
-
   <header>
     <div class="logo">
       <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
@@ -402,7 +410,8 @@
         </div>
       </div>
 
-      <section class="container">
+      <!-- Why Choose RoomLink - with breathing space -->
+      <div class="container why-section">
         <h2>Why Choose RoomLink?</h2>
         <div class="features-grid">
           <div class="feature-card">
@@ -436,9 +445,10 @@
             <p>We actively block scammers & fake listings</p>
           </div>
         </div>
-      </section>
+      </div>
 
-      <div class="how-it-works">
+      <!-- How RoomLink Works - with breathing space -->
+      <div class="how-it-works how-section">
         <h2>How RoomLink Works</h2>
         <div class="steps">
           <div class="step">
@@ -495,7 +505,6 @@
       <div style="text-align:center; margin:6rem 0 4rem; font-size:1.35rem; color:#94a3b8;">
         Join <strong style="color:#00cfff;">thousands</strong> of users renting smarter with RoomLink
       </div>
-
       <div style="text-align:center; margin-bottom: 6rem;">
         <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank">
           <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
@@ -558,7 +567,6 @@
     closeMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
     mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) mobileMenu.classList.remove('active'); });
 
-    // Smooth scroll reveal animation for all cards
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -566,11 +574,10 @@
         }
       });
     }, {
-      threshold: 0.12,          // trigger when 12% of the card is visible
-      rootMargin: "0px 0px -80px 0px"   // start animation a little before it fully enters
+      threshold: 0.12,
+      rootMargin: "0px 0px -80px 0px"
     });
 
-    // Select all the cards we want to animate
     document.querySelectorAll('.feature-card, .step, .benefit-card').forEach(card => {
       revealObserver.observe(card);
     });
