@@ -19,7 +19,6 @@
       --accent: #00d4ff;
       --card-bg: rgba(255, 255, 255, 0.92);
       --card-text: #1a1a2e;
-      --tint-bg: rgba(15, 23, 42, 0.85); /* Tinted overlay for sections */
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
@@ -32,6 +31,7 @@
     }
     main { flex: 1; }
 
+    /* ==================== HEADER - EXACT SAME AS HOME PAGE ==================== */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -54,6 +54,29 @@
     }
     @media (min-width: 768px) { .logo img { height: 80px; max-width: 360px; } }
     @media (max-width: 480px) { .logo img { height: 52px; max-width: 220px; } }
+
+    /* RentEase centered - exactly like home */
+    .header-center {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 10px;
+    }
+    .rent-ease {
+      font-size: 1.75rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #00ff9d, #00eaff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+      .rent-ease { font-size: 1.4rem; }
+    }
+
     .hamburger {
       font-size: 1.8rem;
       color: #cbd5e1;
@@ -93,20 +116,27 @@
     @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
     @media (min-width: 769px) { .hamburger, .mobile-menu { display: none; } }
 
+    /* ==================== PRIVACY SECTION - NOW MATCHES HEADER COLOR EXACTLY ==================== */
     section {
       padding: 120px 5% 90px;
       position: relative;
-      background: var(--tint-bg); /* More tinted screen */
-      backdrop-filter: blur(5px); /* Subtle blur for modern feel */
-      border-radius: 0 0 28px 28px; /* Modern rounded bottom */
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2); /* Depth */
+      background: rgba(15, 23, 42, 0.92);     /* ← EXACT same color as home header */
+      backdrop-filter: blur(10px);            /* ← Exact same blur */
+      box-shadow: none;
+      border-radius: 0;
     }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
     h2 {
       font-size: 2.8rem;
       margin-bottom: 1.5rem;
       color: #00cfff;
       text-align: center;
-      text-shadow: 0 2px 4px rgba(0,207,255,0.2); /* Modern glow */
+      text-shadow: 0 2px 4px rgba(0,207,255,0.2);
     }
     h3 {
       font-size: 2.2rem;
@@ -115,7 +145,7 @@
       text-align: center;
       transition: color 0.3s;
     }
-    h3:hover { color: #00eaff; } /* Subtle hover for modern interaction */
+    h3:hover { color: #00eaff; }
     h4 {
       font-size: 1.5rem;
       color: #cbd5e1;
@@ -134,11 +164,6 @@
       color: #e2e8f0;
       font-size: 1.05rem;
       line-height: 1.8;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 1rem;
     }
 
     footer {
@@ -186,7 +211,7 @@
     }
 
     @media (max-width: 768px) {
-      section { padding: 100px 5% 80px; border-radius: 0; }
+      section { padding: 100px 5% 80px; }
       h2 { font-size: 2.3rem; margin-bottom: 1.2rem; }
       h3 { font-size: 1.8rem; margin: 2.5rem 0 1rem; }
       h4 { font-size: 1.3rem; margin: 1.8rem 0 0.8rem; }
@@ -197,10 +222,15 @@
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- HEADER - NOW FULLY MATCHES HOME PAGE -->
   <header>
     <div class="logo">
       <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
+    </div>
+
+    <!-- RentEase centered (same as home) -->
+    <div class="header-center">
+      <div class="rent-ease">RentEase</div>
     </div>
 
     <ul class="nav-links">
@@ -239,7 +269,7 @@
   </div>
 
   <main>
-    <!-- PRIVACY POLICY -->
+    <!-- PRIVACY POLICY - Now uses exact same header color -->
     <section id="privacy">
       <div class="container">
         <h2>Privacy Policy & Terms of Use</h2>

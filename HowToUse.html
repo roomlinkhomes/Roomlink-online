@@ -15,8 +15,6 @@
       --dark: #0f0f2d;
       --light: #f8f9ff;
       --accent: #00d4ff;
-      --card-bg: rgba(255, 255, 255, 0.92);
-      --card-text: #1a1a2e;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
@@ -28,6 +26,8 @@
       flex-direction: column;
     }
     main { flex: 1; }
+
+    /* ==================== HEADER - CONSISTENT WITH OTHER PAGES ==================== */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -50,6 +50,28 @@
     }
     @media (min-width: 768px) { .logo img { height: 80px; max-width: 360px; } }
     @media (max-width: 480px) { .logo img { height: 52px; max-width: 220px; } }
+
+    .header-center {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 10px;
+    }
+    .rent-ease {
+      font-size: 1.75rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #00ff9d, #00eaff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+      .rent-ease { font-size: 1.4rem; }
+    }
+
     .hamburger {
       font-size: 1.8rem;
       color: #cbd5e1;
@@ -88,6 +110,8 @@
     .signup-btn:hover { transform: scale(1.05); }
     @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
     @media (min-width: 769px) { .hamburger, .mobile-menu { display: none; } }
+
+    /* ==================== HERO ==================== */
     .hero {
       position: relative;
       height: 85vh;
@@ -156,6 +180,8 @@
     .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 207, 255, 0.4); }
     .btn-outline { border: 2px solid #00cfff; color: #00cfff; }
     .btn-outline:hover { background: #00cfff; color: #0f172a; }
+
+    /* ==================== STEP-BY-STEP SECTION - FIXED SPACING ==================== */
     section { padding: 90px 5% 110px; }
     h2 {
       font-size: 2.8rem;
@@ -163,7 +189,10 @@
       color: #00cfff;
       text-align: center;
     }
-    .how-it-works { background: rgba(0,0,0,0.25); }
+    .how-it-works {
+      background: rgba(0,0,0,0.25);
+      padding: 80px 5% 100px;   /* Added generous top/bottom padding */
+    }
     .steps {
       display: flex;
       flex-wrap: wrap;
@@ -175,7 +204,11 @@
       flex: 1 1 22%;
       min-width: 240px;
       max-width: 280px;
+      background: rgba(15, 23, 42, 0.85);
+      border-radius: 20px;
+      padding: 32px 24px 40px;   /* Increased internal padding for breathing space */
       text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       opacity: 0;
       transform: translateY(50px);
       transition: opacity 0.5s ease, transform 0.5s ease;
@@ -188,22 +221,25 @@
       display: inline-block;
       background: var(--purple);
       color: white;
-      width: 40px; height: 40px;
-      line-height: 40px;
+      width: 48px; 
+      height: 48px;
+      line-height: 48px;
       border-radius: 50%;
-      margin-bottom: 12px;
+      margin-bottom: 20px;
       font-weight: bold;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
     }
     .step h3 {
       font-size: 1.5rem;
-      margin-bottom: 1rem;
+      margin-bottom: 16px;
       color: #e2e8f0;
     }
     .step p {
       color: #cbd5e1;
       font-size: 0.97rem;
+      line-height: 1.65;
     }
+
     footer {
       background: linear-gradient(to top, #0f172a, #1e293b);
       padding: 6rem 5% 4rem;
@@ -247,13 +283,15 @@
       transform: scale(1.05);
       box-shadow: 0 10px 30px rgba(0,207,255,0.3);
     }
+
     @media (max-width: 768px) {
       section { padding: 70px 5% 90px; }
       h2 { font-size: 2.3rem; margin-bottom: 2.5rem; }
+      .how-it-works { padding: 60px 5% 80px; }
       .hero { height: 80vh; min-height: 540px; padding: 100px 5% 60px; }
-      .hero h1 { font-size: 2.2rem; font-weight: 600; }
-      .hero p { font-size: 1rem; line-height: 1.4; }
-      .step { flex: 1 1 100%; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1rem; }
+      .step { flex: 1 1 100%; max-width: none; }
     }
   </style>
 </head>
@@ -262,6 +300,11 @@
     <div class="logo">
       <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
     </div>
+
+    <div class="header-center">
+      <div class="rent-ease">RentEase</div>
+    </div>
+
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="HowToUse.html" class="active">How to Use</a></li>
@@ -273,6 +316,7 @@
       <i class="fas fa-bars"></i>
     </button>
   </header>
+
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-header">
       <div class="logo">
@@ -291,6 +335,7 @@
       <i class="fab fa-google-play"></i> Sign Up / Download App
     </a>
   </div>
+
   <main>
     <section id="how-to-use">
       <div class="hero">
@@ -305,6 +350,7 @@
           </div>
         </div>
       </div>
+
       <div class="how-it-works">
         <h2>Step-by-Step Guide</h2>
         <div class="steps">
@@ -357,6 +403,7 @@
       </div>
     </section>
   </main>
+
   <footer>
     <div class="footer-container">
       <div>
@@ -399,6 +446,7 @@
       <p>Designed with ❤️ for better living spaces around the world</p>
     </div>
   </footer>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
     const hamburgerBtn = document.getElementById('hamburgerBtn');

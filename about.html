@@ -31,6 +31,7 @@
     }
     main { flex: 1; }
 
+    /* ==================== HEADER - NOW 100% CONSISTENT ==================== */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -53,6 +54,28 @@
     }
     @media (min-width: 768px) { .logo img { height: 80px; max-width: 360px; } }
     @media (max-width: 480px) { .logo img { height: 52px; max-width: 220px; } }
+
+    .header-center {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 10px;
+    }
+    .rent-ease {
+      font-size: 1.75rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #00ff9d, #00eaff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+      .rent-ease { font-size: 1.4rem; }
+    }
+
     .hamburger {
       font-size: 1.8rem;
       color: #cbd5e1;
@@ -92,6 +115,7 @@
     @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
     @media (min-width: 769px) { .hamburger, .mobile-menu { display: none; } }
 
+    /* ==================== REST OF PAGE (UNCHANGED - LOOKS PERFECT) ==================== */
     .hero {
       position: relative;
       height: 85vh;
@@ -299,6 +323,11 @@
   <header>
     <div class="logo">
       <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
+    </div>
+
+    <!-- RentEase centered (added for consistency) -->
+    <div class="header-center">
+      <div class="rent-ease">RentEase</div>
     </div>
 
     <ul class="nav-links">

@@ -58,6 +58,31 @@
       cursor: pointer;
       z-index: 1001;
     }
+    /* ==================== NEW: CENTERED RENTEASE TEXT ==================== */
+    .header-center {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 10px;
+    }
+    .rent-ease {
+      font-size: 1.75rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #00ff9d, #00eaff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+      .rent-ease {
+        font-size: 1.4rem;
+      }
+    }
+    /* ==================== END NEW RENTEASE ==================== */
+
     @media (max-width: 768px) {
       header { padding: 0.8rem 4%; justify-content: space-between; }
       .logo img { height: 42px; max-width: 160px; }
@@ -88,8 +113,7 @@
     .signup-btn:hover { transform: scale(1.05); }
     @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
     @media (min-width: 769px) { .hamburger, .mobile-menu { display: none; } }
-
-    /* ==================== HERO - MOVED TO UPPER EDGE ==================== */
+    /* ==================== HERO - FULL EDGE-TO-EDGE BACKGROUND ==================== */
     .hero {
       position: relative;
       height: 85vh;
@@ -99,7 +123,7 @@
       align-items: flex-start;
       justify-content: center;
       text-align: center;
-      padding: 110px 5% 100px 5%;     /* Reduced top padding → moved UP significantly */
+      padding: 110px 0 100px 0;
       overflow: hidden;
     }
     .hero::before {
@@ -112,9 +136,10 @@
       position: relative;
       z-index: 2;
       max-width: 900px;
+      width: 100%;
     }
     .hero h1 {
-      font-size: 2.9rem;
+      font-size: 3.1rem;
       font-weight: 900;
       margin-bottom: 1rem;
       background: linear-gradient(to right, #00ff9d, #00eaff);
@@ -130,6 +155,7 @@
       margin: 0 auto 2.5rem;
       color: #e0f7ff;
       line-height: 1.6;
+      font-weight: 700;
       opacity: 0;
       transform: translateY(30px);
       animation: fadeUp 1.4s ease-out 0.3s forwards;
@@ -158,18 +184,34 @@
     .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 207, 255, 0.4); }
     .btn-outline { border: 2px solid #00cfff; color: #00cfff; }
     .btn-outline:hover { background: #00cfff; color: #0f172a; }
-
-    /* Mobile adjustments */
+    /* Mobile adjustments - HOW IT WORKS + DOWNLOAD APP stay in ONE ROW (2 buttons side-by-side) */
     @media (max-width: 768px) {
       .hero {
         height: 82vh;
         min-height: 520px;
-        padding: 85px 5% 80px 5%;     /* Even higher on mobile */
+        padding: 85px 0 80px 0;
       }
-      .hero h1 { font-size: 2.2rem; }
+      .hero h1 { font-size: 2.4rem; }
       .hero p { font-size: 1.05rem; }
+      
+      /* NEW: Force 2 buttons in a single row on mobile */
+      .hero-cta {
+        flex-wrap: nowrap !important;
+        gap: 1rem;
+      }
+      .btn {
+        padding: 0.85rem 1.6rem;
+        font-size: 0.98rem;
+        flex: 1;
+        min-width: 0;
+      }
+      .btn-primary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
     }
-
     /* Breathing spaces */
     .why-section {
       padding-top: 120px !important;
@@ -177,7 +219,6 @@
     .how-section {
       padding-top: 100px !important;
     }
-
     section { padding: 90px 5% 110px; }
     h2 {
       font-size: 2.8rem;
@@ -204,11 +245,9 @@
     .feature-icon { font-size: 2.6rem; margin-bottom: 16px; color: var(--purple); }
     .feature-title { font-size: 1.25rem; margin-bottom: 10px; font-weight: 600; }
     .feature-card p { color: #444; font-size: 0.92rem; line-height: 1.45; }
-
-    .how-it-works { 
-      background: rgba(0,0,0,0.25); 
+    .how-it-works {
+      background: rgba(0,0,0,0.25);
     }
-
     .steps {
       display: flex;
       flex-wrap: wrap;
@@ -368,6 +407,12 @@
     <div class="logo">
       <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
     </div>
+    
+    <!-- NEW: RentEase centered in header (between logo and hamburger/nav) -->
+    <div class="header-center">
+      <div class="rent-ease">RentEase</div>
+    </div>
+
     <ul class="nav-links">
       <li><a href="index.html" class="active">Home</a></li>
       <li><a href="HowToUse.html">How to Use</a></li>
@@ -377,7 +422,6 @@
     </ul>
     <button class="hamburger" id="hamburgerBtn"><i class="fas fa-bars"></i></button>
   </header>
-
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-header">
       <div class="logo"><img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo"></div>
@@ -394,13 +438,12 @@
       <i class="fab fa-google-play"></i> Sign Up / Download App
     </a>
   </div>
-
   <main>
     <section id="home">
       <div class="hero">
         <div class="hero-content">
           <h1>Find Your Perfect Place</h1>
-          <p>Verified apartments & stylish short-term stays — secure, transparent, effortless.</p>
+          <p>Verified apartments & stylish short-term stays, secure, transparent, effortless.</p>
           <div class="hero-cta">
             <a href="HowToUse.html" class="btn btn-outline">How It Works</a>
             <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary">
@@ -409,7 +452,6 @@
           </div>
         </div>
       </div>
-
       <!-- Why Choose RoomLink -->
       <div class="container why-section">
         <h2>Why Choose RoomLink?</h2>
@@ -446,7 +488,6 @@
           </div>
         </div>
       </div>
-
       <!-- How RoomLink Works -->
       <div class="how-it-works how-section">
         <h2>How RoomLink Works</h2>
@@ -473,7 +514,6 @@
           </div>
         </div>
       </div>
-
       <div class="landlord-section">
         <h2>Are You a Landlord or Agent?</h2>
         <ul class="check-list">
@@ -483,7 +523,6 @@
         </ul>
         <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary" style="font-size:1.25rem; padding:16px 48px; margin-top:40px;">Start on App →</a>
       </div>
-
       <div class="benefits container">
         <div class="benefit-card">
           <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Verified Security">
@@ -501,7 +540,6 @@
           <p>Search, chat, book & manage everything in one app.</p>
         </div>
       </div>
-
       <div style="text-align:center; margin:6rem 0 4rem; font-size:1.35rem; color:#94a3b8;">
         Join <strong style="color:#00cfff;">thousands</strong> of users renting smarter with RoomLink
       </div>
@@ -514,7 +552,6 @@
       </div>
     </section>
   </main>
-
   <footer>
     <div class="footer-container">
       <div>
@@ -557,7 +594,6 @@
       <p>Designed with ❤️ for better living spaces around the world</p>
     </div>
   </footer>
-
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
     const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -566,7 +602,6 @@
     hamburgerBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
     closeMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
     mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) mobileMenu.classList.remove('active'); });
-
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -577,7 +612,6 @@
       threshold: 0.12,
       rootMargin: "0px 0px -80px 0px"
     });
-
     document.querySelectorAll('.feature-card, .step, .benefit-card').forEach(card => {
       revealObserver.observe(card);
     });
