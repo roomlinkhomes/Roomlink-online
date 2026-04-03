@@ -109,7 +109,8 @@
     .signup-btn:hover { transform: scale(1.05); }
     @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
     @media (min-width: 769px) { .hamburger, .mobile-menu { display: none; } }
-    /* ==================== REST OF PAGE (UPDATED FOR BREATHING SPACE + MISSION IMAGE) ==================== */
+
+    /* ==================== REST OF PAGE (FIXED - THICKER TITLE + CURVY MISSION BACKGROUND) ==================== */
     .hero {
       position: relative;
       height: 85vh;
@@ -119,7 +120,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 120px 5% 180px 5%; /* Increased bottom padding for breathing space before Our Mission */
+      padding: 120px 5% 180px 5%;
       overflow: hidden;
     }
     .hero::before {
@@ -134,20 +135,23 @@
       max-width: 900px;
     }
     .hero h1 {
-      font-size: 4.2rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
+      font-size: 4.6rem;               /* Bigger */
+      font-weight: 900;                /* MUCH THICKER / HEAVIER */
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 1.2rem;
       background: linear-gradient(to right, #00ff9d, #00eaff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      text-shadow: 0 10px 30px rgba(0, 207, 255, 0.3); /* Extra bold depth */
       opacity: 0;
       transform: translateY(40px);
       animation: fadeUp 1.2s ease-out forwards;
     }
     .hero p {
-      font-size: 1.4rem;
+      font-size: 1.45rem;
       max-width: 800px;
-      margin: 0 auto 2.5rem;
+      margin: 0 auto 2.8rem;
       color: #e0f7ff;
       line-height: 1.6;
       opacity: 0;
@@ -186,11 +190,30 @@
       text-align: center;
     }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+    /* ==================== OUR MISSION - CURVY BACKGROUND + BREATHING SPACE ==================== */
     .how-it-works {
       background: rgba(0,0,0,0.25);
-      margin-top: 80px; /* Added breathing space / gap between Hero and Our Mission */
-      padding-bottom: 60px; /* Extra space at the bottom of mission section */
+      margin-top: 80px;
+      position: relative;
+      padding: 100px 5% 140px;               /* Extra bottom padding */
+      border-bottom-left-radius: 80px;       /* Soft curve at bottom */
+      border-bottom-right-radius: 80px;
+      overflow: hidden;
     }
+    .how-it-works::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #0f172a;                   /* Matches body background */
+      border-top-left-radius: 80px;
+      border-top-right-radius: 80px;
+      z-index: 1;
+    }
+
     .steps {
       display: flex;
       flex-wrap: wrap;
@@ -228,7 +251,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 40px;
-      margin-top: 40px; /* Extra gap between mission section and benefit cards */
+      margin-top: 40px; /* Extra gap after curved section */
     }
     .benefit-card {
       background: rgba(30, 41, 59, 0.6);
@@ -258,7 +281,7 @@
     .mission-image-container {
       text-align: center;
       margin-top: 3rem;
-      margin-bottom: 110px; /* ← This is the key fix: big breathing space before benefit cards */
+      margin-bottom: 110px; /* Big breathing space before benefit cards */
     }
     .mission-image {
       max-width: 100%;
@@ -324,10 +347,11 @@
       section { padding: 70px 5% 90px; }
       h2 { font-size: 2.3rem; margin-bottom: 2.5rem; }
       .hero { height: 80vh; min-height: 540px; padding: 100px 5% 140px; }
-      .hero h1 { font-size: 2.2rem; font-weight: 600; }
+      .hero h1 { font-size: 3rem; } /* Still thick on mobile */
       .hero p { font-size: 1rem; line-height: 1.4; }
       .mission-image { max-height: 420px; }
-      .mission-image-container { margin-bottom: 70px; } /* Still good gap on mobile */
+      .mission-image-container { margin-bottom: 70px; }
+      .how-it-works { border-bottom-left-radius: 50px; border-bottom-right-radius: 50px; }
     }
   </style>
 </head>
@@ -385,6 +409,7 @@
           </div>
         </div>
       </div>
+
       <!-- Our Mission Section - Text first, then image -->
       <div class="how-it-works">
         <h2>Our Mission</h2>
