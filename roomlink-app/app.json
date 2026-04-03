@@ -1,0 +1,64 @@
+{
+  "expo": {
+    "name": "RoomLink",
+    "slug": "roomlink-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": false,
+    "jsEngine": "jsc",
+    "scheme": "roomlink",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.roomlink.app"
+    },
+    "android": {
+      "package": "com.roomlink.app",
+      "versionCode": 2,
+      "googleServicesFile": "./firebase-config/google-services.json",
+      "permissions": [
+        "CAMERA",
+        "READ_MEDIA_IMAGES",
+        "READ_EXTERNAL_STORAGE",
+        "POST_NOTIFICATIONS"
+      ],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ef3b6bfd-9dba-4622-9075-642be841c6cc"
+      }
+    },
+    "plugins": [
+      "expo-system-ui",
+      "expo-web-browser",
+      "expo-font",
+      "expo-asset",
+      "react-native-iap",
+      "@react-native-firebase/app",
+      "@react-native-firebase/messaging",
+      "expo-audio",
+      "@react-native-firebase/auth",
+      "expo-secure-store",
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Allow RoomLink to use Face ID for quick and secure login."
+        }
+      ],
+      "expo-video"
+    ]
+  }
+}
