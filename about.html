@@ -8,9 +8,7 @@
   <meta name="description" content="RoomLink offers secure, verified apartments and stylish short-term stays worldwide. Transparent bookings, no hidden fees — let's find your perfect place." />
   <meta name="keywords" content="apartments for rent, short-term stays, verified rentals, RoomLink, global accommodation, Nigeria rentals" />
   <link rel="icon" href="/logo.png" type="image/png" />
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
   <style>
     :root {
       --purple: #6b48ff;
@@ -30,7 +28,6 @@
       flex-direction: column;
     }
     main { flex: 1; }
-
     /* ==================== HEADER - NOW 100% CONSISTENT ==================== */
     header {
       position: fixed;
@@ -54,7 +51,6 @@
     }
     @media (min-width: 768px) { .logo img { height: 80px; max-width: 360px; } }
     @media (max-width: 480px) { .logo img { height: 52px; max-width: 220px; } }
-
     .header-center {
       flex: 1;
       display: flex;
@@ -75,7 +71,6 @@
     @media (max-width: 768px) {
       .rent-ease { font-size: 1.4rem; }
     }
-
     .hamburger {
       font-size: 1.8rem;
       color: #cbd5e1;
@@ -114,8 +109,7 @@
     .signup-btn:hover { transform: scale(1.05); }
     @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
     @media (min-width: 769px) { .hamburger, .mobile-menu { display: none; } }
-
-    /* ==================== REST OF PAGE (UNCHANGED - LOOKS PERFECT) ==================== */
+    /* ==================== REST OF PAGE (UPDATED FOR BREATHING SPACE + MISSION IMAGE) ==================== */
     .hero {
       position: relative;
       height: 85vh;
@@ -125,7 +119,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 120px 5% 80px 5%;
+      padding: 120px 5% 180px 5%; /* Increased bottom padding for breathing space before Our Mission */
       overflow: hidden;
     }
     .hero::before {
@@ -184,7 +178,6 @@
     .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 207, 255, 0.4); }
     .btn-outline { border: 2px solid #00cfff; color: #00cfff; }
     .btn-outline:hover { background: #00cfff; color: #0f172a; }
-
     section { padding: 90px 5% 110px; }
     h2 {
       font-size: 2.8rem;
@@ -192,10 +185,12 @@
       color: #00cfff;
       text-align: center;
     }
-
     .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
-
-    .how-it-works { background: rgba(0,0,0,0.25); }
+    .how-it-works {
+      background: rgba(0,0,0,0.25);
+      margin-top: 80px; /* Added breathing space / gap between Hero and Our Mission */
+      padding-bottom: 60px; /* Extra space at the bottom of mission section */
+    }
     .steps {
       display: flex;
       flex-wrap: wrap;
@@ -229,11 +224,11 @@
       color: #cbd5e1;
       font-size: 0.97rem;
     }
-
     .benefits {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 40px;
+      margin-top: 40px; /* Extra gap between mission section and benefit cards */
     }
     .benefit-card {
       background: rgba(30, 41, 59, 0.6);
@@ -259,7 +254,25 @@
       color: #cbd5e1;
       font-size: 0.97rem;
     }
-
+    /* New mission image styling - FIXED LARGE GAP */
+    .mission-image-container {
+      text-align: center;
+      margin-top: 3rem;
+      margin-bottom: 110px; /* ← This is the key fix: big breathing space before benefit cards */
+    }
+    .mission-image {
+      max-width: 100%;
+      width: 100%;
+      max-height: 560px;
+      object-fit: cover;
+      border-radius: 24px;
+      box-shadow: 0 25px 50px -12px rgba(0, 207, 255, 0.25);
+      border: 1px solid rgba(0,207,255,0.2);
+      transition: transform 0.3s ease;
+    }
+    .mission-image:hover {
+      transform: scale(1.02);
+    }
     footer {
       background: linear-gradient(to top, #0f172a, #1e293b);
       padding: 6rem 5% 4rem;
@@ -303,7 +316,6 @@
       transform: scale(1.05);
       box-shadow: 0 10px 30px rgba(0,207,255,0.3);
     }
-
     @media (max-width: 1024px) {
       .benefits { grid-template-columns: repeat(2, 1fr); }
     }
@@ -311,25 +323,24 @@
       .benefits { grid-template-columns: 1fr; }
       section { padding: 70px 5% 90px; }
       h2 { font-size: 2.3rem; margin-bottom: 2.5rem; }
-      .hero { height: 80vh; min-height: 540px; padding: 100px 5% 60px; }
+      .hero { height: 80vh; min-height: 540px; padding: 100px 5% 140px; }
       .hero h1 { font-size: 2.2rem; font-weight: 600; }
       .hero p { font-size: 1rem; line-height: 1.4; }
+      .mission-image { max-height: 420px; }
+      .mission-image-container { margin-bottom: 70px; } /* Still good gap on mobile */
     }
   </style>
 </head>
 <body>
-
   <!-- HEADER -->
   <header>
     <div class="logo">
       <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
     </div>
-
     <!-- RentEase centered (added for consistency) -->
     <div class="header-center">
       <div class="rent-ease">RentEase</div>
     </div>
-
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="HowToUse.html">How to Use</a></li>
@@ -337,12 +348,10 @@
       <li><a href="Privacy.html">Privacy Policy</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-
     <button class="hamburger" id="hamburgerBtn">
       <i class="fas fa-bars"></i>
     </button>
   </header>
-
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-header">
@@ -351,7 +360,6 @@
       </div>
       <button class="close-btn" id="closeMenu">×</button>
     </div>
-
     <ul class="mobile-nav">
       <li><a href="index.html">Home</a></li>
       <li><a href="HowToUse.html">How to Use</a></li>
@@ -359,12 +367,10 @@
       <li><a href="Privacy.html">Privacy Policy</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-
     <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="signup-btn">
       <i class="fab fa-google-play"></i> Sign Up / Download App
     </a>
   </div>
-
   <main>
     <section id="about">
       <div class="hero">
@@ -379,31 +385,39 @@
           </div>
         </div>
       </div>
-
+      <!-- Our Mission Section - Text first, then image -->
       <div class="how-it-works">
         <h2>Our Mission</h2>
         <div class="container">
           <p style="text-align:center; max-width:800px; margin:0 auto 3rem; font-size:1.2rem; color:#cbd5e1; line-height:1.8;">
             We’re building a trusted marketplace where renters and hosts connect directly with verified profiles, clear pricing, secure payments, in-app chat, and real reviews. No surprises, no hidden fees, just quality stays.
           </p>
+          
+          <!-- Mission Image -->
+          <div class="mission-image-container">
+            <img src="https://res.cloudinary.com/drserbss8/image/upload/v1775229718/image_tmuntq.jpg"
+                 alt="RoomLink Our Mission - Building trusted rental experiences worldwide"
+                 class="mission-image">
+          </div>
         </div>
       </div>
 
+      <!-- Benefits Section - Now has clear gap from the image above -->
       <div class="benefits container">
         <div class="benefit-card">
           <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
-          <h3>Verified & Safe</h3>
+          <h3>Verified &amp; Safe</h3>
           <p>Every user and property goes through verification for maximum trust.</p>
         </div>
         <div class="benefit-card">
           <div class="benefit-icon"><i class="fas fa-globe-africa"></i></div>
-          <h3>Global & Local</h3>
+          <h3>Global &amp; Local</h3>
           <p>From cities in Nigeria to destinations worldwide, we're expanding fast.</p>
         </div>
         <div class="benefit-card">
           <div class="benefit-icon"><i class="fas fa-mobile-alt"></i></div>
           <h3>Modern App</h3>
-          <p>Beautiful design, dark/light mode, notifications, wallet, map view & more coming soon.</p>
+          <p>Beautiful design, dark/light mode, notifications, wallet, map view &amp; more coming soon.</p>
         </div>
       </div>
 
@@ -412,7 +426,6 @@
       </div>
     </section>
   </main>
-
   <!-- FOOTER -->
   <footer>
     <div class="footer-container">
@@ -421,10 +434,9 @@
           <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
         </div>
         <p class="footer-tagline">
-          Verified apartments & stylish short-term stays worldwide secure, transparent, effortless.
+          Verified apartments &amp; stylish short-term stays worldwide secure, transparent, effortless.
         </p>
       </div>
-
       <div class="footer-links">
         <h4>Quick Links</h4>
         <ul>
@@ -435,14 +447,12 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
-
       <div>
         <h4>Get the App</h4>
         <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="download-btn">
           <i class="fab fa-google-play"></i> Download on Google Play
         </a>
       </div>
-
       <div class="footer-links">
         <h4>Follow Us</h4>
         <div class="footer-social">
@@ -459,15 +469,12 @@
       <p>Designed with ❤️ for better living spaces around the world</p>
     </div>
   </footer>
-
   <!-- JAVASCRIPT -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const closeMenu = document.getElementById('closeMenu');
     const mobileMenu = document.getElementById('mobileMenu');
-
     hamburgerBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
     closeMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
     mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) mobileMenu.classList.remove('active'); });
