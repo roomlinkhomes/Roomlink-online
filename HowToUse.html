@@ -26,7 +26,6 @@
       flex-direction: column;
     }
     main { flex: 1; }
-
     /* ==================== HEADER - CONSISTENT WITH OTHER PAGES ==================== */
     header {
       position: fixed;
@@ -50,7 +49,6 @@
     }
     @media (min-width: 768px) { .logo img { height: 80px; max-width: 360px; } }
     @media (max-width: 480px) { .logo img { height: 52px; max-width: 220px; } }
-
     .header-center {
       flex: 1;
       display: flex;
@@ -71,7 +69,6 @@
     @media (max-width: 768px) {
       .rent-ease { font-size: 1.4rem; }
     }
-
     .hamburger {
       font-size: 1.8rem;
       color: #cbd5e1;
@@ -110,7 +107,6 @@
     .signup-btn:hover { transform: scale(1.05); }
     @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
     @media (min-width: 769px) { .hamburger, .mobile-menu { display: none; } }
-
     /* ==================== HERO ==================== */
     .hero {
       position: relative;
@@ -180,7 +176,6 @@
     .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 207, 255, 0.4); }
     .btn-outline { border: 2px solid #00cfff; color: #00cfff; }
     .btn-outline:hover { background: #00cfff; color: #0f172a; }
-
     /* ==================== STEP-BY-STEP SECTION - FIXED SPACING ==================== */
     section { padding: 90px 5% 110px; }
     h2 {
@@ -191,7 +186,7 @@
     }
     .how-it-works {
       background: rgba(0,0,0,0.25);
-      padding: 80px 5% 100px;   /* Added generous top/bottom padding */
+      padding: 80px 5% 100px;
     }
     .steps {
       display: flex;
@@ -206,7 +201,7 @@
       max-width: 280px;
       background: rgba(15, 23, 42, 0.85);
       border-radius: 20px;
-      padding: 32px 24px 40px;   /* Increased internal padding for breathing space */
+      padding: 32px 24px 40px;
       text-align: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       opacity: 0;
@@ -221,7 +216,7 @@
       display: inline-block;
       background: var(--purple);
       color: white;
-      width: 48px; 
+      width: 48px;
       height: 48px;
       line-height: 48px;
       border-radius: 50%;
@@ -238,6 +233,59 @@
       color: #cbd5e1;
       font-size: 0.97rem;
       line-height: 1.65;
+    }
+
+    /* ==================== NEW SEARCH BANNER (ADDED AFTER STEPS) ==================== */
+    .search-banner {
+      position: relative;
+      width: 100%;
+      height: 520px;
+      background: url('https://res.cloudinary.com/drserbss8/image/upload/v1775227172/Apartment_search_in_the_city_nlvjhh.png') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      margin: 40px 0;
+    }
+    .search-banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(15,23,42,0.35), rgba(15,23,42,0.78));
+    }
+    .search-banner-content {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+      padding: 0 20px;
+    }
+    .search-banner-content h2 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: white;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+    .search-banner-content p {
+      font-size: 1.35rem;
+      color: #e0f7ff;
+      font-weight: 600;
+      line-height: 1.5;
+      max-width: 700px;
+      margin: 0 auto;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    @media (max-width: 768px) {
+      .search-banner {
+        height: 420px;
+      }
+      .search-banner-content h2 {
+        font-size: 2.2rem;
+      }
+      .search-banner-content p {
+        font-size: 1.15rem;
+      }
     }
 
     footer {
@@ -283,7 +331,6 @@
       transform: scale(1.05);
       box-shadow: 0 10px 30px rgba(0,207,255,0.3);
     }
-
     @media (max-width: 768px) {
       section { padding: 70px 5% 90px; }
       h2 { font-size: 2.3rem; margin-bottom: 2.5rem; }
@@ -300,11 +347,9 @@
     <div class="logo">
       <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
     </div>
-
     <div class="header-center">
       <div class="rent-ease">RentEase</div>
     </div>
-
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="HowToUse.html" class="active">How to Use</a></li>
@@ -316,7 +361,6 @@
       <i class="fas fa-bars"></i>
     </button>
   </header>
-
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-header">
       <div class="logo">
@@ -335,7 +379,6 @@
       <i class="fab fa-google-play"></i> Sign Up / Download App
     </a>
   </div>
-
   <main>
     <section id="how-to-use">
       <div class="hero">
@@ -350,7 +393,6 @@
           </div>
         </div>
       </div>
-
       <div class="how-it-works">
         <h2>Step-by-Step Guide</h2>
         <div class="steps">
@@ -400,10 +442,18 @@
             <p>Report issues, contact support, use our verification system for peace of mind.</p>
           </div>
         </div>
+
+        <!-- NEW BANNER ADDED AFTER THE LAST STEP -->
+        <div class="search-banner">
+          <div class="search-banner-content">
+            <h2>Search Smarter.<br>Live Better.</h2>
+            <p>Verified apartments and short-term stays in the city — and beyond.<br>Find your perfect place with confidence.</p>
+          </div>
+        </div>
+
       </div>
     </section>
   </main>
-
   <footer>
     <div class="footer-container">
       <div>
@@ -446,7 +496,6 @@
       <p>Designed with ❤️ for better living spaces around the world</p>
     </div>
   </footer>
-
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
     const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -455,7 +504,6 @@
     hamburgerBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
     closeMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
     mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) mobileMenu.classList.remove('active'); });
-
     // Scroll animation for steps
     const steps = document.querySelectorAll('.step');
     const observerOptions = {
@@ -463,7 +511,6 @@
       rootMargin: '0px',
       threshold: 0.1
     };
-
     const stepObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -472,7 +519,6 @@
         }
       });
     }, observerOptions);
-
     steps.forEach(step => {
       stepObserver.observe(step);
     });
