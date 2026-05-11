@@ -66,7 +66,7 @@
       text-align: center;
       padding: 0 10px;
     }
-    .rent-ease {
+    .room-link {
       font-size: 1.75rem;
       font-weight: 800;
       background: linear-gradient(to right, #00ff9d, #00eaff);
@@ -76,7 +76,7 @@
       white-space: nowrap;
     }
     @media (max-width: 768px) {
-      .rent-ease { font-size: 1.4rem; }
+      .room-link { font-size: 1.4rem; }
     }
     @media (max-width: 768px) {
       header { padding: 0.8rem 4%; justify-content: space-between; }
@@ -113,12 +113,13 @@
     @media (min-width: 769px) {
       .hamburger, .mobile-menu { display: none; }
     }
-    /* ==================== HERO SECTION - NOW WITH REQUESTED BACKGROUND IMAGE ==================== */
+
+    /* Hero Section */
     .hero {
       position: relative;
       height: 75vh;
       min-height: 580px;
-      background: url('https://res.cloudinary.com/drserbss8/image/upload/v1775221808/image_qkdnbt.jpg') center/cover no-repeat;
+      background: #0f172a;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -168,18 +169,18 @@
     .hero-cta {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.5rem;
+      gap: 1rem;
       justify-content: center;
       opacity: 0;
       transform: translateY(30px);
       animation: fadeUp 1.6s ease-out 0.6s forwards;
     }
     .btn {
-      padding: 1rem 2.2rem;
+      padding: 0.85rem 1.8rem;
       border-radius: 50px;
       font-weight: bold;
       text-decoration: none;
-      font-size: 1.1rem;
+      font-size: 1rem;
       transition: all 0.3s;
     }
     .btn-primary {
@@ -206,18 +207,9 @@
       }
       .hero h1 { font-size: 2.4rem; }
       .hero p { font-size: 1.05rem; }
-      .hero-cta {
-        flex-wrap: nowrap !important;
-        gap: 1rem;
-      }
-      .btn {
-        padding: 0.85rem 1.6rem;
-        font-size: 0.98rem;
-        flex: 1;
-        min-width: 0;
-      }
     }
-    /* ==================== NEW PLATFORM BANNER WITH IMAGE AS BACKGROUND ==================== */
+
+    /* Other sections */
     .platform-banner {
       position: relative;
       width: 100%;
@@ -257,18 +249,7 @@
       margin: 0 auto;
       text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
-    @media (max-width: 768px) {
-      .platform-banner {
-        height: 420px;
-      }
-      .platform-banner-content h2 {
-        font-size: 2.2rem;
-      }
-      .platform-banner-content p {
-        font-size: 1.15rem;
-      }
-    }
-    /* NEW PROTECTION BANNER – Added after benefits */
+
     .protection-banner {
       position: relative;
       width: 100%;
@@ -309,21 +290,8 @@
       margin: 0 auto;
       text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
-    @media (max-width: 768px) {
-      .protection-banner {
-        height: 420px;
-      }
-      .protection-banner-content h2 {
-        font-size: 2.2rem;
-      }
-      .protection-banner-content p {
-        font-size: 1.15rem;
-      }
-    }
-    /* Other sections */
-    .why-section {
-      padding-top: 60px !important;   /* Reduced because banner now fills the space */
-    }
+
+    .why-section { padding-top: 60px !important; }
     .how-section { padding-top: 100px !important; }
     section { padding: 90px 5% 110px; }
     h2 {
@@ -333,6 +301,7 @@
       text-align: center;
     }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -351,6 +320,7 @@
     .feature-icon { font-size: 2.6rem; margin-bottom: 16px; color: var(--purple); }
     .feature-title { font-size: 1.25rem; margin-bottom: 10px; font-weight: 600; }
     .feature-card p { color: #444; font-size: 0.92rem; line-height: 1.45; }
+
     .how-it-works { background: rgba(0,0,0,0.25); }
     .steps {
       display: flex;
@@ -382,6 +352,7 @@
       font-weight: bold;
       font-size: 1.3rem;
     }
+
     .landlord-section {
       background: linear-gradient(135deg, #4b0082, #006994);
       padding: 90px 5%;
@@ -399,6 +370,7 @@
     }
     .check-list li { margin: 20px 0; display: flex; align-items: center; gap: 16px; }
     .check-list i { color: #00ff9d; font-size: 1.8rem; }
+
     .benefits {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -422,6 +394,7 @@
     }
     .benefit-card h3 { font-size: 1.5rem; margin: 1.4rem 1rem 0.8rem; color: #e2e8f0; }
     .benefit-card p { padding: 0 1.5rem 1rem; color: #cbd5e1; font-size: 0.97rem; }
+
     footer {
       background: linear-gradient(to top, #0f172a, #1e293b);
       padding: 6rem 5% 4rem;
@@ -465,7 +438,7 @@
       transform: scale(1.05);
       box-shadow: 0 10px 30px rgba(0,207,255,0.3);
     }
-    /* Scroll Reveal */
+
     .feature-card, .step, .benefit-card {
       opacity: 0;
       transform: translateY(60px);
@@ -475,6 +448,7 @@
       opacity: 1;
       transform: translateY(0);
     }
+
     @media (max-width: 1024px) {
       .features-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -496,7 +470,7 @@
     </div>
    
     <div class="header-center">
-      <div class="rent-ease">RentEase</div>
+      <div class="room-link">RoomLink</div>
     </div>
     <ul class="nav-links">
       <li><a href="index.html" class="active">Home</a></li>
@@ -504,9 +478,12 @@
       <li><a href="about.html">About</a></li>
       <li><a href="Privacy.html">Privacy Policy</a></li>
       <li><a href="contact.html">Contact</a></li>
+      <li><a href="signup.html" style="color:#00ff9d; font-weight:600;">Sign Up</a></li>
+      <li><a href="login.html" style="color:#00ff9d; font-weight:600;">Login</a></li>
     </ul>
     <button class="hamburger" id="hamburgerBtn"><i class="fas fa-bars"></i></button>
   </header>
+
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-header">
       <div class="logo"><img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo"></div>
@@ -518,34 +495,36 @@
       <li><a href="about.html">About</a></li>
       <li><a href="Privacy.html">Privacy Policy</a></li>
       <li><a href="contact.html">Contact</a></li>
+      <li><a href="signup.html" style="color:#00ff9d; font-weight:600;">Sign Up</a></li>
+      <li><a href="login.html" style="color:#00ff9d; font-weight:600;">Login</a></li>
     </ul>
-    <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="signup-btn">
+    <a href="https://play.google.com/store/apps/details?id=com.roomlink.app" target="_blank" class="signup-btn">
       <i class="fab fa-google-play"></i> Sign Up / Download App
     </a>
   </div>
+
   <main>
     <section id="home">
-      <!-- Updated Hero Section – "Find Your Perfect Place" now sits on top of the new background image -->
       <div class="hero">
         <div class="hero-content">
           <h1>Find Your Perfect Place</h1>
           <p>Verified apartments & stylish short-term stays, secure, transparent, effortless.</p>
           <div class="hero-cta">
             <a href="HowToUse.html" class="btn btn-outline">How It Works</a>
-            <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary">
-              <i class="fab fa-google-play"></i> Download App
+            <a href="signup.html" class="btn btn-primary">
+              <i class="fas fa-user-plus"></i> Sign Up
             </a>
           </div>
         </div>
       </div>
-      <!-- Platform Banner – Verified Homes. Real Trust. (gap reduced by shorter hero padding) -->
+
       <div class="platform-banner">
         <div class="platform-banner-content">
           <h2>Verified Homes. Real Trust.</h2>
           <p>Secure apartments &amp; short-term stays in Nigeria and worldwide.<br>No scams • KYC verified landlords • Transparent payments</p>
         </div>
       </div>
-      <!-- Why Choose RoomLink -->
+
       <div class="container why-section">
         <h2>Why Choose RoomLink?</h2>
         <div class="features-grid">
@@ -581,7 +560,7 @@
           </div>
         </div>
       </div>
-      <!-- How RoomLink Works -->
+
       <div class="how-it-works how-section">
         <h2>How RoomLink Works</h2>
         <div class="steps">
@@ -607,6 +586,7 @@
           </div>
         </div>
       </div>
+
       <div class="landlord-section">
         <h2>Are You a Landlord or Agent?</h2>
         <ul class="check-list">
@@ -614,10 +594,9 @@
           <li><i class="fas fa-check"></i> Get a verified badge and attract more tenants</li>
           <li><i class="fas fa-check"></i> Receive secure payments directly to your bank account</li>
         </ul>
-        <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary" style="font-size:1.25rem; padding:16px 48px; margin-top:40px;">Start on App →</a>
+        <a href="https://play.google.com/store/apps/details?id=com.roomlink.app" target="_blank" class="btn btn-primary" style="font-size:1.25rem; padding:16px 48px; margin-top:40px;">Start on App →</a>
       </div>
 
-      <!-- Benefits Section (Seamless Experience image updated to a more relatable photo) -->
       <div class="benefits container">
         <div class="benefit-card">
           <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Verified Security">
@@ -630,14 +609,12 @@
           <p>No hidden fees, clear costs from start to finish.</p>
         </div>
         <div class="benefit-card">
-          <!-- Changed to a more relatable image: happy user comfortably using the app on their phone in a modern home setting -->
           <img src="https://res.cloudinary.com/drserbss8/image/upload/v1775227574/ChatGPT_Image_Feb_28_2026_09_25_09_AM_lpofgr.png" alt="Seamless Experience">
           <h3>Seamless Experience</h3>
           <p>Search, chat, book & manage everything in one app.</p>
         </div>
       </div>
 
-      <!-- NEW PROTECTION BANNER – Added right after benefits as requested -->
       <div class="protection-banner">
         <div class="protection-banner-content">
           <h2>Protected &amp; Prioritized</h2>
@@ -649,7 +626,7 @@
         Join <strong style="color:#00cfff;">thousands</strong> of users renting smarter with RoomLink
       </div>
       <div style="text-align:center; margin-bottom: 6rem;">
-        <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank">
+        <a href="https://play.google.com/store/apps/details?id=com.roomlink.app" target="_blank">
           <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
                alt="Get it on Google Play"
                style="height:85px;" />
@@ -657,6 +634,7 @@
       </div>
     </section>
   </main>
+
   <footer>
     <div class="footer-container">
       <div>
@@ -675,11 +653,13 @@
           <li><a href="about.html">About</a></li>
           <li><a href="Privacy.html">Privacy Policy</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="signup.html">Sign Up</a></li>
+          <li><a href="login.html">Login</a></li>
         </ul>
       </div>
       <div>
         <h4>Get the App</h4>
-        <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="download-btn">
+        <a href="https://play.google.com/store/apps/details?id=com.roomlink.app" target="_blank" class="download-btn">
           <i class="fab fa-google-play"></i> Download on Google Play
         </a>
       </div>
@@ -699,6 +679,7 @@
       <p>Designed with ❤️ for better living spaces around the world</p>
     </div>
   </footer>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
     const hamburgerBtn = document.getElementById('hamburgerBtn');

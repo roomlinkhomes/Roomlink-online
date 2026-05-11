@@ -30,7 +30,6 @@
     }
     main { flex: 1; }
 
-    /* ==================== HEADER - NOW FULLY CONSISTENT WITH ALL OTHER PAGES ==================== */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -54,7 +53,6 @@
     @media (min-width: 768px) { .logo img { height: 80px; max-width: 360px; } }
     @media (max-width: 480px) { .logo img { height: 52px; max-width: 220px; } }
 
-    /* RentEase centered - exactly like Home, Privacy & How to Use */
     .header-center {
       flex: 1;
       display: flex;
@@ -63,7 +61,7 @@
       text-align: center;
       padding: 0 10px;
     }
-    .rent-ease {
+    .room-link {
       font-size: 1.75rem;
       font-weight: 800;
       background: linear-gradient(to right, #00ff9d, #00eaff);
@@ -73,7 +71,7 @@
       white-space: nowrap;
     }
     @media (max-width: 768px) {
-      .rent-ease { font-size: 1.4rem; }
+      .room-link { font-size: 1.4rem; }
     }
 
     .hamburger {
@@ -115,7 +113,6 @@
     @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
     @media (min-width: 769px) { .hamburger, .mobile-menu { display: none; } }
 
-    /* ==================== REST OF THE PAGE (UNCHANGED - LOOKS GREAT) ==================== */
     .hero {
       position: relative;
       height: 85vh;
@@ -210,9 +207,6 @@
       transition: transform 0.3s ease;
     }
     .support-robot:hover { transform: translateY(-8px); }
-    @media (max-width: 768px) {
-      .support-robot { max-width: 220px; margin: 1.5rem auto 2.5rem; }
-    }
 
     .contact-form {
       background: rgba(30, 41, 59, 0.6);
@@ -223,20 +217,37 @@
       margin-bottom: 4rem;
     }
     .contact-form input,
-    .contact-form textarea {
+    .contact-form textarea,
+    .contact-form select {
       width: 100%;
       padding: 1rem;
       margin-bottom: 1.5rem;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(0,207,255,0.3);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(0,207,255,0.4);
       border-radius: 8px;
       color: white;
       font-size: 1rem;
       outline: none;
-      transition: border 0.3s;
+      transition: all 0.3s;
     }
     .contact-form input:focus,
-    .contact-form textarea:focus { border-color: #00cfff; }
+    .contact-form textarea:focus,
+    .contact-form select:focus {
+      border-color: #00cfff;
+      background: rgba(255,255,255,0.12);
+    }
+
+    /* ==================== FIXED SELECT DROPDOWN ==================== */
+    .contact-form select {
+      background: #1e2937;
+      color: white;
+      cursor: pointer;
+    }
+    .contact-form select option {
+      background: #1e2937;
+      color: white;
+      padding: 12px;
+    }
 
     .contact-form button {
       background: #00cfff;
@@ -353,22 +364,22 @@
       section { padding: 70px 5% 90px; }
       h2 { font-size: 2.3rem; margin-bottom: 2.5rem; }
       .hero { height: 80vh; min-height: 540px; padding: 100px 5% 60px; }
-      .hero h1 { font-size: 2.2rem; font-weight: 600; }
-      .hero p { font-size: 1rem; line-height: 1.4; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1rem; }
       .contact-info { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Header and Mobile Menu (unchanged) -->
   <header>
     <div class="logo">
       <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
     </div>
 
-    <!-- RentEase centered (added to match all other pages) -->
     <div class="header-center">
-      <div class="rent-ease">RentEase</div>
+      <div class="room-link">RoomLink</div>
     </div>
 
     <ul class="nav-links">
@@ -410,7 +421,7 @@
       <div class="hero">
         <div class="hero-content">
           <h1>Get in Touch</h1>
-          <p>Have questions about RoomLink? Need help with a booking or listing? We're here for you, drop us a message!</p>
+          <p>Have questions about RoomLink? Need help with a booking or listing? We're here for you!</p>
           <div class="hero-cta">
             <a href="index.html" class="btn btn-outline">Back to Home</a>
             <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary">
@@ -424,15 +435,31 @@
         <div class="robot-welcome">
           <img 
             src="https://res.cloudinary.com/drserbss8/image/upload/v1769558780/Friendly_robot_support_assistant_cxyled.png" 
-            alt="Friendly robot support assistant saying we're here to help 24/7" 
+            alt="Friendly robot support assistant" 
             class="support-robot"
           >
         </div>
 
         <form id="contactForm" class="contact-form">
-          <input type="text" id="name" placeholder="Your Name" required>
-          <input type="email" id="email" placeholder="Your Email" required>
-          <textarea id="message" rows="6" placeholder="Your Message..." required></textarea>
+          <input type="text" id="name" placeholder="Your Full Name" required>
+          <input type="email" id="email" placeholder="Your Email Address" required>
+          <input type="tel" id="phone" placeholder="Phone Number (Optional)">
+          <input type="text" id="subject" placeholder="Subject" required>
+
+          <!-- Fixed Inquiry Type Dropdown -->
+          <select id="inquiryType" required>
+            <option value="" disabled selected>Select Inquiry Type</option>
+            <option value="General">General Inquiry</option>
+            <option value="Booking">Booking Assistance</option>
+            <option value="Listing">Listing a Property</option>
+            <option value="Technical">Technical Support</option>
+            <option value="Partnership">Partnership / Business</option>
+            <option value="Complaint">Complaint / Feedback</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <textarea id="message" rows="7" placeholder="Please describe your message in detail..." required></textarea>
+
           <button type="submit" id="submitBtn">Send Message</button>
           <div id="formMessage" class="form-message"></div>
         </form>
@@ -441,12 +468,12 @@
           <div class="info-card">
             <div class="info-icon"><i class="fas fa-envelope"></i></div>
             <h3>Email Us</h3>
-            <p>roomlinkapp@gmail.com</p>
+            <p>support@roomlink.homes</p>
           </div>
           <div class="info-card">
             <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
             <h3>Call Us</h3>
-            <p>+234 (0) 8039836030</p>
+            <p>+234 (0) 803 983 6030</p>
           </div>
           <div class="info-card">
             <div class="info-icon"><i class="fas fa-clock"></i></div>
@@ -464,6 +491,7 @@
   </main>
 
   <footer>
+    <!-- Footer content remains the same -->
     <div class="footer-container">
       <div>
         <div class="footer-logo">
@@ -521,6 +549,7 @@
     closeMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
     mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) mobileMenu.classList.remove('active'); });
 
+    // Contact Form
     const contactForm = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
     const formMessage = document.getElementById('formMessage');
@@ -534,34 +563,35 @@
         formMessage.textContent = '';
         formMessage.className = 'form-message';
 
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const message = document.getElementById('message').value.trim();
+        const formData = {
+          name: document.getElementById('name').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          phone: document.getElementById('phone').value.trim(),
+          subject: document.getElementById('subject').value.trim(),
+          inquiryType: document.getElementById('inquiryType').value,
+          message: document.getElementById('message').value.trim()
+        };
 
         try {
-          const response = await fetch(
-            'https://us-central1-roomlink-homes.cloudfunctions.net/submitContact',
-            {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ name, email, message })
-            }
-          );
+          const response = await fetch('https://us-central1-roomlink-homes.cloudfunctions.net/submitContact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+          });
 
           const result = await response.json();
 
           if (response.ok && result.success) {
-            formMessage.textContent = 'Message sent successfully! We’ll get back to you soon.';
+            formMessage.textContent = 'Thank you! Your message has been sent successfully.';
             formMessage.className = 'form-message success';
             contactForm.reset();
           } else {
-            formMessage.textContent = result.error || 'Failed to send message. Please try again.';
+            formMessage.textContent = result.error || 'Something went wrong. Please try again.';
             formMessage.className = 'form-message error';
           }
         } catch (err) {
-          formMessage.textContent = 'Network error. Please check your connection and try again.';
+          formMessage.textContent = 'Network error. Please check your connection.';
           formMessage.className = 'form-message error';
-          console.error('Contact form error:', err);
         } finally {
           submitBtn.disabled = false;
           submitBtn.textContent = 'Send Message';
