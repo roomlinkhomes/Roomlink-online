@@ -23,9 +23,36 @@
       color: #017a6b; 
       margin-bottom: 10px;
     }
-    .header {
-      margin-bottom: 20px;
+
+    /* Banner Section */
+    .banner-section {
+      margin-bottom: 25px;
     }
+    .banner {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 15px;
+      position: relative;
+    }
+    .banner img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .banner-label {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: #017a6b;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
     .search-container {
       position: relative;
       margin: 0 5px 15px;
@@ -97,38 +124,31 @@
       padding: 60px 20px; 
       color: #666; 
       font-size: 16px; 
-      grid-column: 1 / -1;
     }
     .error { 
       color: red; 
       text-align: center; 
       padding: 40px 20px; 
-      grid-column: 1 / -1;
-    }
-
-    @media (max-width: 480px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <div class="header">
-      <h1>Latest Listings</h1>
-      
-      <div class="search-container">
-        <span class="search-icon">🔍</span>
-        <input 
-          type="text" 
-          id="searchInput" 
-          class="search-input" 
-          placeholder="Search by title, location..."
-          onkeyup="filterListings()"
-        >
-      </div>
+    <h1>Latest Listings</h1>
+    
+    <!-- Banner Section -->
+    <div class="banner-section" id="bannerSection"></div>
+
+    <div class="search-container">
+      <span class="search-icon">🔍</span>
+      <input 
+        type="text" 
+        id="searchInput" 
+        class="search-input" 
+        placeholder="Search by title, location..."
+        onkeyup="filterListings()"
+      >
     </div>
 
     <div id="loading" class="loading">Loading feed...</div>
@@ -152,24 +172,41 @@
     let allListings = [];
 
     async function loadFeed() {
-      const feedDiv = document.getElementById('feed');
       const loadingDiv = document.getElementById('loading');
 
       try {
-        const snapshot = await db.collection("listings")
+        console.log("Fetching banners and listings...");
+
+        // Fetch Banners - More flexible query
+        const bannerSnap = await db.collection("ads")
+          .where("status", "==", "active")
+          .get();
+
+        const banners = [];
+        bannerSnap.forEach(doc => {
+          const data = doc.data();
+          if (data.type === "banner" || data.type === "Banner") {
+            banners.push(data);
+          }
+        });
+
+        renderBanners(banners);
+
+        // Fetch Listings
+        const listingSnap = await db.collection("listings")
           .orderBy("createdAt", "desc")
           .limit(50)
           .get();
 
         loadingDiv.style.display = "none";
 
-        if (snapshot.empty) {
-          feedDiv.innerHTML = `<div class="empty">No listings available at the moment.</div>`;
+        if (listingSnap.empty && banners.length === 0) {
+          document.getElementById('feed').innerHTML = `<div class="empty">No listings available at the moment.</div>`;
           return;
         }
 
         allListings = [];
-        snapshot.forEach(doc => {
+        listingSnap.forEach(doc => {
           allListings.push({ id: doc.id, ...doc.data() });
         });
 
@@ -178,18 +215,34 @@
       } catch (err) {
         console.error("Error loading feed:", err);
         loadingDiv.style.display = "none";
-        feedDiv.innerHTML = `<div class="error">Failed to load listings.<br><small>${err.message}</small></div>`;
+        document.getElementById('feed').innerHTML = `<div class="error">Failed to load feed.<br><small>${err.message}</small></div>`;
       }
+    }
+
+    function renderBanners(banners) {
+      const container = document.getElementById('bannerSection');
+      if (banners.length === 0) {
+        console.log("No active banners found");
+        return;
+      }
+
+      let html = "";
+      banners.forEach(banner => {
+        const img = banner.image || banner.adDescription || "https://via.placeholder.com/800x200?text=Banner";
+        html += `
+          <div class="banner" onclick="openAppStore()">
+            <span class="banner-label">Sponsored</span>
+            <img src="${img}" alt="Banner">
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+      console.log(`${banners.length} banner(s) displayed`);
     }
 
     function renderListings(listings) {
       const feedDiv = document.getElementById('feed');
       let html = "";
-
-      if (listings.length === 0) {
-        feedDiv.innerHTML = `<div class="empty">No matching listings found.</div>`;
-        return;
-      }
 
       listings.forEach(d => {
         let img = "https://via.placeholder.com/300x200?text=No+Image";
@@ -227,19 +280,14 @@
         const title = (listing.title || "").toLowerCase();
         const location = (listing.location || "").toLowerCase();
         const category = (listing.category || "").toLowerCase();
-        
-        return title.includes(searchTerm) || 
-               location.includes(searchTerm) || 
-               category.includes(searchTerm);
+        return title.includes(searchTerm) || location.includes(searchTerm) || category.includes(searchTerm);
       });
 
       renderListings(filtered);
     }
 
-    // Open Play Store
     function openAppStore() {
-      const playStoreUrl = "https://play.google.com/store/apps/details?id=com.roomlink.app";
-      window.open(playStoreUrl, "_blank");
+      window.open("https://play.google.com/store/apps/details?id=com.roomlink.app", "_blank");
     }
 
     window.onload = loadFeed;
