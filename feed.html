@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RoomLink - Feed</title>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      background: #f4f4f4; 
+      margin: 0; 
+      padding: 10px; 
+    }
+    .container { 
+      max-width: 800px; 
+      margin: auto; 
+    }
+    h1 { 
+      text-align: center; 
+      color: #017a6b; 
+      margin-bottom: 10px;
+    }
+    .header {
+      margin-bottom: 20px;
+    }
+    .search-container {
+      position: relative;
+      margin: 0 5px 15px;
+    }
+    .search-input {
+      width: 100%;
+      padding: 14px 20px 14px 50px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 16px;
+      outline: none;
+    }
+    .search-input:focus {
+      border-color: #017a6b;
+    }
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      font-size: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .listing {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    .listing:hover {
+      transform: translateY(-3px);
+    }
+    .listing img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+    .info {
+      padding: 12px;
+    }
+    .title { 
+      font-size: 15px; 
+      font-weight: bold; 
+      margin: 0 0 6px 0; 
+      line-height: 1.3;
+    }
+    .price { 
+      color: #017a6b; 
+      font-size: 17px; 
+      font-weight: bold; 
+    }
+    .location { 
+      color: #555; 
+      font-size: 13px; 
+      margin-top: 4px;
+    }
+
+    .loading, .empty { 
+      text-align: center; 
+      padding: 60px 20px; 
+      color: #666; 
+      font-size: 16px; 
+      grid-column: 1 / -1;
+    }
+    .error { 
+      color: red; 
+      text-align: center; 
+      padding: 40px 20px; 
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 480px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>Latest Listings</h1>
+      
+      <div class="search-container">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="Search by title, location..."
+          onkeyup="filterListings()"
+        >
+      </div>
+    </div>
+
+    <div id="loading" class="loading">Loading feed...</div>
+    <div id="feed" class="grid"></div>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyATm08xqtzXsiftaxlq9zvB7pPPXaePDTI",
+      authDomain: "roomlink-homes.firebaseapp.com",
+      projectId: "roomlink-homes",
+      storageBucket: "roomlink-homes.firebasestorage.app",
+      messagingSenderId: "796064439495",
+      appId: "1:796064439495:web:6b99c970d933238967f2e2",
+      measurementId: "G-3G5QVNNR7K"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    let allListings = [];
+
+    async function loadFeed() {
+      const feedDiv = document.getElementById('feed');
+      const loadingDiv = document.getElementById('loading');
+
+      try {
+        const snapshot = await db.collection("listings")
+          .orderBy("createdAt", "desc")
+          .limit(50)
+          .get();
+
+        loadingDiv.style.display = "none";
+
+        if (snapshot.empty) {
+          feedDiv.innerHTML = `<div class="empty">No listings available at the moment.</div>`;
+          return;
+        }
+
+        allListings = [];
+        snapshot.forEach(doc => {
+          allListings.push({ id: doc.id, ...doc.data() });
+        });
+
+        renderListings(allListings);
+
+      } catch (err) {
+        console.error("Error loading feed:", err);
+        loadingDiv.style.display = "none";
+        feedDiv.innerHTML = `<div class="error">Failed to load listings.<br><small>${err.message}</small></div>`;
+      }
+    }
+
+    function renderListings(listings) {
+      const feedDiv = document.getElementById('feed');
+      let html = "";
+
+      if (listings.length === 0) {
+        feedDiv.innerHTML = `<div class="empty">No matching listings found.</div>`;
+        return;
+      }
+
+      listings.forEach(d => {
+        let img = "https://via.placeholder.com/300x200?text=No+Image";
+        if (d.images && Array.isArray(d.images) && d.images.length > 0) {
+          img = d.images[0];
+        } else if (d.image) {
+          img = d.image;
+        }
+
+        html += `
+          <div class="listing" onclick="openAppStore()">
+            <img src="${img}" alt="${d.title || 'Property'}">
+            <div class="info">
+              <div class="title">${d.title || "Untitled Listing"}</div>
+              <div class="price">₦${(d.price || 0).toLocaleString()}</div>
+              <div class="location">${d.location || "Location not available"}</div>
+              <small>${d.propertyType || ""} ${d.category ? `• ${d.category}` : ""}</small>
+            </div>
+          </div>
+        `;
+      });
+
+      feedDiv.innerHTML = html;
+    }
+
+    function filterListings() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+      
+      if (!searchTerm) {
+        renderListings(allListings);
+        return;
+      }
+
+      const filtered = allListings.filter(listing => {
+        const title = (listing.title || "").toLowerCase();
+        const location = (listing.location || "").toLowerCase();
+        const category = (listing.category || "").toLowerCase();
+        
+        return title.includes(searchTerm) || 
+               location.includes(searchTerm) || 
+               category.includes(searchTerm);
+      });
+
+      renderListings(filtered);
+    }
+
+    // Open Play Store
+    function openAppStore() {
+      const playStoreUrl = "https://play.google.com/store/apps/details?id=com.roomlink.app";
+      window.open(playStoreUrl, "_blank");
+    }
+
+    window.onload = loadFeed;
+  </script>
+</body>
+</html>

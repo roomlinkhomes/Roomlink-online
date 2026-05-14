@@ -7,14 +7,16 @@
   <meta name="description" content="Join RoomLink - Create your account and start renting smarter." />
   <link rel="icon" href="/logo.png" type="image/png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
+  
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-
+  
   <style>
-    :root { --accent: #00cfff; }
+    :root { 
+      --accent: #017a6b; 
+    }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -25,7 +27,6 @@
       flex-direction: column;
     }
     main { flex: 1; }
-
     header {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px);
@@ -36,37 +37,35 @@
     .header-center { flex: 1; text-align: center; }
     .room-link {
       font-size: 1.75rem; font-weight: 800;
-      background: linear-gradient(to right, #00ff9d, #00eaff);
+      background: linear-gradient(to right, #00ff9d, var(--accent));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
-
     .signup-container {
       max-width: 480px; margin: 120px auto 80px;
       background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px);
       border-radius: 20px; padding: 40px 30px;
-      border: 1px solid rgba(0,207,255,0.15);
+      border: 1px solid rgba(1, 122, 107, 0.3);
     }
     h1 {
       text-align: center; font-size: 2.4rem; margin-bottom: 10px;
-      background: linear-gradient(to right, #00ff9d, #00eaff);
+      background: linear-gradient(to right, #00ff9d, var(--accent));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
     .subtitle { text-align: center; color: #cbd5e1; margin-bottom: 30px; }
-
     .form-group { margin-bottom: 20px; }
     label { display: block; margin-bottom: 8px; color: #e2e8f0; font-size: 0.95rem; }
-
+    
     input, select {
-      width: 100%; padding: 14px; 
+      width: 100%; padding: 14px;
       background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(0,207,255,0.3); 
+      border: 1px solid rgba(1, 122, 107, 0.4);
       border-radius: 10px;
-      color: white; 
+      color: white;
       font-size: 1rem;
     }
     input:focus, select:focus {
-      outline: none; 
-      border-color: #00cfff; 
+      outline: none;
+      border-color: var(--accent);
       background: rgba(255,255,255,0.12);
     }
 
@@ -78,7 +77,7 @@
     select option {
       background: #1e2937;
       color: white;
-      padding: 12px;
+      padding: 12px 16px;
     }
 
     .name-row {
@@ -86,22 +85,25 @@
       grid-template-columns: 1fr 1fr;
       gap: 15px;
     }
-
     .btn-create {
-      width: 100%; padding: 16px; background: #00cfff; color: #0f172a;
+      width: 100%; padding: 16px; 
+      background: var(--accent); 
+      color: white;
       font-size: 1.2rem; font-weight: bold; border: none; border-radius: 50px;
       cursor: pointer; margin-top: 10px; transition: all 0.3s;
     }
-    .btn-create:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 207, 255, 0.4); }
-    .btn-create:disabled { opacity: 0.7; cursor: not-allowed; }
-
-    .message { 
-      text-align: center; margin-top: 15px; padding: 12px; 
-      border-radius: 8px; font-weight: 500; 
+    .btn-create:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 10px 25px rgba(1, 122, 107, 0.4); 
+    }
+    .message {
+      text-align: center; margin-top: 15px; padding: 12px;
+      border-radius: 8px; font-weight: 500;
     }
     .success { background: rgba(0, 255, 157, 0.2); color: #00ff9d; }
     .error { background: rgba(255, 77, 77, 0.2); color: #ff4d4d; }
 
+    /* Footer Styles */
     footer {
       background: linear-gradient(to top, #0f172a, #1e293b);
       padding: 6rem 5% 4rem;
@@ -121,9 +123,9 @@
     .footer-links h4 { color: #00cfff; margin-bottom: 1rem; font-size: 1.1rem; }
     .footer-links ul { list-style: none; }
     .footer-links a { color: #cbd5e1; text-decoration: none; line-height: 2; transition: color 0.3s; }
-    .footer-links a:hover { color: #00cfff; }
+    .footer-links a:hover { color: var(--accent); }
     .footer-social a { color: #cbd5e1; font-size: 1.6rem; margin-right: 1.2rem; transition: color 0.3s; }
-    .footer-social a:hover { color: #00cfff; }
+    .footer-social a:hover { color: var(--accent); }
     .footer-bottom {
       text-align: center;
       margin-top: 4rem;
@@ -134,8 +136,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.8rem;
-      background: #00cfff;
-      color: #0f172a;
+      background: var(--accent);
+      color: white;
       padding: 1rem 2rem;
       border-radius: 50px;
       text-decoration: none;
@@ -144,12 +146,11 @@
     }
     .download-btn:hover {
       transform: scale(1.05);
-      box-shadow: 0 10px 30px rgba(0,207,255,0.3);
+      box-shadow: 0 10px 30px rgba(1,122,107,0.4);
     }
   </style>
 </head>
 <body>
-
   <header>
     <div class="logo">
       <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
@@ -163,7 +164,7 @@
     <div class="signup-container">
       <h1>Create Account</h1>
       <p class="subtitle">Join thousands of smart renters in Nigeria</p>
-
+      
       <form id="signupForm">
         <div class="name-row">
           <div class="form-group">
@@ -175,17 +176,14 @@
             <input type="text" id="lastname" placeholder="Last Name" required>
           </div>
         </div>
-
         <div class="form-group">
           <label>Email Address</label>
           <input type="email" id="email" placeholder="you@example.com" required>
         </div>
-
         <div class="form-group">
           <label>Phone Number</label>
           <input type="tel" id="phone" placeholder="+234 803 123 4567" required>
         </div>
-
         <div class="form-group">
           <label>I am a</label>
           <select id="userType" required>
@@ -195,26 +193,23 @@
             <option value="agent">Agent</option>
           </select>
         </div>
-
         <div class="form-group">
           <label>Password</label>
           <input type="password" id="password" placeholder="Create a strong password" required minlength="6">
         </div>
-
         <div class="form-group">
           <label>Confirm Password</label>
           <input type="password" id="confirmPassword" placeholder="Confirm password" required>
         </div>
-
         <button type="submit" id="submitBtn" class="btn-create">
           <i class="fas fa-user-plus"></i> Create My Account
         </button>
       </form>
-
       <div id="message" class="message"></div>
     </div>
   </main>
 
+  <!-- Footer Added Back -->
   <footer>
     <div class="footer-container">
       <div>
@@ -222,10 +217,9 @@
           <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
         </div>
         <p class="footer-tagline">
-          Verified apartments & stylish short-term stays worldwide secure, transparent, effortless.
+          Verified apartments & stylish short-term stays worldwide — secure, transparent, effortless.
         </p>
       </div>
-
       <div class="footer-links">
         <h4>Quick Links</h4>
         <ul>
@@ -234,17 +228,14 @@
           <li><a href="about.html">About</a></li>
           <li><a href="Privacy.html">Privacy Policy</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a href="signup.html">Sign Up</a></li>
         </ul>
       </div>
-
       <div>
         <h4>Get the App</h4>
         <a href="https://play.google.com/store/apps/details?id=com.roomlink.app" target="_blank" class="download-btn">
           <i class="fab fa-google-play"></i> Download on Google Play
         </a>
       </div>
-
       <div class="footer-links">
         <h4>Follow Us</h4>
         <div class="footer-social">
@@ -256,7 +247,6 @@
         </div>
       </div>
     </div>
-
     <div class="footer-bottom">
       © <span id="year"></span> RoomLink. All rights reserved.
       <p>Designed with ❤️ for better living spaces around the world</p>
@@ -286,7 +276,7 @@
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+     
       const firstname = document.getElementById('firstname').value.trim();
       const lastname = document.getElementById('lastname').value.trim();
       const email = document.getElementById('email').value.trim();
@@ -305,31 +295,26 @@
         const userCredential = await auth.createUserWithEmailAndPassword(email, password);
         const user = userCredential.user;
 
-        // Send Email Verification
         await user.sendEmailVerification();
 
-        // Save user data to Firestore
         await db.collection("users").doc(user.uid).set({
-          firstname: firstname,
-          lastname: lastname,
+          firstname, lastname,
           fullname: firstname + " " + lastname,
-          email: email,
-          phone: phone,
-          userType: userType,
+          email, phone, userType,
           emailVerified: false,
           createdAt: firebase.firestore.FieldValue.serverTimestamp(),
           uid: user.uid
         });
 
-        showMessage("✅ Account created successfully!<br>Please check your email to verify your account.", "success");
+        showMessage("✅ Account created successfully!<br>Please check your email to verify.", "success");
 
         setTimeout(() => {
-          window.location.href = "https://play.google.com/store/apps/details?id=com.roomlink.app";
-        }, 3000);
+          window.location.href = "feed.html";
+        }, 2500);
 
       } catch (error) {
         console.error(error);
-        showMessage(error.message || "Failed to create account. Please try again.", "error");
+        showMessage(error.message || "Failed to create account.", "error");
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = `<i class="fas fa-user-plus"></i> Create My Account`;

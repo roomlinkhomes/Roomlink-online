@@ -14,8 +14,7 @@
 
   <style>
     :root {
-      --purple: #6b48ff;
-      --accent: #00cfff;
+      --accent: #017a6b;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
@@ -28,7 +27,6 @@
     }
     main { flex: 1; }
 
-    /* Header - Same as other pages */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -41,18 +39,12 @@
       justify-content: space-between;
       align-items: center;
     }
-    .logo img {
-      height: 65px;
-      width: auto;
-    }
-    .header-center {
-      flex: 1;
-      text-align: center;
-    }
+    .logo img { height: 65px; width: auto; }
+    .header-center { flex: 1; text-align: center; }
     .room-link {
       font-size: 1.75rem;
       font-weight: 800;
-      background: linear-gradient(to right, #00ff9d, #00eaff);
+      background: linear-gradient(to right, #00ff9d, var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -64,13 +56,13 @@
       backdrop-filter: blur(12px);
       border-radius: 20px;
       padding: 40px 30px;
-      border: 1px solid rgba(0,207,255,0.15);
+      border: 1px solid rgba(1,122,107,0.3);
     }
     h1 {
       text-align: center;
       font-size: 2.3rem;
       margin-bottom: 8px;
-      background: linear-gradient(to right, #00ff9d, #00eaff);
+      background: linear-gradient(to right, #00ff9d, var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -91,22 +83,22 @@
       width: 100%;
       padding: 14px;
       background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(0,207,255,0.3);
+      border: 1px solid rgba(1,122,107,0.4);
       border-radius: 10px;
       color: white;
       font-size: 1rem;
     }
     input:focus {
       outline: none;
-      border-color: #00cfff;
+      border-color: var(--accent);
       background: rgba(255,255,255,0.12);
     }
 
     .btn-login {
       width: 100%;
       padding: 15px;
-      background: #00cfff;
-      color: #0f172a;
+      background: var(--accent);
+      color: white;
       font-size: 1.15rem;
       font-weight: bold;
       border: none;
@@ -117,7 +109,7 @@
     }
     .btn-login:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0, 207, 255, 0.4);
+      box-shadow: 0 10px 25px rgba(1, 122, 107, 0.4);
     }
     .btn-login:disabled {
       opacity: 0.7;
@@ -134,36 +126,12 @@
     .success { background: rgba(0, 255, 157, 0.2); color: #00ff9d; }
     .error { background: rgba(255, 77, 77, 0.2); color: #ff4d4d; }
 
-    /* Success Screen */
-    #successScreen {
-      text-align: center;
-      padding: 30px 20px;
-    }
-    #successScreen h1 {
-      font-size: 2.1rem;
-      margin-bottom: 15px;
-    }
-
-    .btn-app {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #00cfff;
-      color: #0f172a;
-      padding: 14px 32px;
-      border-radius: 50px;
-      font-weight: bold;
-      text-decoration: none;
-      font-size: 1.1rem;
-      margin: 20px 0;
-    }
-
     .signup-link {
       text-align: center;
       margin-top: 30px;
       color: #cbd5e1;
     }
-    .signup-link a { color: #00cfff; text-decoration: none; }
+    .signup-link a { color: var(--accent); text-decoration: none; }
 
     footer {
       background: linear-gradient(to top, #0f172a, #1e293b);
@@ -184,9 +152,9 @@
     .footer-links h4 { color: #00cfff; margin-bottom: 1rem; font-size: 1.1rem; }
     .footer-links ul { list-style: none; }
     .footer-links a { color: #cbd5e1; text-decoration: none; line-height: 2; transition: color 0.3s; }
-    .footer-links a:hover { color: #00cfff; }
+    .footer-links a:hover { color: var(--accent); }
     .footer-social a { color: #cbd5e1; font-size: 1.6rem; margin-right: 1.2rem; transition: color 0.3s; }
-    .footer-social a:hover { color: #00cfff; }
+    .footer-social a:hover { color: var(--accent); }
     .footer-bottom {
       text-align: center;
       margin-top: 4rem;
@@ -234,22 +202,6 @@
         Don't have an account? <a href="signup.html">Sign Up</a>
       </div>
     </div>
-
-    <!-- Success Screen -->
-    <div class="login-container" id="successScreen" style="display: none; text-align: center;">
-      <h1>Login Successful! 🎉</h1>
-      <p id="welcomeText" style="color:#00ff9d; font-size:1.1rem; margin:20px 0 30px;"></p>
-      
-      <div style="margin:30px 0;">
-        <a href="https://play.google.com/store/apps/details?id=com.roomlink.app" class="btn-app" target="_blank">
-          <i class="fab fa-google-play"></i> Open RoomLink App
-        </a>
-      </div>
-
-      <a href="index.html" style="color:#00cfff; text-decoration:none;">
-        ← Back to Homepage
-      </a>
-    </div>
   </main>
 
   <!-- Full Footer -->
@@ -276,7 +228,7 @@
       </div>
       <div>
         <h4>Get the App</h4>
-        <a href="https://play.google.com/store/apps/details?id=com.roomlink.app" target="_blank" class="download-btn">
+        <a href="https://play.google.com/store/apps/details?id=com.roomlink.app" target="_blank" class="download-btn" style="background:var(--accent);">
           <i class="fab fa-google-play"></i> Download on Google Play
         </a>
       </div>
@@ -314,8 +266,6 @@
     const auth = firebase.auth();
 
     const loginForm = document.getElementById('loginForm');
-    const loginContainer = document.getElementById('loginFormContainer');
-    const successScreen = document.getElementById('successScreen');
     const submitBtn = document.getElementById('submitBtn');
     const messageDiv = document.getElementById('message');
 
@@ -330,12 +280,13 @@
 
       try {
         const userCredential = await auth.signInWithEmailAndPassword(email, password);
-        const user = userCredential.user;
-
-        loginContainer.style.display = "none";
-        successScreen.style.display = "block";
         
-        document.getElementById('welcomeText').textContent = `Welcome back, ${user.email.split('@')[0]}!`;
+        showMessage("✅ Login successful! Redirecting to feed...", "success");
+
+        // Redirect to feed.html after successful login
+        setTimeout(() => {
+          window.location.href = "feed.html";
+        }, 1800);
 
       } catch (error) {
         console.error(error);
@@ -347,7 +298,7 @@
     });
 
     function showMessage(text, type) {
-      messageDiv.textContent = text;
+      messageDiv.innerHTML = text;
       messageDiv.className = `message ${type}`;
     }
   </script>
