@@ -18,10 +18,53 @@
       max-width: 800px; 
       margin: auto; 
     }
-    h1 { 
-      text-align: center; 
-      color: #017a6b; 
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 5px 15px;
       margin-bottom: 10px;
+    }
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #017a6b;
+      margin: 0;
+    }
+    .search-icon-header {
+      font-size: 26px;
+      color: #017a6b;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    /* Search Bar (Hidden by default) */
+    .search-bar {
+      display: none;
+      align-items: center;
+      background: white;
+      border-radius: 12px;
+      padding: 8px 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .search-bar.active {
+      display: flex;
+    }
+    .search-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      padding: 8px 10px;
+    }
+    .search-close {
+      font-size: 24px;
+      color: #666;
+      cursor: pointer;
+      padding: 5px;
     }
 
     /* Banner Section */
@@ -51,30 +94,6 @@
       border-radius: 20px;
       font-size: 12px;
       font-weight: bold;
-    }
-
-    .search-container {
-      position: relative;
-      margin: 0 5px 15px;
-    }
-    .search-input {
-      width: 100%;
-      padding: 14px 20px 14px 50px;
-      border: 1px solid #ddd;
-      border-radius: 12px;
-      font-size: 16px;
-      outline: none;
-    }
-    .search-input:focus {
-      border-color: #017a6b;
-    }
-    .search-icon {
-      position: absolute;
-      left: 18px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #666;
-      font-size: 20px;
     }
 
     .grid {
@@ -135,13 +154,15 @@
 <body>
 
   <div class="container">
-    <h1>Latest Listings</h1>
     
-    <!-- Banner Section -->
-    <div class="banner-section" id="bannerSection"></div>
+    <!-- Header -->
+    <div class="header">
+      <h1 class="logo">RoomLink</h1>
+      <span class="search-icon-header" id="searchIcon">🔍</span>
+    </div>
 
-    <div class="search-container">
-      <span class="search-icon">🔍</span>
+    <!-- Search Bar -->
+    <div class="search-bar" id="searchBar">
       <input 
         type="text" 
         id="searchInput" 
@@ -149,7 +170,11 @@
         placeholder="Search by title, location..."
         onkeyup="filterListings()"
       >
+      <span class="search-close" id="closeSearch">✕</span>
     </div>
+
+    <!-- Banner Section -->
+    <div class="banner-section" id="bannerSection"></div>
 
     <div id="loading" class="loading">Loading feed...</div>
     <div id="feed" class="grid"></div>
@@ -175,9 +200,6 @@
       const loadingDiv = document.getElementById('loading');
 
       try {
-        console.log("Fetching banners and listings...");
-
-        // Fetch Banners - More flexible query
         const bannerSnap = await db.collection("ads")
           .where("status", "==", "active")
           .get();
@@ -192,7 +214,6 @@
 
         renderBanners(banners);
 
-        // Fetch Listings
         const listingSnap = await db.collection("listings")
           .orderBy("createdAt", "desc")
           .limit(50)
@@ -215,20 +236,17 @@
       } catch (err) {
         console.error("Error loading feed:", err);
         loadingDiv.style.display = "none";
-        document.getElementById('feed').innerHTML = `<div class="error">Failed to load feed.<br><small>${err.message}</small></div>`;
+        document.getElementById('feed').innerHTML = `<div class="error">Failed to load feed.</div>`;
       }
     }
 
     function renderBanners(banners) {
       const container = document.getElementById('bannerSection');
-      if (banners.length === 0) {
-        console.log("No active banners found");
-        return;
-      }
+      if (banners.length === 0) return;
 
       let html = "";
       banners.forEach(banner => {
-        const img = banner.image || banner.adDescription || "https://via.placeholder.com/800x200?text=Banner";
+        const img = banner.image || "https://via.placeholder.com/800x200?text=Banner";
         html += `
           <div class="banner" onclick="openAppStore()">
             <span class="banner-label">Sponsored</span>
@@ -237,7 +255,6 @@
         `;
       });
       container.innerHTML = html;
-      console.log(`${banners.length} banner(s) displayed`);
     }
 
     function renderListings(listings) {
@@ -286,9 +303,28 @@
       renderListings(filtered);
     }
 
+    // Search Toggle
+    function toggleSearch() {
+      const searchBar = document.getElementById('searchBar');
+      const searchInput = document.getElementById('searchInput');
+      
+      searchBar.classList.toggle('active');
+      
+      if (searchBar.classList.contains('active')) {
+        searchInput.focus();
+      } else {
+        searchInput.value = '';
+        renderListings(allListings);
+      }
+    }
+
     function openAppStore() {
       window.open("https://play.google.com/store/apps/details?id=com.roomlink.app", "_blank");
     }
+
+    // Event Listeners
+    document.getElementById('searchIcon').addEventListener('click', toggleSearch);
+    document.getElementById('closeSearch').addEventListener('click', toggleSearch);
 
     window.onload = loadFeed;
   </script>
