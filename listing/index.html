@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoomLink Listing</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            text-align: center; 
+            padding: 50px 20px; 
+            background: #f4f6f8; 
+            color: #333;
+        }
+        .card { 
+            background: white; 
+            padding: 40px 30px; 
+            border-radius: 16px; 
+            max-width: 420px; 
+            margin: auto; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08); 
+        }
+        h2 { color: #111; margin-bottom: 10px; }
+        p { color: #666; font-size: 15px; }
+        .btn { 
+            display: inline-block; 
+            background: #2563eb; 
+            color: white; 
+            padding: 14px 28px; 
+            border-radius: 8px; 
+            text-decoration: none; 
+            font-weight: 600; 
+            margin-top: 24px; 
+            transition: background 0.2s;
+        }
+        .btn:hover { background: #1d4ed8; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>RoomLink Property</h2>
+        <p id="listingIdText">Loading property details...</p>
+        <a id="appButton" href="#" class="btn">Open in RoomLink App</a>
+    </div>
+
+    <script>
+        // Extract the unique listing ID from the URL path (e.g., /listing/zMSr0ba9QXrz3xv4CADy)
+        const pathSegments = window.location.pathname.split('/');
+        const listingId = pathSegments[pathSegments.length - 1] || pathSegments[pathSegments.length - 2];
+
+        if (listingId && listingId !== 'listing') {
+            // Display the ID on the page
+            document.getElementById('listingIdText').innerText = `Viewing Property ID: ${listingId}`;
+            
+            // Set the custom app scheme link so it triggers the app if installed
+            document.getElementById('appButton').href = `roomlink://listing/${listingId}`;
+        } else {
+            document.getElementById('listingIdText').innerText = "Property not found.";
+            document.getElementById('appButton').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
