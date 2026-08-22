@@ -1,1 +1,4 @@
-/app https://play.google.com/store/apps/details?id=com.roomlink.app 301
+/app  https://play.google.com/store/apps/details?id=com.roomlink.app  301
+
+# Serve listing page for every /listing/ID URL (no 404)
+/listing/*  /listing/index.html  200
