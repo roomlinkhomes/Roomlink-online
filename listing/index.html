@@ -34,7 +34,7 @@
         }
         .btn-secondary {
             display: inline-block;
-            margin-top: 12px;
+            margin-top: 16px;
             color: #107a6b;
             font-weight: 600;
             text-decoration: none;
@@ -45,40 +45,54 @@
 <body>
     <div class="card">
         <h2>RoomLink Property</h2>
-        <p id="listingIdText">Loading property details...</p>
+        <p id="listingIdText">Loading...</p>
         <a id="appButton" href="#" class="btn">Open in RoomLink App</a>
         <br>
-        <a id="storeButton" href="https://play.google.com/store/apps/details?id=com.roomlink.app" class="btn-secondary">
+        <a
+          id="storeButton"
+          href="https://play.google.com/store/apps/details?id=com.roomlink.app"
+          class="btn-secondary"
+        >
             Don't have the app? Download it
         </a>
     </div>
 
     <script>
         const pathSegments = window.location.pathname.split('/').filter(Boolean);
-        // path is like ["listing", "ABC123"]
         const listingId = pathSegments[pathSegments.length - 1];
-
-        const appButton = document.getElementById('appButton');
         const textEl = document.getElementById('listingIdText');
+        const appButton = document.getElementById('appButton');
+        const storeUrl = 'https://play.google.com/store/apps/details?id=com.roomlink.app';
+
+        const isAndroid = /android/i.test(navigator.userAgent);
+        const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
 
         if (listingId && listingId !== 'listing') {
             textEl.innerText = 'Open this property in the RoomLink app';
-            const appUrl = 'roomlink://listing/' + listingId;
-            const storeUrl = 'https://play.google.com/store/apps/details?id=com.roomlink.app';
 
-            appButton.href = appUrl;
-
-            appButton.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                // Try to open the app
-                window.location.href = appUrl;
-
-                // If app doesn't open, go to Play Store after 1.5s
-                setTimeout(function () {
-                    window.location.href = storeUrl;
-                }, 1500);
-            });
+            if (isAndroid) {
+                // Opens app if installed, otherwise Play Store
+                appButton.href =
+                    'intent://listing/' + listingId +
+                    '#Intent;scheme=roomlink;package=com.roomlink.app;' +
+                    'S.browser_fallback_url=' + encodeURIComponent(storeUrl) +
+                    ';end';
+            } else if (isIOS) {
+                // Try app scheme; if it fails, user can use Download link
+                appButton.href = 'roomlink://listing/' + listingId;
+                appButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.location.href = 'roomlink://listing/' + listingId;
+                    setTimeout(function () {
+                        // Optional: App Store link when you have one
+                        window.location.href = storeUrl;
+                    }, 2000);
+                });
+            } else {
+                // Desktop / other
+                appButton.href = storeUrl;
+                appButton.innerText = 'Get RoomLink on Play Store';
+            }
         } else {
             textEl.innerText = 'Property not found.';
             appButton.style.display = 'none';
