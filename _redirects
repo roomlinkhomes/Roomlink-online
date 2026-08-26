@@ -2,3 +2,6 @@
 
 # Serve listing page for every /listing/ID URL (no 404)
 /listing/*  /listing/index.html  200
+
+# Serve profile page for every /profile/ID URL (no 404)
+/profile/*  /profile/index.html  200

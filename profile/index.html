@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RoomLink Profile</title>
+  <meta name="description" content="View this profile on RoomLink" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f1f5f9;
+      padding: 24px;
+      color: #0f172a;
+    }
+    .card {
+      background: #fff;
+      width: 100%;
+      max-width: 420px;
+      border-radius: 20px;
+      padding: 40px 28px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+    }
+    .logo {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #036dd6;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #0f172a;
+    }
+    p {
+      font-size: 15px;
+      line-height: 1.5;
+      color: #64748b;
+      margin-bottom: 28px;
+    }
+    .uid {
+      display: inline-block;
+      background: #f1f5f9;
+      color: #334155;
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-bottom: 24px;
+      word-break: break-all;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      text-decoration: none;
+      border-radius: 12px;
+      padding: 15px 20px;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      transition: opacity 0.15s ease;
+    }
+    .btn:active { opacity: 0.85; }
+    .btn-primary {
+      background: #036dd6;
+      color: #fff;
+    }
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">RoomLink</div>
+    <h1>Profile</h1>
+    <p id="description">Open this profile in the RoomLink app.</p>
+    <div class="uid" id="uidLabel">Loading...</div>
+
+    <a id="openApp" class="btn btn-primary" href="#">Open in RoomLink</a>
+    <a
+      class="btn btn-secondary"
+      href="https://play.google.com/store/apps/details?id=com.roomlink.app"
+      target="_blank"
+      rel="noopener"
+    >
+      Download App
+    </a>
+
+    <div class="footer">Verified apartments & short-term stays</div>
+  </div>
+
+  <script>
+    (function () {
+      var path = window.location.pathname || "";
+      var parts = path.split("/").filter(Boolean);
+      // expects /profile/USER_ID
+      var userId = parts[0] === "profile" ? (parts[1] || "") : "";
+
+      var uidLabel = document.getElementById("uidLabel");
+      var description = document.getElementById("description");
+      var openApp = document.getElementById("openApp");
+
+      if (userId) {
+        uidLabel.textContent = userId;
+        description.textContent = "Open this profile in the RoomLink app.";
+        openApp.href = "roomlink://profile/" + encodeURIComponent(userId);
+      } else {
+        uidLabel.textContent = "Profile not found";
+        description.textContent = "This profile link is invalid or incomplete.";
+        openApp.href = "https://play.google.com/store/apps/details?id=com.roomlink.app";
+        openApp.textContent = "Get RoomLink";
+      }
+    })();
+  </script>
+</body>
+</html>
