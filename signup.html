@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RoomLink | Create Account</title>
   <meta name="description" content="Join RoomLink - Create your account and start renting smarter." />
-  <link rel="icon" href="/logo.png" type="image/png" />
+  <link rel="icon" href="favicon.png" type="image/png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   
   <!-- Firebase SDK -->
@@ -16,8 +16,11 @@
   <style>
     :root { 
       --accent: #017a6b; 
+      --bg: #ffffff; --soft: #f5f6fb; --ink: #0f172a; --muted: #5b6478; --line: #e6e8f0;
+      --brand: #107a6b; --brand-dark: #0b5a4f;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #0f172a;
@@ -27,19 +30,43 @@
       flex-direction: column;
     }
     main { flex: 1; }
+
+    /* Header styling consistent with other pages */
     header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 72px;
       background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.08); padding: 0 5%;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
     }
-    .logo img { height: 65px; width: auto; }
-    .header-center { flex: 1; text-align: center; }
-    .room-link {
-      font-size: 1.75rem; font-weight: 800;
-      background: linear-gradient(to right, #00ff9d, var(--accent));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    .room-link { font-size: 1.5rem; font-weight: 800; letter-spacing: .5px; color: #00ff9d; text-decoration: none; justify-self: start; }
+    .logo-center { justify-self: center; display: block; }
+    .logo-center img { height: 44px; width: 44px; object-fit: contain; display: block; }
+    .header-right { justify-self: end; }
+    .hamburger { font-size: 1.5rem; color: white; background: none; border: none; cursor: pointer; min-width: 44px; min-height: 44px; }
+    
+    .get-started {
+      position: absolute; top: 84px; right: 5%; z-index: 900;
+      background: var(--accent); color: #fff; text-decoration: none; font-weight: 700;
+      padding: .6rem 1.2rem; border-radius: 50px; font-size: .95rem; white-space: nowrap;
+      box-shadow: 0 6px 18px rgba(1,122,107,.28); transition: background .2s;
     }
+    .get-started:hover { background: var(--brand-dark); }
+
+    /* Mobile Drawer Menu */
+    .mobile-menu {
+      position: fixed; top: 0; right: -100%; width: 80%; max-width: 340px; height: 100dvh; overflow-y: auto;
+      background: #1e293b; box-shadow: -10px 0 40px rgba(15,23,42,.4);
+      transition: right .4s ease; z-index: 1100; padding: 1.5rem 2rem 2rem;
+    }
+    .mobile-menu.active { right: 0; }
+    .mobile-menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; }
+    .mobile-menu-header img { height: 40px; width: 40px; object-fit: contain; }
+    .close-btn { font-size: 2.2rem; color: #cbd5e1; background: none; border: none; cursor: pointer; line-height: 1; }
+    .mobile-nav { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; }
+    .mobile-nav a { color: #cbd5e1; text-decoration: none; font-size: 1.15rem; font-weight: 500; }
+    .mobile-nav a:hover, .mobile-nav a.active { color: #00ff9d; }
+    .signup-btn-mobile { margin-top: 2.5rem; display: block; background: var(--accent); color: #fff; padding: 1rem; border-radius: 50px; text-decoration: none; font-weight: bold; text-align: center; }
+
     .signup-container {
       max-width: 480px; margin: 120px auto 80px;
       background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px);
@@ -151,14 +178,37 @@
   </style>
 </head>
 <body>
+  <!-- Header with Navigation and Hamburger Menu -->
   <header>
-    <div class="logo">
-      <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
-    </div>
-    <div class="header-center">
-      <div class="room-link">RoomLink</div>
+    <a href="index.html" class="room-link">RoomLink</a>
+    <a href="index.html" class="logo-center" aria-label="RoomLink home">
+      <img src="favicon.png" alt="RoomLink Logo">
+    </a>
+    <div class="header-right">
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><i class="fas fa-bars"></i></button>
     </div>
   </header>
+  <a href="login.html" class="get-started">Login</a>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <img src="favicon.png" alt="RoomLink logo">
+      <button class="close-btn" id="closeMenu" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="mobile-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="feed.html">Feed</a></li>
+      <li><a href="ads.html">Billboard Ads</a></li>
+      <li><a href="HowToUse.html">How to Use</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="Privacy.html">Privacy Policy</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="signup.html" class="active" style="color:#00ff9d; font-weight:600;">Sign Up</a></li>
+      <li><a href="login.html" style="color:#00ff9d; font-weight:600;">Login</a></li>
+    </ul>
+    <a href="https://play.google.com/store/apps/details?id=com.roomlink.app" target="_blank" class="signup-btn-mobile"><i class="fab fa-google-play"></i> Download App</a>
+  </div>
 
   <main>
     <div class="signup-container">
@@ -209,12 +259,11 @@
     </div>
   </main>
 
-  <!-- Footer Added Back -->
   <footer>
     <div class="footer-container">
       <div>
         <div class="footer-logo">
-          <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
+          <img src="favicon.png" alt="RoomLink Logo">
         </div>
         <p class="footer-tagline">
           Verified apartments & stylish short-term stays worldwide — secure, transparent, effortless.
@@ -224,6 +273,8 @@
         <h4>Quick Links</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
+          <li><a href="feed.html">Feed</a></li>
+          <li><a href="ads.html">Billboard Ads</a></li>
           <li><a href="HowToUse.html">How to Use</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="Privacy.html">Privacy Policy</a></li>
@@ -255,6 +306,16 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle logic
+    const mobileMenu = document.getElementById('mobileMenu');
+    document.getElementById('hamburgerBtn').addEventListener('click', () => mobileMenu.classList.add('active'));
+    document.getElementById('closeMenu').addEventListener('click', () => mobileMenu.classList.remove('active'));
+    document.addEventListener('click', e => {
+      if (mobileMenu.classList.contains('active') && !mobileMenu.contains(e.target) && !e.target.closest('#hamburgerBtn')) {
+        mobileMenu.classList.remove('active');
+      }
+    });
 
     const firebaseConfig = {
       apiKey: "AIzaSyATm08xqtzXsiftaxlq9zvB7pPPXaePDTI",
