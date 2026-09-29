@@ -7,476 +7,218 @@
   <title>RoomLink | About</title>
   <meta name="description" content="RoomLink offers secure, verified apartments and stylish short-term stays worldwide. Transparent bookings, no hidden fees — let's find your perfect place." />
   <meta name="keywords" content="apartments for rent, short-term stays, verified rentals, RoomLink, global accommodation, Nigeria rentals" />
-  <link rel="icon" href="/logo.png" type="image/png" />
+  <link rel="icon" href="/favicon.png" type="image/png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     :root {
-      --purple: #6b48ff;
-      --dark: #0f0f2d;
-      --light: #f8f9ff;
-      --accent: #00d4ff;
-      --card-bg: rgba(255, 255, 255, 0.92);
-      --card-text: #1a1a2e;
+      --bg: #ffffff; --soft: #f5f6fb; --ink: #0f172a; --muted: #5b6478; --line: #e6e8f0;
+      --brand: #107a6b; --brand-dark: #0b5a4f;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0f172a;
-      color: white;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      background: var(--bg); color: var(--ink); min-height: 100vh;
+      display: flex; flex-direction: column; overflow-x: hidden; position: relative; --gut: 5vw;
     }
-    main { flex: 1; }
-    /* ==================== HEADER - NOW 100% CONSISTENT ==================== */
+    main { flex: 1; padding-top: 72px; }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+
+    /* Header: label left | logo center | hamburger right, Get Started below it */
     header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      background: rgba(15, 23, 42, 0.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      padding: 1rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 72px;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line); padding: 0 5%;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
     }
-    .logo { flex-shrink: 0; }
-    .logo img {
-      height: 100px;
-      width: auto;
-      max-width: 500px;
-      display: block;
+    .room-link { font-size: 1.5rem; font-weight: 800; letter-spacing: .5px; color: var(--brand); text-decoration: none; justify-self: start; }
+    .logo-center { justify-self: center; display: block; }
+    .logo-center img { height: 44px; width: 44px; object-fit: contain; display: block; }
+    .header-right { justify-self: end; }
+    .hamburger { font-size: 1.5rem; color: var(--ink); background: none; border: none; cursor: pointer; min-width: 44px; min-height: 44px; }
+    .get-started {
+      position: absolute; top: 84px; right: 5%; z-index: 900;
+      background: var(--brand); color: #fff; text-decoration: none; font-weight: 700;
+      padding: .6rem 1.2rem; border-radius: 50px; font-size: .95rem; white-space: nowrap;
+      box-shadow: 0 6px 18px rgba(16,122,107,.28); transition: background .2s;
     }
-    @media (min-width: 768px) { .logo img { height: 80px; max-width: 360px; } }
-    @media (max-width: 480px) { .logo img { height: 52px; max-width: 220px; } }
-    .header-center {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 0 10px;
+    .get-started:hover { background: var(--brand-dark); }
+    @media (max-width: 480px) {
+      .room-link { font-size: 1.2rem; }
+      .logo-center img { height: 36px; width: 36px; }
+      .get-started { padding: .5rem .9rem; font-size: .85rem; }
     }
-    .room-link {
-      font-size: 1.75rem;
-      font-weight: 800;
-      background: linear-gradient(to right, #00ff9d, #00eaff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: 2px;
-      white-space: nowrap;
-    }
-    @media (max-width: 768px) {
-      .room-link { font-size: 1.4rem; }
-    }
-    .hamburger {
-      font-size: 1.8rem;
-      color: #cbd5e1;
-      background: none;
-      border: none;
-      cursor: pointer;
-      z-index: 1001;
-    }
-    @media (max-width: 768px) {
-      header { padding: 0.8rem 4%; justify-content: space-between; }
-      .logo img { height: 42px; max-width: 160px; }
-      .hamburger { display: block !important; order: 2; }
-    }
-    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
-    .nav-links a { color: #cbd5e1; text-decoration: none; font-weight: 500; transition: color 0.3s; }
-    .nav-links a:hover, .nav-links a.active { color: #00cfff; }
+
     .mobile-menu {
-      position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100%;
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(10px);
-      transition: right 0.4s ease; z-index: 999;
-      padding: 5rem 2rem 2rem;
+      position: fixed; top: 0; right: -100%; width: 80%; max-width: 340px; height: 100dvh; overflow-y: auto;
+      background: #fff; box-shadow: -10px 0 40px rgba(15,23,42,.15);
+      transition: right .4s ease; z-index: 1100; padding: 1.5rem 2rem 2rem;
     }
     .mobile-menu.active { right: 0; }
-    .mobile-menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
-    .mobile-menu-header .logo img { height: 60px; max-width: 240px; }
-    .close-btn { font-size: 2.5rem; color: #cbd5e1; background: none; border: none; cursor: pointer; }
-    .mobile-nav { list-style: none; display: flex; flex-direction: column; gap: 2.2rem; }
-    .mobile-nav a { color: #cbd5e1; text-decoration: none; font-size: 1.3rem; font-weight: 500; }
-    .mobile-nav a:hover, .mobile-nav a.active { color: #00cfff; }
-    .signup-btn {
-      margin-top: 3rem; display: block; background: #00cfff; color: #0f172a;
-      padding: 1rem; border-radius: 50px; text-decoration: none; font-weight: bold;
-      text-align: center; font-size: 1.2rem;
-    }
-    .signup-btn:hover { transform: scale(1.05); }
-    @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } }
-    @media (min-width: 769px) { .hamburger, .mobile-menu { display: none; } }
+    .mobile-menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; }
+    .mobile-menu-header img { height: 40px; width: 40px; object-fit: contain; }
+    .close-btn { font-size: 2.2rem; color: var(--muted); background: none; border: none; cursor: pointer; line-height: 1; }
+    .mobile-nav { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; }
+    .mobile-nav a { color: var(--ink); text-decoration: none; font-size: 1.15rem; font-weight: 500; }
+    .mobile-nav a:hover, .mobile-nav a.active { color: var(--brand); }
+    .signup-btn { margin-top: 2.5rem; display: block; background: var(--brand); color: #fff; padding: 1rem; border-radius: 50px; text-decoration: none; font-weight: bold; text-align: center; }
 
-    /* ==================== REST OF PAGE (FIXED - THICKER TITLE + CURVY MISSION BACKGROUND) ==================== */
+    /* Hero */
     .hero {
-      position: relative;
-      height: 85vh;
-      min-height: 620px;
+      position: relative; min-height: 520px; padding: 110px 6% 90px;
       background: url('https://res.cloudinary.com/drserbss8/image/upload/v1775227172/Modern_housing_estate_in_an_urban_locale_sjag9h.png') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 120px 5% 180px 5%;
-      overflow: hidden;
+      display: flex; align-items: center; justify-content: center; text-align: center;
     }
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(10,0,40,0.65), rgba(20,0,60,0.75), rgba(0,0,0,0.72));
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 900px;
-    }
-    .hero h1 {
-      font-size: 4.6rem;               /* Bigger */
-      font-weight: 700;                /* MUCH THICKER / HEAVIER */
-      line-height: 1.03;
-      letter-spacing: -1px;
-      margin-bottom: 1.1rem;
-      background: linear-gradient(to right, #00ff9d, #00eaff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 10px 30px rgba(0, 207, 255, 0.3); /* Extra bold depth */
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeUp 1.2s ease-out forwards;
-    }
-    .hero p {
-      font-size: 1.45rem;
-      max-width: 800px;
-      margin: 0 auto 2.8rem;
-      color: #e0f7ff;
-      line-height: 1.6;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeUp 1.4s ease-out 0.3s forwards;
-    }
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .hero-cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      justify-content: center;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeUp 1.6s ease-out 0.6s forwards;
-    }
-    .btn {
-      padding: 1rem 2.2rem;
-      border-radius: 50px;
-      font-weight: bold;
-      text-decoration: none;
-      font-size: 1.1rem;
-      transition: all 0.3s;
-    }
-    .btn-primary { background: #00cfff; color: #0f172a; }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 207, 255, 0.4); }
-    .btn-outline { border: 2px solid #00cfff; color: #00cfff; }
-    .btn-outline:hover { background: #00cfff; color: #0f172a; }
-    section { padding: 90px 5% 110px; }
-    h2 {
-      font-size: 2.8rem;
-      margin-bottom: 3.5rem;
-      color: #00cfff;
-      text-align: center;
-    }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+    .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(15,23,42,.45), rgba(15,23,42,.78)); }
+    .hero-content { position: relative; max-width: 860px; color: #fff; }
+    .hero h1 { font-size: 3.4rem; font-weight: 900; line-height: 1.08; margin-bottom: 1rem; }
+    .hero p { font-size: 1.2rem; line-height: 1.6; margin: 0 auto 2rem; max-width: 720px; color: #eef6f4; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .btn { padding: .85rem 1.8rem; border-radius: 50px; font-weight: bold; text-decoration: none; font-size: 1rem; transition: all .25s; display: inline-block; }
+    .btn-primary { background: var(--brand); color: #fff; }
+    .btn-primary:hover { background: var(--brand-dark); }
+    .btn-outline { border: 2px solid #fff; color: #fff; }
+    .btn-outline:hover { background: #fff; color: var(--brand-dark); }
 
-    /* ==================== OUR MISSION - CURVY BACKGROUND + BREATHING SPACE ==================== */
-    .how-it-works {
-      background: rgba(0,0,0,0.25);
-      margin-top: 80px;
-      position: relative;
-      padding: 100px 5% 140px;               /* Extra bottom padding */
-      border-bottom-left-radius: 80px;       /* Soft curve at bottom */
-      border-bottom-right-radius: 80px;
-      overflow: hidden;
-    }
-    .how-it-works::after {
-      content: "";
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      right: 0;
-      height: 60px;
-      background: #0f172a;                   /* Matches body background */
-      border-top-left-radius: 80px;
-      border-top-right-radius: 80px;
-      z-index: 1;
-    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 72px var(--gut) 16px; }
+    .section-head h2 { font-size: 2.2rem; margin-bottom: .5rem; }
+    .section-head { margin-bottom: 2rem; }
+    .section-head p { color: var(--muted); font-size: 1.05rem; }
 
-    .steps {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 40px;
-      margin-top: 40px;
+    /* Mission */
+    .mission { max-width: 900px; margin: 0 auto; }
+    .mission-text { font-size: 1.15rem; color: var(--muted); line-height: 1.8; margin-bottom: 2.5rem; }
+    .mission-image { width: 100%; max-height: 480px; object-fit: cover; border-radius: 20px; display: block; background: var(--soft); }
+
+    /* Horizontal row */
+    .row {
+      display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory;
+      margin: 0 calc(-1 * var(--gut)); padding: 4px var(--gut) 20px; scroll-padding: 0 var(--gut); scrollbar-width: thin;
     }
-    .step {
-      flex: 1 1 22%;
-      min-width: 240px;
-      max-width: 280px;
-      text-align: center;
-    }
-    .step-number {
-      display: inline-block;
-      background: var(--purple);
-      color: white;
-      width: 40px; height: 40px;
-      line-height: 40px;
-      border-radius: 50%;
-      margin-bottom: 12px;
-      font-weight: bold;
-      font-size: 1.3rem;
-    }
-    .step h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: #e2e8f0;
-    }
-    .step p {
-      color: #cbd5e1;
-      font-size: 0.97rem;
-    }
-    .benefits {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 40px;
-      margin-top: 40px; /* Extra gap after curved section */
-    }
-    .benefit-card {
-      background: rgba(30, 41, 59, 0.6);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 2.5rem;
-      border: 1px solid rgba(0,207,255,0.15);
-      text-align: center;
-      transition: transform 0.3s;
-    }
-    .benefit-card:hover { transform: translateY(-10px); }
-    .benefit-icon {
-      font-size: 3.5rem;
-      color: #00cfff;
-      margin-bottom: 1.5rem;
-    }
-    .benefit-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: #e2e8f0;
-    }
-    .benefit-card p {
-      color: #cbd5e1;
-      font-size: 0.97rem;
-    }
-    /* New mission image styling - FIXED LARGE GAP */
-    .mission-image-container {
-      text-align: center;
-      margin-top: 3rem;
-      margin-bottom: 110px; /* Big breathing space before benefit cards */
-    }
-    .mission-image {
-      max-width: 100%;
-      width: 100%;
-      max-height: 560px;
-      object-fit: cover;
-      border-radius: 24px;
-      box-shadow: 0 25px 50px -12px rgba(0, 207, 255, 0.25);
-      border: 1px solid rgba(0,207,255,0.2);
-      transition: transform 0.3s ease;
-    }
-    .mission-image:hover {
-      transform: scale(1.02);
-    }
-    footer {
-      background: linear-gradient(to top, #0f172a, #1e293b);
-      padding: 6rem 5% 4rem;
-      color: #cbd5e1;
-      font-size: 0.95rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 3rem;
-    }
-    .footer-logo img { height: 60px; width: auto; max-width: 240px; }
-    .footer-links h4 { color: #00cfff; margin-bottom: 1rem; font-size: 1.1rem; }
+    .row > * { flex: 0 0 300px; scroll-snap-align: start; }
+    .why-item { background: var(--soft); border-radius: 18px; padding: 28px 24px; border: 1px solid var(--line); }
+    .why-item i { width: 44px; height: 44px; border-radius: 12px; background: #fff; color: var(--brand); display: flex; align-items: center; justify-content: center; font-size: 1.15rem; margin-bottom: 18px; border: 1px solid var(--line); }
+    .why-item h3 { font-size: 1.15rem; margin-bottom: 8px; }
+    .why-item p { color: var(--muted); font-size: .95rem; line-height: 1.55; }
+
+    .cta-wrap { text-align: center; padding: 72px var(--gut) 88px; }
+
+    footer { background: var(--soft); padding: 5rem 5% 3rem; color: var(--muted); font-size: .95rem; border-top: 1px solid var(--line); }
+    .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 2.5rem; }
+    .footer-logo img { height: 56px; width: 56px; object-fit: contain; margin-bottom: 12px; }
+    .footer-links h4, .footer-container h4 { color: var(--ink); margin-bottom: 1rem; font-size: 1.05rem; }
     .footer-links ul { list-style: none; }
-    .footer-links a { color: #cbd5e1; text-decoration: none; line-height: 2; transition: color 0.3s; }
-    .footer-links a:hover { color: #00cfff; }
-    .footer-social a { color: #cbd5e1; font-size: 1.6rem; margin-right: 1.2rem; transition: color 0.3s; }
-    .footer-social a:hover { color: #00cfff; }
-    .footer-bottom {
-      text-align: center;
-      margin-top: 4rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-    .download-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.8rem;
-      background: #00cfff;
-      color: #0f172a;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      margin-top: 1.5rem;
-    }
-    .download-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 30px rgba(0,207,255,0.3);
-    }
-    @media (max-width: 1024px) {
-      .benefits { grid-template-columns: repeat(2, 1fr); }
-    }
+    .footer-links a { color: var(--muted); text-decoration: none; line-height: 2; }
+    .footer-links a:hover { color: var(--brand); }
+    .footer-social a { color: var(--muted); font-size: 1.5rem; margin-right: 1.1rem; }
+    .footer-social a:hover { color: var(--brand); }
+    .footer-bottom { text-align: center; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+    .download-btn { display: inline-flex; align-items: center; gap: .7rem; background: var(--brand); color: #fff; padding: .9rem 1.8rem; border-radius: 50px; text-decoration: none; font-weight: bold; }
+
     @media (max-width: 768px) {
-      .benefits { grid-template-columns: 1fr; }
-      section { padding: 70px 5% 90px; }
-      h2 { font-size: 2.3rem; margin-bottom: 2.5rem; }
-      .hero { height: 80vh; min-height: 540px; padding: 100px 5% 140px; }
-      .hero h1 { font-size: 3rem; } /* Still thick on mobile */
-      .hero p { font-size: 1rem; line-height: 1.4; }
-      .mission-image { max-height: 420px; }
-      .mission-image-container { margin-bottom: 70px; }
-      .how-it-works { border-bottom-left-radius: 50px; border-bottom-right-radius: 50px; }
+      .container { padding-top: 56px; }
+      .hero { min-height: 460px; padding: 100px 6% 64px; }
+      .hero h1 { font-size: 2.4rem; }
+      .section-head h2 { font-size: 1.9rem; }
+      footer { padding: 3.5rem 6% 2.5rem; }
     }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1.02rem; }
+      .hero-cta .btn { width: 100%; text-align: center; }
+      .row > * { flex-basis: 78%; }
+      .mission-text { font-size: 1.05rem; }
+      .cta-wrap .btn { padding: 14px 32px !important; font-size: 1.05rem !important; }
+      .footer-social a { font-size: 1.7rem; margin-right: 1.4rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
   </style>
 </head>
 <body>
-  <!-- HEADER -->
   <header>
-    <div class="logo">
-      <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
+    <a href="index.html" class="room-link">RoomLink</a>
+    <a href="index.html" class="logo-center" aria-label="RoomLink home"><img src="favicon.png" alt="RoomLink logo"></a>
+    <div class="header-right">
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><i class="fas fa-bars"></i></button>
     </div>
-    <!-- RoomLink centered (added for consistency) -->
-    <div class="header-center">
-      <div class="room-link">RoomLink</div>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="HowToUse.html">How to Use</a></li>
-      <li><a href="about.html" class="active">About</a></li>
-      <li><a href="Privacy.html">Privacy Policy</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <button class="hamburger" id="hamburgerBtn">
-      <i class="fas fa-bars"></i>
-    </button>
   </header>
-  <!-- MOBILE MENU -->
+  <a href="signup.html" class="get-started">Get Started</a>
+
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-header">
-      <div class="logo">
-        <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
-      </div>
-      <button class="close-btn" id="closeMenu">×</button>
+      <img src="favicon.png" alt="RoomLink logo">
+      <button class="close-btn" id="closeMenu" aria-label="Close menu">×</button>
     </div>
     <ul class="mobile-nav">
       <li><a href="index.html">Home</a></li>
+      <li><a href="feed.html">Feed</a></li>
+      <li><a href="ads.html">Billboard Ads</a></li>
       <li><a href="HowToUse.html">How to Use</a></li>
       <li><a href="about.html" class="active">About</a></li>
       <li><a href="Privacy.html">Privacy Policy</a></li>
       <li><a href="contact.html">Contact</a></li>
+      <li><a href="signup.html" style="color:var(--brand); font-weight:600;">Sign Up</a></li>
+      <li><a href="login.html" style="color:var(--brand); font-weight:600;">Login</a></li>
     </ul>
-    <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="signup-btn">
-      <i class="fab fa-google-play"></i> Sign Up / Download App
-    </a>
+    <a href="https://play.google.com/store/apps/details?id=com.roomlink.app" target="_blank" class="signup-btn"><i class="fab fa-google-play"></i> Sign Up / Download App</a>
   </div>
+
   <main>
-    <section id="about">
-      <div class="hero">
-        <div class="hero-content">
-          <h1>About RoomLink</h1>
-          <p>RoomLink is a next-generation rental platform designed to make finding and booking apartments and short-term stays safe, transparent, and effortless anywhere in the world.</p>
-          <div class="hero-cta">
-            <a href="index.html" class="btn btn-outline">Back to Home</a>
-            <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="btn btn-primary">
-              <i class="fab fa-google-play"></i> Download Coming Soon
-            </a>
-          </div>
+    <div class="hero">
+      <div class="hero-content">
+        <h1>About RoomLink</h1>
+        <p>RoomLink is a next-generation rental platform designed to make finding and booking apartments and short-term stays safe, transparent, and effortless anywhere in the world.</p>
+        <div class="hero-cta">
+          <a href="index.html" class="btn btn-outline">Back to Home</a>
+          <a href="https://play.google.com/store/apps/details?id=com.roomlink.app" target="_blank" class="btn btn-primary"><i class="fab fa-google-play"></i> Download Coming Soon</a>
         </div>
       </div>
+    </div>
 
-      <!-- Our Mission Section - Text first, then image -->
-      <div class="how-it-works">
-        <h2>Our Mission</h2>
-        <div class="container">
-          <p style="text-align:center; max-width:800px; margin:0 auto 3rem; font-size:1.2rem; color:#cbd5e1; line-height:1.8;">
-            We’re building a trusted marketplace where renters and hosts connect directly with verified profiles, clear pricing, secure payments, in-app chat, and real reviews. No surprises, no hidden fees, just quality stays.
-          </p>
-          
-          <!-- Mission Image -->
-          <div class="mission-image-container">
-            <img src="https://res.cloudinary.com/drserbss8/image/upload/v1775229718/image_tmuntq.jpg"
-                 alt="RoomLink Our Mission - Building trusted rental experiences worldwide"
-                 class="mission-image">
-          </div>
-        </div>
+    <div class="container">
+      <div class="mission">
+        <div class="section-head"><h2>Our Mission</h2></div>
+        <p class="mission-text">We’re building a trusted marketplace where renters and hosts connect directly with verified profiles, clear pricing, secure payments, in-app chat, and real reviews. No surprises, no hidden fees, just quality stays.</p>
+        <img class="mission-image" src="https://res.cloudinary.com/drserbss8/image/upload/v1775229718/image_tmuntq.jpg" alt="RoomLink Our Mission - Building trusted rental experiences worldwide">
       </div>
+    </div>
 
-      <!-- Benefits Section - Now has clear gap from the image above -->
-      <div class="benefits container">
-        <div class="benefit-card">
-          <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
-          <h3>Verified &amp; Safe</h3>
-          <p>Every user and property goes through verification for maximum trust.</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon"><i class="fas fa-globe-africa"></i></div>
-          <h3>Global &amp; Local</h3>
-          <p>From cities in Nigeria to destinations worldwide, we're expanding fast.</p>
-        </div>
-        <div class="benefit-card">
-          <div class="benefit-icon"><i class="fas fa-mobile-alt"></i></div>
-          <h3>Modern App</h3>
-          <p>Beautiful design, dark/light mode, notifications, wallet, map view &amp; more coming soon.</p>
-        </div>
+    <div class="container">
+      <div class="row">
+        <div class="why-item"><i class="fas fa-shield-alt"></i><h3>Verified &amp; Safe</h3><p>Every user and property goes through verification for maximum trust.</p></div>
+        <div class="why-item"><i class="fas fa-globe-africa"></i><h3>Global &amp; Local</h3><p>From cities in Nigeria to destinations worldwide, we're expanding fast.</p></div>
+        <div class="why-item"><i class="fas fa-mobile-alt"></i><h3>Modern App</h3><p>Beautiful design, dark/light mode, notifications, wallet, map view &amp; more coming soon.</p></div>
       </div>
+    </div>
 
-      <div style="text-align:center; margin:6rem 0 4rem;">
-        <a href="contact.html" class="btn btn-primary" style="font-size:1.25rem; padding:16px 48px;">Contact the Team</a>
-      </div>
-    </section>
+    <div class="cta-wrap">
+      <a href="contact.html" class="btn btn-primary" style="font-size:1.15rem; padding:16px 48px;">Contact the Team</a>
+    </div>
   </main>
-  <!-- FOOTER -->
+
   <footer>
     <div class="footer-container">
       <div>
-        <div class="footer-logo">
-          <img src="https://res.cloudinary.com/drserbss8/image/upload/v1769550181/file_000000007f0871f489aca1759f368568_xmhhnn.png" alt="RoomLink Logo">
-        </div>
-        <p class="footer-tagline">
-          Verified apartments &amp; stylish short-term stays worldwide secure, transparent, effortless.
-        </p>
+        <div class="footer-logo"><img src="favicon.png" alt="RoomLink Logo"></div>
+        <p>Verified apartments &amp; stylish short-term stays worldwide, secure, transparent, effortless.</p>
       </div>
       <div class="footer-links">
         <h4>Quick Links</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
+          <li><a href="feed.html">Feed</a></li>
+          <li><a href="ads.html">Billboard Ads</a></li>
           <li><a href="HowToUse.html">How to Use</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="Privacy.html">Privacy Policy</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="signup.html">Sign Up</a></li>
+          <li><a href="login.html">Login</a></li>
         </ul>
       </div>
       <div>
         <h4>Get the App</h4>
-        <a href="https://play.google.com/store/apps/details?id=your.roomlink.app.id" target="_blank" class="download-btn">
-          <i class="fab fa-google-play"></i> Download on Google Play
-        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.roomlink.app" target="_blank" class="download-btn"><i class="fab fa-google-play"></i> Download on Google Play</a>
       </div>
       <div class="footer-links">
         <h4>Follow Us</h4>
@@ -494,15 +236,15 @@
       <p>Designed with ❤️ for better living spaces around the world</p>
     </div>
   </footer>
-  <!-- JAVASCRIPT -->
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const closeMenu = document.getElementById('closeMenu');
     const mobileMenu = document.getElementById('mobileMenu');
-    hamburgerBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
-    closeMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
-    mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) mobileMenu.classList.remove('active'); });
+    document.getElementById('hamburgerBtn').addEventListener('click', () => mobileMenu.classList.add('active'));
+    document.getElementById('closeMenu').addEventListener('click', () => mobileMenu.classList.remove('active'));
+    document.addEventListener('click', e => {
+      if (mobileMenu.classList.contains('active') && !mobileMenu.contains(e.target) && !e.target.closest('#hamburgerBtn')) mobileMenu.classList.remove('active');
+    });
   </script>
 </body>
 </html>
