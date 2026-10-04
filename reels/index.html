@@ -56,26 +56,29 @@
     <script>
         (function () {
             var playStore = "https://play.google.com/store/apps/details?id=com.roomlink.app";
+            var packageName = "com.roomlink.app";
             var ua = navigator.userAgent || navigator.vendor || window.opera;
             var isAndroid = /android/i.test(ua);
             var isIOS = /ipad|iphone|ipod/.test(ua) && !window.MSStream;
-            var appOpened = false;
 
-            // Fallback if app did not open
-            setTimeout(function () {
-                if (appOpened || document.hidden) return;
-
-                if (isAndroid || isIOS) {
-                    window.location.href = playStore;
-                } else {
-                    // Desktop: show button instead of auto-redirect
-                    document.querySelector("h2").textContent = "Open in RoomLink";
-                    document.getElementById("desc").textContent = "Install or open the RoomLink app to watch property reels.";
-                    var storeBtn = document.getElementById("storeBtn");
-                    storeBtn.classList.add("show");
-                    storeBtn.href = playStore;
-                }
-            }, 1500);
+            if (isAndroid) {
+                // Captures /reels or /reels/* via native intent and lets app intercept
+                var currentPath = window.location.pathname; 
+                var intentUrl = "intent://roomlink.homes" + currentPath + "#Intent;scheme=https;package=" + packageName + ";S.browser_fallback_url=" + encodeURIComponent(playStore) + ";end;";
+                window.location.replace(intentUrl);
+            } else if (isIOS) {
+                setTimeout(function () {
+                    if (!document.hidden) {
+                        window.location.href = playStore;
+                    }
+                }, 1500);
+            } else {
+                document.querySelector("h2").textContent = "Open in RoomLink";
+                document.getElementById("desc").textContent = "Install or open the RoomLink app to watch property reels.";
+                var storeBtn = document.getElementById("storeBtn");
+                storeBtn.classList.add("show");
+                storeBtn.href = playStore;
+            }
         })();
     </script>
 </body>

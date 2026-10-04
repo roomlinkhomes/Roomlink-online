@@ -3,37 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoomLink - Home</title>
+    <title>RoomLink - Redirect</title>
     <style>
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #0f172a; color: #ffffff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; text-align: center; padding: 20px; }
-        .container { max-width: 400px; }
-        h2 { margin-bottom: 10px; color: #ffffff; }
-        p { color: #94a3b8; font-size: 15px; line-height: 1.5; margin-bottom: 25px; }
-        .btn { display: none; background-color: #017a6b; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; box-shadow: 0 4px 12px rgba(1, 122, 107, 0.4); }
-        .btn.show { display: inline-block; }
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #0f172a;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 400px;
+        }
+        h2 {
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        p {
+            color: #94a3b8;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+        .btn {
+            display: none;
+            background-color: #017a6b;
+            color: #ffffff;
+            padding: 14px 28px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(1, 122, 107, 0.4);
+        }
+        .btn.show {
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Opening RoomLink...</h2>
-        <p id="desc">Taking you to the home screen. If the app doesn't open automatically, click below.</p>
+        <p id="desc">Taking you into the app. If it doesn't open automatically, click below.</p>
         <a id="storeBtn" class="btn" href="#">View on Play Store</a>
     </div>
+
     <script>
         (function () {
             var playStore = "https://play.google.com/store/apps/details?id=com.roomlink.app";
+            var packageName = "com.roomlink.app";
             var ua = navigator.userAgent || navigator.vendor || window.opera;
             var isAndroid = /android/i.test(ua);
             var isIOS = /ipad|iphone|ipod/.test(ua) && !window.MSStream;
-            var appOpened = false;
-            setTimeout(function () {
-                if (appOpened || document.hidden) return;
-                if (isAndroid || isIOS) {
-                    window.location.href = playStore;
-                } else {
-                    window.location.href = "https://roomlink.homes";
-                }
-            }, 1500);
+
+            if (isAndroid) {
+                // Uses native Android Intent so the app intercepts if installed, 
+                // and only falls back to Play Store if the app is missing.
+                var currentPath = window.location.pathname; // catches /reels or /home
+                var intentUrl = "intent://roomlink.homes" + currentPath + "#Intent;scheme=https;package=" + packageName + ";S.browser_fallback_url=" + encodeURIComponent(playStore) + ";end;";
+                window.location.replace(intentUrl);
+            } else if (isIOS) {
+                // iOS fallback timer
+                setTimeout(function () {
+                    if (!document.hidden) {
+                        window.location.href = playStore;
+                    }
+                }, 1500);
+            } else {
+                // Desktop fallback: show manual button
+                document.querySelector("h2").textContent = "Open in RoomLink";
+                document.getElementById("desc").textContent = "Install or open the RoomLink app to view this content.";
+                var storeBtn = document.getElementById("storeBtn");
+                storeBtn.classList.add("show");
+                storeBtn.href = playStore;
+            }
         })();
     </script>
 </body>
