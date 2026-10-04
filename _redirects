@@ -1,7 +1,15 @@
+# App Store redirect
 /app  https://play.google.com/store/apps/details?id=com.roomlink.app  301
 
-# Serve listing page for every /listing/ID URL (no 404)
+# Core web fallbacks / redirects
+/home  /  301
+/reels  /  301
+
+# Serve listing page for every /listing/ID URL (no 404 on web)
 /listing/*  /listing/index.html  200
+
+# Serve reels/billboard page for every /reels/ID or feed URL (no 404 on web)
+/reels/*  /reels/index.html  200
 
 # Serve profile page for every /profile/ID URL (no 404)
 /profile/*  /profile/index.html  200

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoomLink - Property Listing</title>
+    <title>RoomLink - Reels</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -49,7 +49,7 @@
 <body>
     <div class="container">
         <h2>Opening RoomLink...</h2>
-        <p id="desc">Taking you to the property listing. If the app doesn't open automatically, click below.</p>
+        <p id="desc">Taking you to RoomLink Reels. If the app doesn't open automatically, click below.</p>
         <a id="storeBtn" class="btn" href="#">View on Play Store</a>
     </div>
 
@@ -70,7 +70,7 @@
                 } else {
                     // Desktop: show button instead of auto-redirect
                     document.querySelector("h2").textContent = "Open in RoomLink";
-                    document.getElementById("desc").textContent = "Install or open the RoomLink app to view or create property listings.";
+                    document.getElementById("desc").textContent = "Install or open the RoomLink app to watch property reels.";
                     var storeBtn = document.getElementById("storeBtn");
                     storeBtn.classList.add("show");
                     storeBtn.href = playStore;
